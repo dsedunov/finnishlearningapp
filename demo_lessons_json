@@ -1,0 +1,401 @@
+73% of storage used … If you run out, you can't create, edit and upload files.
+{
+  "metadata": {
+    "version": "1.0",
+    "source": "Demo Suomen Mestari Content",
+    "totalLessons": 3,
+    "difficulty": "A1",
+    "lastUpdated": "2025-06-29"
+  },
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Hei ja tervetuloa!",
+      "subtitle": "Привет и добро пожаловать!",
+      "difficulty": "beginner",
+      "estimatedTime": "45 minutes",
+      "objectives": [
+        "Научиться приветствовать людей",
+        "Представляться и знакомиться",
+        "Выучить основные фразы"
+      ],
+      "theory": {
+        "sections": [
+          {
+            "title": "Tervehdykset",
+            "subtitle": "Приветствия",
+            "content": "Suomessa ihmiset tervehtivät toisiaan eri tavoin riippuen tilanteesta ja vuorokaudenajasta. Virallisemmissa tilanteissa käytetään muodollisempia tervehdyksiä.",
+            "vocabulary": [
+              {
+                "finnish": "Hei",
+                "russian": "Привет",
+                "usage": "Epävirallinen tervehdys",
+                "formality": "informal",
+                "pronunciation": "HEI"
+              },
+              {
+                "finnish": "Hyvää päivää",
+                "russian": "Добрый день",
+                "usage": "Käytetään päivällä klo 10-18",
+                "formality": "formal",
+                "pronunciation": "HÜ-vää PÄI-vää"
+              },
+              {
+                "finnish": "Moi",
+                "russian": "Привет (молодежный)",
+                "usage": "Hyvin epävirallinen",
+                "formality": "very_informal",
+                "pronunciation": "MOI"
+              },
+              {
+                "finnish": "Hauska tutustua",
+                "russian": "Приятно познакомиться",
+                "usage": "Ensimmäisessä tapaamisessa",
+                "formality": "neutral",
+                "pronunciation": "HAUS-ka tu-TUS-tua"
+              }
+            ],
+            "grammar": [
+              {
+                "rule": "Партитив в пожеланиях",
+                "explanation": "В приветствиях используется партитив: hyvä → hyvää",
+                "examples": ["hyvä päivä → Hyvää päivää!", "hyvä aamu → Hyvää huomenta!"]
+              }
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "title": "Kahvilassa",
+        "subtitle": "В кафе",
+        "description": "Anna ja Matti tapaavat kahvilassa ensimmäistä kertaa",
+        "dialogue": [
+          {
+            "speaker": "Anna",
+            "text": "Hyvää päivää!",
+            "translation": "Добрый день!",
+            "emotion": "friendly"
+          },
+          {
+            "speaker": "Matti",
+            "text": "Hyvää päivää! Mitä kuuluu?",
+            "translation": "Добрый день! Как дела?",
+            "emotion": "polite"
+          },
+          {
+            "speaker": "Anna",
+            "text": "Kiitos, hyvää. Entä sinulle?",
+            "translation": "Спасибо, хорошо. А у тебя?",
+            "emotion": "warm"
+          },
+          {
+            "speaker": "Matti",
+            "text": "Kiitos kysymästä. Minulla on myös hyvää.",
+            "translation": "Спасибо, что спросил. У меня тоже хорошо.",
+            "emotion": "grateful"
+          }
+        ],
+        "comprehension": [
+          {
+            "question": "Missä Anna ja Matti tapaavat?",
+            "answer": "Kahvilassa",
+            "translation": "Где встречаются Анна и Матти?"
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "pronunciation",
+          "title": "Ääntäminen: vokaalit",
+          "instruction": "Harjoittele lyhyitä ja pitkiä vokaaleja",
+          "items": [
+            {
+              "category": "Lyhyet ja pitkät vokaalit",
+              "pairs": [
+                {"short": "a", "long": "aa", "examples": ["ma - maa", "sa - saa"]},
+                {"short": "o", "long": "oo", "examples": ["mo - moo", "ko - koo"]},
+                {"short": "u", "long": "uu", "examples": ["mu - muu", "pu - puu"]}
+              ]
+            }
+          ]
+        },
+        {
+          "type": "vowel_harmony",
+          "title": "Vokaaliharmonia",
+          "instruction": "Valitse oikea pääte vokaaliharmonian mukaan",
+          "items": [
+            {
+              "stem": "auto",
+              "rule": "takavokaalit (a, o, u)",
+              "options": ["ssa", "ssä"],
+              "correct": "ssa",
+              "result": "autossa"
+            },
+            {
+              "stem": "kieli",
+              "rule": "etuvokaalit (ä, ö, y)",
+              "options": ["lla", "llä"],
+              "correct": "llä",
+              "result": "kielellä"
+            }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "title": "Täydennä keskustelu",
+          "instruction": "Valitse oikea tervehdys",
+          "items": [
+            {
+              "text": "Kello on 14:00. A: Hyvää ______!",
+              "options": ["huomenta", "päivää", "iltaa"],
+              "correct": "päivää",
+              "explanation": "Päivällä (10-18) käytetään 'Hyvää päivää'"
+            }
+          ]
+        },
+        {
+          "type": "multiple-choice",
+          "title": "Valitse oikea vastaus",
+          "items": [
+            {
+              "question": "Joku sanoo sinulle 'Mitä kuuluu?'. Miten vastaat?",
+              "options": [
+                "Hyvää päivää",
+                "Kiitos, hyvää",
+                "Hei hei",
+                "Näkemiin"
+              ],
+              "correct": "Kiitos, hyvää",
+              "explanation": "Kuulumisiin vastataan 'Kiitos, hyvää' tai 'Hyvää, kiitos'"
+            }
+          ]
+        },
+        {
+          "type": "listening",
+          "title": "Kuunteluharjoitus",
+          "items": [
+            {
+              "audio": "Hyvää päivää! Mitä kuuluu?",
+              "question": "Mitä henkilö kysyi toisen tervehdyksen jälkeen?",
+              "options": ["Miten voit?", "Mitä kuuluu?", "Kuka sinä olet?"],
+              "correct": "Mitä kuuluu?",
+              "translation": "Что спросил человек после приветствия?"
+            }
+          ]
+        },
+        {
+          "type": "speaking",
+          "title": "Ääntämisharjoitus",
+          "items": [
+            {
+              "text": "Hyvää päivää",
+              "translation": "Добрый день",
+              "phonetic": "HÜ-vää PÄI-vää",
+              "tips": "Ударение на первый слог каждого слова"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Minä olen...",
+      "subtitle": "Я есть...",
+      "difficulty": "beginner",
+      "estimatedTime": "50 minutes",
+      "objectives": [
+        "Научиться представляться",
+        "Выучить глагол olla (быть)",
+        "Узнать о местоимениях"
+      ],
+      "theory": {
+        "sections": [
+          {
+            "title": "Esittäytyminen",
+            "subtitle": "Представление",
+            "content": "Kun tapaamme uusia ihmisiä, kerromme nimemme ja mistä tulemme. Käytämme olla-verbiä.",
+            "vocabulary": [
+              {
+                "finnish": "Minä olen",
+                "russian": "Я есть",
+                "usage": "Esittäytyminen",
+                "pronunciation": "MI-nä O-len"
+              },
+              {
+                "finnish": "Sinä olet",
+                "russian": "Ты есть",
+                "usage": "Puhutaan toiselle henkilölle",
+                "pronunciation": "SI-nä O-let"
+              },
+              {
+                "finnish": "Hän on",
+                "russian": "Он/она есть",
+                "usage": "Kolmas henkilö",
+                "pronunciation": "HÄN ON"
+              }
+            ],
+            "grammar": [
+              {
+                "rule": "Olla-verbi",
+                "explanation": "Глагол 'быть' спрягается по лицам",
+                "examples": ["Minä olen Anna", "Sinä olet Matti", "Hän on opiskelija"]
+              }
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "title": "Uusien opiskelijoiden tapaaminen",
+        "subtitle": "Встреча новых студентов",
+        "dialogue": [
+          {
+            "speaker": "Liisa",
+            "text": "Minun nimeni on Liisa. Minä olen Helsingistä.",
+            "translation": "Меня зовут Лииса. Я из Хельсинки.",
+            "emotion": "confident"
+          },
+          {
+            "speaker": "Ivan",
+            "text": "Minä olen Ivan. Tulen Venäjältä, Moskovasta.",
+            "translation": "Я Иван. Я приехал из России, из Москвы.",
+            "emotion": "friendly"
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "grammar_fill",
+          "title": "Olla-verbi",
+          "items": [
+            {
+              "sentence": "Minä _____ Anna. Sinä _____ Matti.",
+              "blanks": ["olen", "olet"],
+              "explanation": "Первое и второе лицо единственного числа"
+            }
+          ]
+        },
+        {
+          "type": "numbers",
+          "title": "Numerot",
+          "instruction": "Laske ja vastaa suomeksi",
+          "items": [
+            {
+              "dicePattern": "⚀ + ⚃",
+              "calculation": "1 + 4",
+              "answer": 5,
+              "finnish": "viisi"
+            },
+            {
+              "dicePattern": "⚁ + ⚂",
+              "calculation": "2 + 3",
+              "answer": 5,
+              "finnish": "viisi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Perhe ja ystävät",
+      "subtitle": "Семья и друзья",
+      "difficulty": "beginner",
+      "estimatedTime": "55 minutes",
+      "objectives": [
+        "Выучить слова семьи",
+        "Понять притяжательные местоимения",
+        "Рассказать о своей семье"
+      ],
+      "theory": {
+        "sections": [
+          {
+            "title": "Perheen jäsenet",
+            "subtitle": "Члены семьи",
+            "content": "Suomalainen perhe on tärkeä. Opitaan perheen jäsenten nimet ja kuinka kertoa perheestä.",
+            "vocabulary": [
+              {
+                "finnish": "perhe",
+                "russian": "семья",
+                "usage": "Koko perheryhmä",
+                "pronunciation": "PER-he"
+              },
+              {
+                "finnish": "äiti",
+                "russian": "мать",
+                "usage": "Naispuolinen vanhempi",
+                "pronunciation": "ÄI-ti"
+              },
+              {
+                "finnish": "isä",
+                "russian": "отец",
+                "usage": "Miespuolinen vanhempi",
+                "pronunciation": "I-sä"
+              },
+              {
+                "finnish": "veli",
+                "russian": "брат",
+                "usage": "Miespuolinen sisarus",
+                "pronunciation": "VE-li"
+              },
+              {
+                "finnish": "sisko",
+                "russian": "сестра",
+                "usage": "Naispuolinen sisarus",
+                "pronunciation": "SIS-ko"
+              }
+            ],
+            "grammar": [
+              {
+                "rule": "Притяжательные местоимения",
+                "explanation": "minun äiti, sinun isä, hänen veli",
+                "examples": ["minun perhe", "sinun sisko", "hänen lapsi"]
+              }
+            ]
+          }
+        ]
+      },
+      "reading": {
+        "title": "Minun perheeni",
+        "subtitle": "Моя семья",
+        "dialogue": [
+          {
+            "speaker": "Anna",
+            "text": "Minulla on iso perhe. Äiti, isä ja kaksi veljeä.",
+            "translation": "У меня большая семья. Мама, папа и два брата.",
+            "emotion": "proud"
+          }
+        ]
+      },
+      "exercises": [
+        {
+          "type": "dialogue_complete",
+          "title": "Täydennä keskustelu",
+          "scenario": "Kertominen perheestä",
+          "items": [
+            {
+              "setup": "Anna kertoo perheestään",
+              "missing_parts": [
+                {"speaker": "Anna", "text": "Minulla on _______ perhe."},
+                {"speaker": "Ystävä", "text": "Kuka on _______ perheessäsi?"}
+              ],
+              "options": ["iso", "pieni", "kuka", "mitä"],
+              "correct": ["iso", "kuka"]
+            }
+          ]
+        },
+        {
+          "type": "multiple-choice",
+          "title": "Valitse oikea vastaus",
+          "items": [
+            {
+              "question": "Mikä on suomeksi 'mother'?",
+              "options": ["isä", "äiti", "sisko", "mummo"],
+              "correct": "äiti",
+              "explanation": "Äiti = mother englanniksi"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
