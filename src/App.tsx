@@ -1,17 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { Check, X } from 'lucide-react';
 
+// Import new types
+import {
+  ChaptersData,
+  VocabularyData,
+  AudioScriptsData,
+  AppState,
+  AppProgress,
+  Chapter,
+  Lesson,
+  LessonProgressDetailed,
+  ChapterProgress,
+  DataLoadingState,
+  FavoriteWord,
+  ProgressStatus
+} from './types';
+
 // Component imports
 import Header from './components/Header';
-import Navigation from './components/Navigation';
+import ChapterNavigation from './components/ChapterNavigation';
+import LessonNavigation from './components/LessonNavigation';
+import SectionNavigation from './components/SectionNavigation';
 import StatsCards from './components/StatsCards';
-import FileUpload from './components/FileUpload';
-import LessonsList from './components/LessonsList';
 import TheorySection from './components/TheorySection';
 import ReadingSection from './components/ReadingSection';
 import ExercisesSection from './components/ExercisesSection';
 import FavoritesSection from './components/FavoritesSection';
 import Tooltip from './components/Tooltip';
+import ServerDebugTool from './ServerDebugTool';
+import chaptersDataImport from './data/chapters.json';
+import vocabularyDataImport from './data/vocabulary.json';
+import audioScriptsDataImport from './data/audio_scripts.json';
+
+
+// Utility imports
 import { 
   getEnhancedTranslation, 
   enhanceTranslationWithAI,
@@ -24,134 +47,322 @@ import {
   startSpeechRecognition,
 } from './utils/audioHelpers';
 
-
 // Hook imports
 import useLocalStorage from './hooks/useLocalStorage';
 
+// ===== UTILITY FUNCTIONS =====
+
+// Audio utility - implement 6+ word rule
+const shouldUseEnhancedTTS = (text: string): boolean => {
+  const wordCount = text.trim().split(/\s+/).length;
+  return wordCount > 6;
+};
+
+const getAudioIcon = (text: string): '⚡' | '🔊' => {
+  return shouldUseEnhancedTTS(text) ? '⚡' : '🔊';
+};
+
+// Progress utility functions
+const getLessonStatus = (progress: LessonProgressDetailed): ProgressStatus => {
+  if (progress.lessonFullyCompleted) return 'completed';
+  if (progress.theory_completed || progress.reading_completed || progress.exercises_completed > 0) {
+    return 'in_progress';
+  }
+  return 'not_started';
+};
+
+const getProgressIcon = (status: ProgressStatus): '⏳' | '🔄' | '✅' => {
+  switch (status) {
+    case 'completed': return '✅';
+    case 'in_progress': return '🔄';
+    case 'not_started': return '⏳';
+  }
+};
+
+const createEmptyProgress = (): AppProgress => ({
+  chapters: {},
+  lastUpdated: new Date().toISOString(),
+  totalCompletedLessons: 0
+});
+
+const createEmptyLessonProgress = (lessonId: string, totalExercises: number): LessonProgressDetailed => ({
+  lessonId,
+  theory_completed: false,
+  reading_completed: false,
+  exercises_completed: 0,
+  total_exercises: totalExercises,
+  lessonFullyCompleted: false,
+  lastAccessedAt: new Date().toISOString()
+});
+
+// ===== MAIN APP COMPONENT =====
+
 const App: React.FC = () => {
-  // Core state
-  const [currentSection, setCurrentSection] = useState('home');
-  const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
-  const [lessons, setLessons] = useState<any[]>([]);
-  const [translations, setTranslations] = useState<{[key: string]: any}>({});
-  const [usageStats, setUsageStats] = useState(getUsageStats());
-  
-  // Exercise state
+  // ===== CORE STATE =====
+  const [appState, setAppState] = useState<AppState>({
+    chaptersData: null,
+    vocabularyData: null,
+    audioScriptsData: null,
+    currentChapter: null,
+    currentLesson: null,
+    currentSection: 'home',
+    appProgress: createEmptyProgress(),
+    favorites: []
+  });
+
+  // ===== DATA LOADING STATE =====
+  const [dataLoading, setDataLoading] = useState<DataLoadingState>({
+    chaptersLoading: false,
+    vocabularyLoading: false,
+    audioScriptsLoading: false,
+    chaptersError: null,
+    vocabularyError: null,
+    audioScriptsError: null
+  });
+
+  // ===== EXERCISE STATE =====
   const [exerciseAnswers, setExerciseAnswers] = useState<{[key: string]: any}>({});
   const [exerciseSubmitted, setExerciseSubmitted] = useState(false);
   
-  // Audio and interaction state
+  // ===== AUDIO STATE =====
   const [audioPlaying, setAudioPlaying] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   
-  // Tooltip state
+  // ===== TOOLTIP STATE =====
   const [showTooltip, setShowTooltip] = useState(false);
   const [selectedText, setSelectedText] = useState('');
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   
-  // UI state
-  const [dataLoading, setDataLoading] = useState(false);
-  const [dataError, setDataError] = useState<string | null>(null);
+  // ===== UI STATE =====
   const [successMessage, setSuccessMessage] = useState('');
+  const [usageStats, setUsageStats] = useState(getUsageStats());
   
-  // Persistent state using localStorage
-  const [favorites, setFavorites] = useLocalStorage<any[]>('finnishApp_favorites', []);
-  const [dataUrls, setDataUrls] = useLocalStorage('finnishApp_dataUrls', {
-    lessons: 'https://raw.githubusercontent.com/dsedunov/finnishlearningapp/refs/heads/main/demo_lessons_json',
-    translations: 'https://raw.githubusercontent.com/dsedunov/finnishlearningapp/refs/heads/main/demo_translations_json.json'
-  });
+  // ===== PERSISTENT STATE =====
+  const [favorites, setFavorites] = useLocalStorage<FavoriteWord[]>('finnishApp_favorites_v2', []);
+  const [appProgress, setAppProgress] = useLocalStorage<AppProgress>('finnishApp_progress_v2', createEmptyProgress());
 
-  // Computed values
-  const getCurrentLessons = () => lessons.length > 0 ? lessons : [];
-  const getCurrentTranslations = () => translations || {};
-  const currentTopic = getCurrentLessons()[currentTopicIndex] || null;
+  // ===== SYNC FAVORITES WITH APP STATE =====
+  useEffect(() => {
+    setAppState(prev => ({ ...prev, favorites }));
+  }, [favorites]);
 
-  const refreshUsageStats = () => {
-    setUsageStats(getUsageStats());
-  };
+  // ===== DATA LOADING FUNCTIONS =====
   
-  // Data loading function
-  const loadExternalData = async (url: string, type: 'lessons' | 'translations') => {
-    if (!url || !url.trim()) {
-      setDataError(`Please enter a valid URL for ${type}`);
-      return;
-    }
-  
-    setDataLoading(true);
-    setDataError(null);
-    setSuccessMessage('');
-  
+  const loadChaptersData = async (url: string) => {
+    setDataLoading(prev => ({ ...prev, chaptersLoading: true, chaptersError: null }));
+    
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
-  
-      // Get the raw text first to debug JSON issues
-      const rawText = await response.text();
-      console.log(`Raw ${type} data:`, rawText.substring(0, 200) + '...'); // Debug log
       
-      let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch (jsonError) {
-        console.error(`JSON Parse Error for ${type}:`, jsonError);
-        console.error(`Raw text around error:`, rawText.substring(16460, 16480)); // Show text around error position
-        
-        // Try to fix common JSON issues
-        const cleanedText = rawText
-          .replace(/}\s*{/g, '},{') // Fix concatenated objects
-          .replace(/^(?!\[)/, '[')   // Add opening bracket if missing
-          .replace(/(?<!\])$/, ']'); // Add closing bracket if missing
-        
-        try {
-          data = JSON.parse(cleanedText);
-          console.log(`Fixed JSON for ${type}`);
-        } catch (secondError) {
-          throw new Error(`Invalid JSON format in ${type} file. Please check the file structure.`);
-        }
-      }
-  
-      if (type === 'lessons') {
-        const lessonsData = Array.isArray(data) ? data : data.lessons || data.lesson || [];
-        if (lessonsData.length === 0) {
-          throw new Error('No lessons found in the data');
-        }
-        setLessons(lessonsData);
-        setCurrentTopicIndex(0);
-        setCurrentSection('home');
-        setSuccessMessage(`✅ Loaded ${lessonsData.length} lessons successfully!`);
-      } else if (type === 'translations') {
-        const translationsData = data.translations || data;
-        const wordCount = Object.keys(translationsData).length;
-        if (wordCount === 0) {
-          throw new Error('No translations found in the data');
-        }
-        setTranslations(translationsData);
-        setSuccessMessage(`✅ Loaded ${wordCount} translations successfully!`);
-      }
+      const rawText = await response.text();
+      const data: ChaptersData = JSON.parse(rawText);
+      
+      setAppState(prev => ({ ...prev, chaptersData: data }));
+      setSuccessMessage(`✅ Loaded ${data.chapters.length} chapters successfully!`);
+      
+      // Initialize progress for any new chapters/lessons
+      initializeProgressForNewData(data);
+      
     } catch (error) {
-      console.error(`Error loading ${type}:`, error);
-      setDataError(`Failed to load ${type}: ${(error as Error).message}`);
+      const errorMessage = `Failed to load chapters: ${(error as Error).message}`;
+      setDataLoading(prev => ({ ...prev, chaptersError: errorMessage }));
+      console.error('Chapters loading error:', error);
     } finally {
-      setDataLoading(false);
-      setTimeout(() => setSuccessMessage(''), 3000);
+      setDataLoading(prev => ({ ...prev, chaptersLoading: false }));
     }
   };
+
+  const loadVocabularyData = async (url: string) => {
+    setDataLoading(prev => ({ ...prev, vocabularyLoading: true, vocabularyError: null }));
+    
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const rawText = await response.text();
+      const data: VocabularyData = JSON.parse(rawText);
+      
+      setAppState(prev => ({ ...prev, vocabularyData: data }));
+      setSuccessMessage(`✅ Loaded ${Object.keys(data.vocabulary).length} vocabulary entries!`);
+      
+    } catch (error) {
+      const errorMessage = `Failed to load vocabulary: ${(error as Error).message}`;
+      setDataLoading(prev => ({ ...prev, vocabularyError: errorMessage }));
+      console.error('Vocabulary loading error:', error);
+    } finally {
+      setDataLoading(prev => ({ ...prev, vocabularyLoading: false }));
+    }
+  };
+
+  const loadAudioScriptsData = async (url: string) => {
+    setDataLoading(prev => ({ ...prev, audioScriptsLoading: true, audioScriptsError: null }));
+    
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const rawText = await response.text();
+      const data: AudioScriptsData = JSON.parse(rawText);
+      
+      setAppState(prev => ({ ...prev, audioScriptsData: data }));
+      setSuccessMessage(`✅ Loaded ${data.scripts.length} audio scripts!`);
+      
+    } catch (error) {
+      const errorMessage = `Failed to load audio scripts: ${(error as Error).message}`;
+      setDataLoading(prev => ({ ...prev, audioScriptsError: errorMessage }));
+      console.error('Audio scripts loading error:', error);
+    } finally {
+      setDataLoading(prev => ({ ...prev, audioScriptsLoading: false }));
+    }
+  };
+
+  // Initialize progress for new chapters/lessons
+  const initializeProgressForNewData = (chaptersData: ChaptersData) => {
+    setAppProgress(currentProgress => {
+      const newProgress = { ...currentProgress };
+      
+      chaptersData.chapters.forEach(chapter => {
+        if (!newProgress.chapters[chapter.id]) {
+          newProgress.chapters[chapter.id] = {
+            chapterId: chapter.id,
+            lessons: {},
+            chapterCompleted: false
+          };
+        }
+        
+        const chapterProgress = newProgress.chapters[chapter.id];
+        chapter.lessons.forEach(lesson => {
+          if (!chapterProgress.lessons[lesson.id]) {
+            chapterProgress.lessons[lesson.id] = createEmptyLessonProgress(
+              lesson.id, 
+              lesson.exercises.length
+            );
+          }
+        });
+      });
+      
+      newProgress.lastUpdated = new Date().toISOString();
+      return newProgress;
+    });
+  };
+
+  // ===== NAVIGATION FUNCTIONS =====
   
+  const goToHome = () => {
+    setAppState(prev => ({ 
+      ...prev, 
+      currentSection: 'home',
+      currentChapter: null,
+      currentLesson: null 
+    }));
+  };
 
-  // Auto-load data on mount
-  useEffect(() => {
-    if (dataUrls.lessons) {
-      loadExternalData(dataUrls.lessons, 'lessons');
-    }
-    if (dataUrls.translations) {
-      loadExternalData(dataUrls.translations, 'translations');
-    }
-  }, []);
+  const goToFavorites = () => {
+    setAppState(prev => ({ ...prev, currentSection: 'favorites' }));
+  };
 
-  // Audio functions
-  const playAudio = (text: string, voiceType = 'default') => {
+  const selectChapter = (chapter: Chapter) => {
+    setAppState(prev => ({ 
+      ...prev, 
+      currentChapter: chapter,
+      currentLesson: null,
+      currentSection: 'chapter'
+    }));
+  };
+
+  const selectLesson = (lesson: Lesson) => {
+    setAppState(prev => ({ 
+      ...prev, 
+      currentLesson: lesson,
+      currentSection: 'theory'
+    }));
+    
+    // Update last accessed time
+    if (appState.currentChapter) {
+      updateLessonProgress(appState.currentChapter.id, lesson.id, {
+        lastAccessedAt: new Date().toISOString()
+      });
+    }
+  };
+
+  const changeSection = (section: 'theory' | 'reading' | 'exercises') => {
+    setAppState(prev => ({ ...prev, currentSection: section }));
+  };
+
+  // ===== PROGRESS MANAGEMENT =====
+  
+  const updateLessonProgress = (chapterId: number, lessonId: string, updates: Partial<LessonProgressDetailed>) => {
+    setAppProgress(currentProgress => {
+      const newProgress = { ...currentProgress };
+      
+      if (!newProgress.chapters[chapterId]) {
+        newProgress.chapters[chapterId] = {
+          chapterId,
+          lessons: {},
+          chapterCompleted: false
+        };
+      }
+      
+      const chapterProgress = newProgress.chapters[chapterId];
+      if (!chapterProgress.lessons[lessonId]) {
+        chapterProgress.lessons[lessonId] = createEmptyLessonProgress(lessonId, 0);
+      }
+      
+      const lessonProgress = chapterProgress.lessons[lessonId];
+      Object.assign(lessonProgress, updates);
+      
+      // Check if lesson is fully completed
+      const isFullyCompleted = lessonProgress.theory_completed && 
+                             lessonProgress.reading_completed && 
+                             lessonProgress.exercises_completed >= lessonProgress.total_exercises;
+      
+      if (isFullyCompleted && !lessonProgress.lessonFullyCompleted) {
+        lessonProgress.lessonFullyCompleted = true;
+        lessonProgress.completedAt = new Date().toISOString();
+      }
+      
+      newProgress.lastUpdated = new Date().toISOString();
+      return newProgress;
+    });
+  };
+
+  const completeTheory = () => {
+    if (appState.currentChapter && appState.currentLesson) {
+      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
+        theory_completed: true,
+        theory_completedAt: new Date().toISOString()
+      });
+    }
+  };
+
+  const completeReading = () => {
+    if (appState.currentChapter && appState.currentLesson) {
+      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
+        reading_completed: true,
+        reading_completedAt: new Date().toISOString()
+      });
+    }
+  };
+
+  const completeExercises = () => {
+    if (appState.currentChapter && appState.currentLesson) {
+      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
+        exercises_completed: appState.currentLesson.exercises.length,
+        exercises_completedAt: new Date().toISOString()
+      });
+    }
+  };
+
+  // ===== AUDIO FUNCTIONS =====
+  
+  const playAudio = (text: string, voiceType?: 'enhanced' | 'standard') => {
     console.log('🎯 playAudio called with:', { text, voiceType, audioPlaying });
     
     if (audioPlaying) {
@@ -162,11 +373,14 @@ const App: React.FC = () => {
     }
     
     setTimeout(() => {
-      if (voiceType === 'gemini') {
-        // Try regular approach first, then streaming
+      // Use voiceType if provided, otherwise apply 6+ word rule
+      const useEnhanced = voiceType === 'enhanced' || 
+                         (voiceType !== 'standard' && shouldUseEnhancedTTS(text));
+      
+      if (useEnhanced) {
         playAudioWithGemini(text, 'Kore', setAudioPlaying).catch(() => {
-          console.log('🔄 Regular TTS failed, trying streaming approach');
-          playAudioWithGemini(text, 'Kore', setAudioPlaying);
+          console.log('🔄 Enhanced TTS failed, falling back to browser TTS');
+          fallbackToWebSpeech(text, setAudioPlaying);
         });
       } else {
         fallbackToWebSpeech(text, setAudioPlaying);
@@ -174,82 +388,54 @@ const App: React.FC = () => {
     }, 50);
   };
 
-  // Text interaction handlers
+  // ===== TEXT INTERACTION =====
+  
   const handleTextClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
     event.preventDefault();
     const target = event.target as HTMLElement;
     const word = target.textContent?.trim();
     if (!word) return;
 
-    const currentTranslations = getCurrentTranslations();
     const cleanWord = word.replace(/[.,!?;:]/g, '');
-    let translation = currentTranslations[cleanWord];
+    let translation = appState.vocabularyData?.vocabulary[cleanWord];
     
     if (!translation) {
-      setDataLoading(true);
+      setDataLoading(prev => ({ ...prev, vocabularyLoading: true }));
       const enhancedTranslation = await getEnhancedTranslation(cleanWord);
-      setDataLoading(false);
+      setDataLoading(prev => ({ ...prev, vocabularyLoading: false }));
       
       if (enhancedTranslation.success) {
-        const newTranslation = {
-          base: enhancedTranslation.data.baseTranslation,
-          details: `📝 ${enhancedTranslation.data.grammaticalInfo.partOfSpeech}\n🔄 ${enhancedTranslation.data.formationRules}\n💡 ${enhancedTranslation.data.usageNotes}`,
-          enhanced: enhancedTranslation.data
+        // Store in temporary state for this session
+        translation = {
+          baseForm: cleanWord,
+          russian: enhancedTranslation.data.translation,
+          grammarInfo: enhancedTranslation.data.partOfSpeech,
+          pronunciation: '',
+          examples: enhancedTranslation.data.examples || [],
+          difficulty: enhancedTranslation.data.difficulty,
+          sourceChapter: 'ai_generated',
+          frequency: 'medium',
+          tags: []
         };
-        
-        setTranslations(prev => ({
-          ...prev,
-          [cleanWord]: newTranslation
-        }));
-        
-        translation = newTranslation;
-      } else {
-        setDataError(`Could not translate "${cleanWord}": ${enhancedTranslation.error}`);
-        return;
       }
     }
     
-    setSelectedText(cleanWord);
-    const rect = target.getBoundingClientRect();
-    setTooltipPosition({ 
-      x: rect.left + rect.width / 2, 
-      y: rect.top - 10 
-    });
-    setShowTooltip(true);
-  };
-
-  // Favorites management
-  const addToFavorites = (word: string, translation?: any) => {
-    const currentTranslations = getCurrentTranslations();
-    const wordTranslation = translation || currentTranslations[word];
-
-    if (wordTranslation && !favorites.some(fav => fav.word === word)) {
-      const favorite = {
-        id: Date.now(),
-        word,
-        translation: wordTranslation.base || wordTranslation,
-        addedAt: new Date()
-      };
-      setFavorites(prev => [...prev, favorite]);
+    if (translation) {
+      setSelectedText(cleanWord);
+      const rect = target.getBoundingClientRect();
+      setTooltipPosition({ 
+        x: rect.left + rect.width / 2, 
+        y: rect.top - 10 
+      });
+      setShowTooltip(true);
     }
   };
 
-
-  const removeFromFavorites = (word: string) => {
-    setFavorites(prev => prev.filter(fav => fav.word !== word));
-  };
-
-  const isFavorited = (word: string) => {
-    return favorites.some(fav => fav.word === word);
-  };
-
-  // Render clickable text
   const renderClickableText = (text: string) => {
     const words = text.split(' ');
     return words.map((word, index) => {
       const cleanWord = word.replace(/[.,!?]/g, '');
-      const currentTranslations = getCurrentTranslations();
-      const hasTranslation = currentTranslations[cleanWord];
+      const hasTranslation = appState.vocabularyData?.vocabulary[cleanWord];
       const isRussian = /[а-яё]/i.test(cleanWord);
       
       return (
@@ -268,292 +454,68 @@ const App: React.FC = () => {
     });
   };
 
-  // Navigation handlers
-  const goToHome = () => {
-    setCurrentSection('home');
-    setCurrentTopicIndex(0);
-  };
-
-  const goToPreviousLesson = () => {
-    const currentIndex = lessons.indexOf(currentTopic);
-    if (currentIndex > 0) {
-      setCurrentTopicIndex(currentIndex - 1);
+  // ===== FAVORITES MANAGEMENT =====
+  
+  const addToFavorites = (word: string, translationData?: any) => {
+    const translation = translationData || appState.vocabularyData?.vocabulary[word];
+    
+    if (translation && !favorites.some(fav => fav.word === word)) {
+      const favorite: FavoriteWord = {
+        id: Date.now(),
+        word,
+        translation: translation.russian || translation.baseForm || translation,
+        sourceChapter: translation.sourceChapter,
+        addedAt: new Date()
+      };
+      setFavorites(prev => [...prev, favorite]);
     }
   };
 
-  const goToNextLesson = () => {
-    const currentIndex = lessons.indexOf(currentTopic);
-    if (currentIndex < lessons.length - 1) {
-      setCurrentTopicIndex(currentIndex + 1);
-    }
+  const removeFromFavorites = (word: string) => {
+    setFavorites(prev => prev.filter(fav => fav.word !== word));
   };
 
-  const selectLesson = (index: number) => {
-    setCurrentTopicIndex(index);
-    setCurrentSection('theory');
+  const isFavorited = (word: string) => {
+    return favorites.some(fav => fav.word === word);
   };
 
-  // File upload handlers
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>, type: 'lessons' | 'translations') => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    setDataLoading(true);
-    setDataError(null);
-
-    try {
-      const text = await file.text();
-      const data = JSON.parse(text);
-      
-      if (type === 'lessons') {
-        setLessons(Array.isArray(data) ? data : [data]);
-        setSuccessMessage('Lessons successfully uploaded!');
-      } else {
-        setTranslations(data);
-        setSuccessMessage('Translations successfully uploaded!');
-      }
-      
-      setTimeout(() => setSuccessMessage(''), 3000);
-    } catch (error) {
-      setDataError(`Error uploading ${type}: Invalid JSON format`);
-    } finally {
-      setDataLoading(false);
-    }
-  };
-
-  // Exercise handlers
-  const handleExerciseAnswer = (exerciseIndex: number, itemIndex: number, answer: any) => {
-    const key = `${exerciseIndex}-${itemIndex}`;
-    setExerciseAnswers(prev => ({
-      ...prev,
-      [key]: answer
-    }));
-  };
-
-  const handleBlankAnswer = (exerciseIndex: number, itemIndex: number, blankIndex: number, answer: string) => {
-    const key = `${exerciseIndex}-${itemIndex}-${blankIndex}`;
-    setExerciseAnswers(prev => ({
-      ...prev,
-      [key]: answer
-    }));
-  };
-
-  const submitExercises = () => {
-    setExerciseSubmitted(true);
-  };
-
-  const resetExercises = () => {
-    setExerciseAnswers({});
-    setExerciseSubmitted(false);
-  };
-
-  // URL handlers
-  const handleUrlChange = (type: 'lessons' | 'translations', url: string) => {
-    setDataUrls(prev => ({ ...prev, [type]: url }));
-  };
-
-  // Tooltip handlers
-  const handleEnhanceTranslation = async (word: string) => {
-    setDataLoading(true);
-    const enhanced = await getEnhancedTranslation(word);
-    setDataLoading(false);
-    if (enhanced.success) {
-      setTranslations(prev => ({
-        ...prev,
-        [word]: {
-          base: enhanced.data.baseTranslation,
-          enhanced: enhanced.data
-        }
-      }));
-    }
-  };
-
-  // Close tooltip when clicking outside or pressing escape
+  // ===== AUTO-LOAD DATA ON MOUNT =====
+  
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (showTooltip) {
-        setShowTooltip(false);
-      }
-    };
+    // Use directly imported data instead of fetching
+    setAppState(prev => ({
+      ...prev,
+      chaptersData: chaptersDataImport as ChaptersData,
+      vocabularyData: vocabularyDataImport as VocabularyData,
+      audioScriptsData: audioScriptsDataImport as AudioScriptsData
+    }));
+    
+    // Initialize progress for the chapters
+    initializeProgressForNewData(chaptersDataImport as ChaptersData);
+    
+    setSuccessMessage('✅ All data loaded successfully!');
+  }, []);
 
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setShowTooltip(false);
-      }
-    };
-
-    if (showTooltip) {
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscapeKey);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, [showTooltip]);
-
-  // Close tooltip when navigating between sections
+  // ===== SUCCESS MESSAGE AUTO-HIDE =====
   useEffect(() => {
-    setShowTooltip(false);
-  }, [currentSection, currentTopicIndex]);
+    if (successMessage) {
+      const timer = setTimeout(() => setSuccessMessage(''), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
+  // ===== COMPUTED VALUES =====
+  
+  const isLoading = dataLoading.chaptersLoading || dataLoading.vocabularyLoading || dataLoading.audioScriptsLoading;
+  const hasErrors = dataLoading.chaptersError || dataLoading.vocabularyError || dataLoading.audioScriptsError;
+  const currentLessonProgress = appState.currentChapter && appState.currentLesson ? 
+    appProgress.chapters[appState.currentChapter.id]?.lessons[appState.currentLesson.id] : null;
+
+  // ===== RENDER =====
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      {/* Header */}
-      <Header onHomeClick={goToHome} />
-
-      <div className="container mx-auto px-4 py-6">
-        {/* Loading State */}
-        {dataLoading && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-lg font-semibold">Loading Finnish lessons...</p>
-            </div>
-          </div>
-        )}
-
-        {/* Success Message */}
-        {successMessage && (
-          <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
-            <div className="flex items-center">
-              <Check className="w-5 h-5 mr-2" />
-              {successMessage}
-            </div>
-          </div>
-        )}
-
-        {/* Error Message */}
-        {dataError && (
-          <div className="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
-            <div className="flex items-center">
-              <X className="w-5 h-5 mr-2" />
-              {dataError}
-              <button 
-                onClick={() => setDataError(null)}
-                className="ml-2 hover:bg-red-600 rounded p-1"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Navigation */}
-        <Navigation
-          currentTopic={currentTopic}
-          currentSection={currentSection}
-          lessons={lessons}
-          favoritesCount={favorites.length}
-          onHomeClick={goToHome}
-          onPreviousLesson={goToPreviousLesson}
-          onNextLesson={goToNextLesson}
-          onSectionChange={setCurrentSection}
-          canGoPrevious={lessons.indexOf(currentTopic) > 0}
-          canGoNext={lessons.indexOf(currentTopic) < lessons.length - 1}
-        />
-
-        {/* Main Content */}
-        <div className="max-w-4xl mx-auto">
-          {/* Home Section */}
-          {currentSection === 'home' && (
-            <div>
-              <StatsCards
-                lessonsCount={getCurrentLessons().length}
-                wordsCount={Object.keys(getCurrentTranslations()).length}
-                favoritesCount={favorites.length}
-              />
-
-              <FileUpload
-                dataUrls={dataUrls}
-                onUrlChange={handleUrlChange}
-                onLoadFromUrl={loadExternalData}
-                onFileUpload={handleFileUpload}
-                dataLoading={dataLoading}
-              />
-
-              <LessonsList
-                lessons={getCurrentLessons()}
-                onLessonSelect={selectLesson}
-              />
-            </div>
-          )}
-
-          {/* Theory Section */}
-          {currentSection === 'theory' && (
-            <TheorySection
-              currentTopic={currentTopic}
-              audioPlaying={audioPlaying}
-              isListening={isListening}
-              onPlayAudio={playAudio}
-              onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
-              onAddToFavorites={addToFavorites}
-              isFavorited={isFavorited}
-              renderClickableText={renderClickableText}
-            />
-          )}
-
-          {/* Reading Section */}
-          {currentSection === 'reading' && (
-            <ReadingSection
-              currentTopic={currentTopic}
-              audioPlaying={audioPlaying}
-              isListening={isListening}
-              exerciseSubmitted={exerciseSubmitted}
-              onPlayAudio={playAudio}
-              onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
-              onSubmitReading={() => setExerciseSubmitted(true)}
-              onResetReading={() => setExerciseSubmitted(false)}
-              onGoToExercises={() => setCurrentSection('exercises')}
-              renderClickableText={renderClickableText}
-            />
-          )}
-
-          {/* Exercises Section */}
-          {currentSection === 'exercises' && (
-            <ExercisesSection
-              currentTopic={currentTopic}
-              exerciseAnswers={exerciseAnswers}
-              exerciseSubmitted={exerciseSubmitted}
-              audioPlaying={audioPlaying}
-              isListening={isListening}
-              onAnswerChange={handleExerciseAnswer}
-              onBlankAnswerChange={handleBlankAnswer}
-              onPlayAudio={playAudio}
-              onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
-              onSubmitExercises={submitExercises}
-              onResetExercises={resetExercises}
-            />
-          )}
-
-          {/* Favorites Section */}
-          {currentSection === 'favorites' && (
-            <FavoritesSection
-              favorites={favorites}
-              audioPlaying={audioPlaying}
-              isListening={isListening}
-              onPlayAudio={playAudio}
-              onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
-              onRemoveFromFavorites={removeFromFavorites}
-              onGoToTheory={() => setCurrentSection('theory')}
-            />
-          )}
-        </div>
-
-        {/* Tooltip */}
-        <Tooltip
-          show={showTooltip}
-          selectedText={selectedText}
-          position={tooltipPosition}
-          translations={getCurrentTranslations()}
-          onClose={() => setShowTooltip(false)}
-          onAddToFavorites={addToFavorites}
-          onPlayAudio={playAudio}
-          onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
-          onEnhanceTranslation={handleEnhanceTranslation}
-        />
-      </div>
+      <ServerDebugTool />
     </div>
   );
 };
