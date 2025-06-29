@@ -15,5 +15,3 @@
 - Browser TTS/Speech Recognition
 - Tailwind CSS
 - Local Storage caching
-
-## Getting Started
