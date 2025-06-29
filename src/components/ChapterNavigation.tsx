@@ -8,7 +8,8 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   appProgress,
   onChapterSelect,
   onHomeClick,
-  favoritesCount
+  favoritesCount,
+  onGoToFavorites
 }) => {
   // Helper function to get chapter progress
   const getChapterProgress = (chapterId: number) => {
@@ -48,7 +49,7 @@ const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
         
         {/* Favorites Button */}
         <button
-          onClick={() => {/* Will be connected to favorites function */}}
+          onClick={onGoToFavorites}
           className="flex items-center bg-red-100 hover:bg-red-200 text-red-600 px-4 py-2 rounded-lg transition-colors"
         >
           <Heart className="w-5 h-5 mr-2" />
