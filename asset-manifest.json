@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/finnishlearningapp/static/css/main.6635597e.css",
+    "main.js": "/finnishlearningapp/static/js/main.d712f449.js",
+    "index.html": "/finnishlearningapp/index.html",
+    "main.6635597e.css.map": "/finnishlearningapp/static/css/main.6635597e.css.map",
+    "main.d712f449.js.map": "/finnishlearningapp/static/js/main.d712f449.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6635597e.css",
+    "static/js/main.d712f449.js"
+  ]
+}
