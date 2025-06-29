@@ -397,16 +397,6 @@
       "difficulty": "beginner",
       "frequency": "very_high"
     },
-    "grateful": {
-      "base": "благодарный",
-      "baseForm": "grateful (English emotion tag)",
-      "case": "эмоциональный тег",
-      "grammarRule": "описание эмоции в диалоге",
-      "pronunciation": "GRAIT-ful",
-      "examples": ["emotion: grateful"],
-      "difficulty": "beginner",
-      "frequency": "low"
-    },
     "auto": {
       "base": "машина",
       "baseForm": "auto",
@@ -446,6 +436,36 @@
       "examples": ["suomen kielellä", "englannin kielellä"],
       "difficulty": "intermediate",
       "frequency": "medium"
+    },
+    "tilanteesta": {
+      "base": "от ситуации",
+      "baseForm": "tilanne (ситуация)",
+      "case": "элатив ед.ч. (-sta/-stä)",
+      "grammarRule": "tilanne + -sta = tilanteesta",
+      "pronunciation": "ti-LAN-tees-ta",
+      "examples": ["Riippuen tilanteesta", "Poistua tilanteesta"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "ja": {
+      "base": "и",
+      "baseForm": "ja",
+      "case": "союз",
+      "grammarRule": "неизменяемое слово",
+      "pronunciation": "ja",
+      "examples": ["Minä ja sinä", "Kissa ja koira"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "vuorokaudenajasta": {
+      "base": "от времени суток",
+      "baseForm": "vuorokaudenaika",
+      "case": "элатив ед.ч.",
+      "grammarRule": "сложное слово vuorokausi + aika + -sta",
+      "pronunciation": "VUO-ro-kau-den-a-jas-ta",
+      "examples": ["Riippuen vuorokaudenajasta"],
+      "difficulty": "advanced",
+      "frequency": "low"
     }
   },
   "grammarRules": {
@@ -502,44 +522,14 @@
           "puhua": ["puhun", "puhut", "puhuu", "puhumme", "puhutte", "puhuvat"]
         }
       }
+    },
+    "categories": {
+      "greetings": ["Hei", "Hyvää", "päivää", "Moi"],
+      "family": ["äiti", "isä", "veli", "sisko", "perhe"],
+      "question_words": ["Mitä", "Entä"],
+      "pronouns": ["Minä", "Sinä", "Hän"],
+      "verbs": ["olen", "olet", "on", "kuuluu", "tervehtivät"],
+      "basic_vocabulary": ["Kiitos", "ja", "auto", "kieli"]
     }
-  },
-  "categories": {
-    "greetings": ["Hei", "Hyvää", "päivää", "Moi"],
-    "family": ["äiti", "isä", "veli", "sisko", "perhe"],
-    "question_words": ["Mitä", "Entä"],
-    "pronouns": ["Minä", "Sinä", "Hän"],
-    "verbs": ["olen", "olet", "on", "kuuluu", "tervehtivät"],
-    "basic_vocabulary": ["Kiitos", "ja", "auto", "kieli"]
   }
-}medium"
-    },
-    "tilanteesta": {
-      "base": "от ситуации",
-      "baseForm": "tilanne (ситуация)",
-      "case": "элатив ед.ч. (-sta/-stä)",
-      "grammarRule": "tilanne + -sta = tilanteesta",
-      "pronunciation": "ti-LAN-tees-ta",
-      "examples": ["Riippuen tilanteesta", "Poistua tilanteesta"],
-      "difficulty": "intermediate",
-      "frequency": "medium"
-    },
-    "ja": {
-      "base": "и",
-      "baseForm": "ja",
-      "case": "союз",
-      "grammarRule": "неизменяемое слово",
-      "pronunciation": "ja",
-      "examples": ["Minä ja sinä", "Kissa ja koira"],
-      "difficulty": "beginner",
-      "frequency": "very_high"
-    },
-    "vuorokaudenajasta": {
-      "base": "от времени суток",
-      "baseForm": "vuorokaudenaika",
-      "case": "элатив ед.ч.",
-      "grammarRule": "сложное слово vuorokausi + aika + -sta",
-      "pronunciation": "VUO-ro-kau-den-a-jas-ta",
-      "examples": ["Riippuen vuorokaudenajasta"],
-      "difficulty": "advanced",
-      "frequency": "
+}
