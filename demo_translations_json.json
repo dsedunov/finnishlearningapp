@@ -1,0 +1,545 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-06-29",
+    "totalWords": 50,
+    "language": "Finnish-Russian",
+    "description": "Demo translations for Finnish learning app testing"
+  },
+  "translations": {
+    "Hei": {
+      "base": "Привет",
+      "baseForm": "hei",
+      "case": "междометие",
+      "grammarRule": "неформальное приветствие",
+      "pronunciation": "HEI",
+      "examples": ["Hei, mitä kuuluu?", "Hei hei!"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "Hyvää": {
+      "base": "Доброго/хорошего",
+      "baseForm": "hyvä (хороший)",
+      "case": "партитив ед.ч.",
+      "grammarRule": "прилагательные в партитиве для пожеланий",
+      "pronunciation": "HÜ-vää",
+      "examples": ["Hyvää päivää!", "Hyvää matkaa!"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "päivää": {
+      "base": "дня",
+      "baseForm": "päivä (день)",
+      "case": "партитив ед.ч.",
+      "grammarRule": "объект в партитиве при пожеланиях",
+      "pronunciation": "PÄI-vää",
+      "examples": ["Hyvää päivää!", "Koko päivää"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Moi": {
+      "base": "Привет (молодежный)",
+      "baseForm": "moi",
+      "case": "междометие",
+      "grammarRule": "неформальное приветствие молодежи",
+      "pronunciation": "MOI",
+      "examples": ["Moi moi!", "Moi, mitä teet?"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Mitä": {
+      "base": "Что/какие",
+      "baseForm": "mikä (что/какой)",
+      "case": "партитив ед.ч.",
+      "grammarRule": "вопросительное слово в партитиве",
+      "pronunciation": "MI-tä",
+      "examples": ["Mitä kuuluu?", "Mitä syöt?"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "kuuluu": {
+      "base": "слышится/происходит",
+      "baseForm": "kuulua (слышаться)",
+      "case": "3-е лицо ед.ч.",
+      "grammarRule": "безличная конструкция",
+      "pronunciation": "KUU-luu",
+      "examples": ["Mitä kuuluu?", "Musiikki kuuluu"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Kiitos": {
+      "base": "Спасибо",
+      "baseForm": "kiitos",
+      "case": "номинатив",
+      "grammarRule": "слово благодарности",
+      "pronunciation": "KII-tos",
+      "examples": ["Kiitos paljon!", "Kiitos samoin!"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "Hauska": {
+      "base": "приятный, веселый",
+      "baseForm": "hauska",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "прилагательное, не склоняется в выражении 'hauska tutustua'",
+      "pronunciation": "HAUS-ka",
+      "examples": ["Hauska tutustua!", "Hauska juttu!"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "tutustua": {
+      "base": "познакомиться",
+      "baseForm": "tutustua",
+      "case": "инфинитив",
+      "grammarRule": "первый инфинитив глагола",
+      "pronunciation": "tu-TUS-tua",
+      "examples": ["Hauska tutustua!", "Haluan tutustua"],
+      "difficulty": "beginner",
+      "frequency": "medium"
+    },
+    "Minä": {
+      "base": "Я",
+      "baseForm": "minä",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "личное местоимение 1-го лица",
+      "pronunciation": "MI-nä",
+      "examples": ["Minä olen Anna", "Minä tulen Suomesta"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "olen": {
+      "base": "есть (я)",
+      "baseForm": "olla (быть)",
+      "case": "1-е лицо ед.ч.",
+      "grammarRule": "глагол быть в настоящем времени",
+      "pronunciation": "O-len",
+      "examples": ["Minä olen opettaja", "Olen kotona"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "Sinä": {
+      "base": "Ты",
+      "baseForm": "sinä",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "личное местоимение 2-го лица",
+      "pronunciation": "SI-nä",
+      "examples": ["Sinä olet kiva", "Sinä tulet mukaan"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "olet": {
+      "base": "есть (ты)",
+      "baseForm": "olla (быть)",
+      "case": "2-е лицо ед.ч.",
+      "grammarRule": "глагол быть в настоящем времени",
+      "pronunciation": "O-let",
+      "examples": ["Sinä olet opettaja", "Olet kotona"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "Hän": {
+      "base": "Он/она",
+      "baseForm": "hän",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "личное местоимение 3-го лица (для людей)",
+      "pronunciation": "HÄN",
+      "examples": ["Hän on opettaja", "Hän tulee huomenna"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "on": {
+      "base": "есть/является",
+      "baseForm": "olla (быть)",
+      "case": "3-е лицо ед.ч.",
+      "grammarRule": "глагол быть в настоящем времени",
+      "pronunciation": "ON",
+      "examples": ["Hän on kiva", "Talo on iso"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "nimeni": {
+      "base": "моё имя",
+      "baseForm": "nimi (имя)",
+      "case": "номинатив ед.ч. + притяжательный суффикс",
+      "grammarRule": "nimi + -ni = nimeni",
+      "pronunciation": "NI-me-ni",
+      "examples": ["Minun nimeni on Anna", "Nimeni on Matti"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "perhe": {
+      "base": "семья",
+      "baseForm": "perhe",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "PER-he",
+      "examples": ["Iso perhe", "Perhe asuu täällä"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "äiti": {
+      "base": "мать",
+      "baseForm": "äiti",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "ÄI-ti",
+      "examples": ["Minun äiti", "Äiti on kotona"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "isä": {
+      "base": "отец",
+      "baseForm": "isä",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "I-sä",
+      "examples": ["Minun isä", "Isä työskentelee"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "veli": {
+      "base": "брат",
+      "baseForm": "veli",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "VE-li",
+      "examples": ["Minun veli", "Veli pelaa jalkapalloa"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "sisko": {
+      "base": "сестра",
+      "baseForm": "sisko",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "SIS-ko",
+      "examples": ["Minun sisko", "Sisko opiskelee"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Suomessa": {
+      "base": "В Финляндии",
+      "baseForm": "Suomi (Финляндия)",
+      "case": "инессив ед.ч. (-ssa/-ssä)",
+      "grammarRule": "место 'где?' → Suomi + -ssa = Suomessa",
+      "pronunciation": "SUO-mes-sa",
+      "examples": ["Asun Suomessa", "Suomessa on kylmä"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "ihmiset": {
+      "base": "люди",
+      "baseForm": "ihminen (человек)",
+      "case": "номинатив мн.ч.",
+      "grammarRule": "ihminen → ihmise- → ihmiset",
+      "pronunciation": "IH-mi-set",
+      "examples": ["Suomalaiset ihmiset", "Nuoret ihmiset"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "tervehtivät": {
+      "base": "приветствуют",
+      "baseForm": "tervehtiä (приветствовать)",
+      "case": "3-е лицо мн.ч.",
+      "grammarRule": "tervehti- + -vät = tervehtivät",
+      "pronunciation": "TER-veh-ti-vät",
+      "examples": ["He tervehtivät toisiaan", "Lapset tervehtivät opettajaa"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "toisiaan": {
+      "base": "друг друга",
+      "baseForm": "toinen (другой)",
+      "case": "партитив + взаимное местоимение",
+      "grammarRule": "toinen → toisi- + -aan = toisiaan",
+      "pronunciation": "TOI-si-aan",
+      "examples": ["He rakastavat toisiaan", "Katsovat toisiaan"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "eri": {
+      "base": "разными",
+      "baseForm": "eri (разный)",
+      "case": "неизменяемое прилагательное",
+      "grammarRule": "eri не склоняется",
+      "pronunciation": "E-ri",
+      "examples": ["Eri tavoin", "Eri maiden"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "tavoin": {
+      "base": "способами",
+      "baseForm": "tapa (способ)",
+      "case": "инструктив мн.ч. (-in)",
+      "grammarRule": "tapa → tavo- + -in = tavoin",
+      "pronunciation": "TA-voin",
+      "examples": ["Eri tavoin", "Monin tavoin"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "riippuen": {
+      "base": "в зависимости от",
+      "baseForm": "riippua (зависеть)",
+      "case": "агентный партицип",
+      "grammarRule": "riipu- + -en = riippuen + элатив",
+      "pronunciation": "RIIP-pu-en",
+      "examples": ["Riippuen tilanteesta", "Riippuen säästä"],
+      "difficulty": "advanced",
+      "frequency": "low"
+    },
+    "Kahvilassa": {
+      "base": "В кафе",
+      "baseForm": "kahvila (кафе)",
+      "case": "инессив ед.ч. (-ssa/-ssä)",
+      "grammarRule": "место 'где?' → kahvila + -ssa = kahvilassa",
+      "pronunciation": "KAH-vi-las-sa",
+      "examples": ["Istumme kahvilassa", "Kahvilassa on hiljaista"],
+      "difficulty": "beginner",
+      "frequency": "medium"
+    },
+    "Anna": {
+      "base": "Анна",
+      "baseForm": "Anna",
+      "case": "собственное имя",
+      "grammarRule": "финское женское имя",
+      "pronunciation": "AN-na",
+      "examples": ["Anna on kiva", "Annan äiti"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Matti": {
+      "base": "Матти",
+      "baseForm": "Matti",
+      "case": "собственное имя",
+      "grammarRule": "финское мужское имя",
+      "pronunciation": "MAT-ti",
+      "examples": ["Matti työskentelee", "Matin auto"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "tapaavat": {
+      "base": "встречаются",
+      "baseForm": "tavata (встречать)",
+      "case": "3-е лицо мн.ч.",
+      "grammarRule": "tapaa- + -vat = tapaavat",
+      "pronunciation": "ta-PAA-vat",
+      "examples": ["He tapaavat usein", "Ystävät tapaavat"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "ensimmäistä": {
+      "base": "первый (раз)",
+      "baseForm": "ensimmäinen (первый)",
+      "case": "партитив ед.ч.",
+      "grammarRule": "порядковое числительное в партитиве",
+      "pronunciation": "EN-sim-mäis-tä",
+      "examples": ["ensimmäistä kertaa", "ensimmäistä päivää"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "kertaa": {
+      "base": "раз",
+      "baseForm": "kerta (раз)",
+      "case": "партитив ед.ч.",
+      "grammarRule": "kerta + -a = kertaa",
+      "pronunciation": "KER-taa",
+      "examples": ["ensimmäistä kertaa", "monta kertaa"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "Entä": {
+      "base": "А как/что насчет",
+      "baseForm": "entä",
+      "case": "частица",
+      "grammarRule": "вопросительная частица",
+      "pronunciation": "EN-tä",
+      "examples": ["Entä sinulle?", "Entä huomenna?"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "sinulle": {
+      "base": "тебе/у тебя",
+      "baseForm": "sinä (ты)",
+      "case": "аллатив ед.ч.",
+      "grammarRule": "направление или обладание: sinä + -lle = sinulle",
+      "pronunciation": "si-NUL-le",
+      "examples": ["Entä sinulle?", "Annan sinulle kirjan"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "kysymästä": {
+      "base": "что спросил",
+      "baseForm": "kysyä (спрашивать)",
+      "case": "элатив + 3-й инфинитив",
+      "grammarRule": "kiitos + элатив выражает благодарность за действие",
+      "pronunciation": "KY-sy-mäs-tä",
+      "examples": ["Kiitos kysymästä", "Kiitos auttamasta"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "Minulla": {
+      "base": "У меня",
+      "baseForm": "minä (я)",
+      "case": "адессив + обладание",
+      "grammarRule": "конструкция обладания: minulla on",
+      "pronunciation": "MI-nul-la",
+      "examples": ["Minulla on kissa", "Minulla on aika"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "myös": {
+      "base": "тоже/также",
+      "baseForm": "myös",
+      "case": "наречие",
+      "grammarRule": "неизменяемое наречие",
+      "pronunciation": "MY-ös",
+      "examples": ["Minulla on myös hyvää", "Hän tulee myös"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "grateful": {
+      "base": "благодарный",
+      "baseForm": "grateful (English emotion tag)",
+      "case": "эмоциональный тег",
+      "grammarRule": "описание эмоции в диалоге",
+      "pronunciation": "GRAIT-ful",
+      "examples": ["emotion: grateful"],
+      "difficulty": "beginner",
+      "frequency": "low"
+    },
+    "auto": {
+      "base": "машина",
+      "baseForm": "auto",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "AU-to",
+      "examples": ["Uusi auto", "Auto on nopea"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "autossa": {
+      "base": "в машине",
+      "baseForm": "auto (машина)",
+      "case": "инессив ед.ч. (-ssa/-ssä)",
+      "grammarRule": "место 'где?' → auto + -ssa = autossa",
+      "pronunciation": "AU-tos-sa",
+      "examples": ["Istun autossa", "Avaimet ovat autossa"],
+      "difficulty": "beginner",
+      "frequency": "medium"
+    },
+    "kieli": {
+      "base": "язык",
+      "baseForm": "kieli",
+      "case": "номинатив ед.ч.",
+      "grammarRule": "базовая форма существительного",
+      "pronunciation": "KIE-li",
+      "examples": ["Suomen kieli", "Kieli on vaikea"],
+      "difficulty": "beginner",
+      "frequency": "high"
+    },
+    "kielellä": {
+      "base": "на языке",
+      "baseForm": "kieli (язык)",
+      "case": "адессив ед.ч. (-lla/-llä)",
+      "grammarRule": "средство или способ: kieli + -llä = kielellä",
+      "pronunciation": "KIE-lel-lä",
+      "examples": ["suomen kielellä", "englannin kielellä"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    }
+  },
+  "grammarRules": {
+    "cases": {
+      "nominative": {
+        "name": "номинатив",
+        "usage": "подлежащее, именная часть сказуемого",
+        "endings": "базовая форма",
+        "examples": ["kissa (кот)", "talo (дом)"]
+      },
+      "partitive": {
+        "name": "партитив",
+        "usage": "неопределённое количество, объект переходного глагола",
+        "endings": "-a/-ä, -ta/-tä",
+        "examples": ["kissaa (кота)", "taloa (дом)"]
+      },
+      "genitive": {
+        "name": "генитив",
+        "usage": "притяжение, определение",
+        "endings": "-n",
+        "examples": ["kissan (кота)", "talon (дома)"]
+      },
+      "inessive": {
+        "name": "инессив",
+        "usage": "место 'где?' внутри",
+        "endings": "-ssa/-ssä",
+        "examples": ["talossa (в доме)", "Suomessa (в Финляндии)"]
+      },
+      "adessive": {
+        "name": "адессив",
+        "usage": "место 'где?' на поверхности, время, обладание",
+        "endings": "-lla/-llä",
+        "examples": ["pöydällä (на столе)", "minulla (у меня)"]
+      },
+      "elative": {
+        "name": "элатив",
+        "usage": "место 'откуда?' изнутри",
+        "endings": "-sta/-stä",
+        "examples": ["talosta (из дома)", "Suomesta (из Финляндии)"]
+      }
+    },
+    "verbConjugation": {
+      "present": {
+        "name": "настоящее время",
+        "endings": {
+          "1sg": "-n",
+          "2sg": "-t",
+          "3sg": "-(consonant gradation)",
+          "1pl": "-mme",
+          "2pl": "-tte",
+          "3pl": "-vat/-vät"
+        },
+        "examples": {
+          "puhua": ["puhun", "puhut", "puhuu", "puhumme", "puhutte", "puhuvat"]
+        }
+      }
+    }
+  },
+  "categories": {
+    "greetings": ["Hei", "Hyvää", "päivää", "Moi"],
+    "family": ["äiti", "isä", "veli", "sisko", "perhe"],
+    "question_words": ["Mitä", "Entä"],
+    "pronouns": ["Minä", "Sinä", "Hän"],
+    "verbs": ["olen", "olet", "on", "kuuluu", "tervehtivät"],
+    "basic_vocabulary": ["Kiitos", "ja", "auto", "kieli"]
+  }
+}medium"
+    },
+    "tilanteesta": {
+      "base": "от ситуации",
+      "baseForm": "tilanne (ситуация)",
+      "case": "элатив ед.ч. (-sta/-stä)",
+      "grammarRule": "tilanne + -sta = tilanteesta",
+      "pronunciation": "ti-LAN-tees-ta",
+      "examples": ["Riippuen tilanteesta", "Poistua tilanteesta"],
+      "difficulty": "intermediate",
+      "frequency": "medium"
+    },
+    "ja": {
+      "base": "и",
+      "baseForm": "ja",
+      "case": "союз",
+      "grammarRule": "неизменяемое слово",
+      "pronunciation": "ja",
+      "examples": ["Minä ja sinä", "Kissa ja koira"],
+      "difficulty": "beginner",
+      "frequency": "very_high"
+    },
+    "vuorokaudenajasta": {
+      "base": "от времени суток",
+      "baseForm": "vuorokaudenaika",
+      "case": "элатив ед.ч.",
+      "grammarRule": "сложное слово vuorokausi + aika + -sta",
+      "pronunciation": "VUO-ro-kau-den-a-jas-ta",
+      "examples": ["Riippuen vuorokaudenajasta"],
+      "difficulty": "advanced",
+      "frequency": "
