@@ -486,7 +486,7 @@ const App: React.FC = () => {
     setAppState(prev => ({
       ...prev,
       chaptersData: chaptersDataImport as ChaptersData,
-      vocabularyData: vocabularyDataImport as VocabularyData,
+     // vocabularyData: vocabularyDataImport as VocabularyData,
       audioScriptsData: audioScriptsDataImport as AudioScriptsData
     }));
     
