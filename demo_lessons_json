@@ -94,7 +94,7 @@
             "emotion": "grateful"
           }
         ],
-        "comprehension": [
+        "questions": [
           {
             "question": "Missä Anna ja Matti tapaavat?",
             "answer": "Kahvilassa",
@@ -109,33 +109,9 @@
           "instruction": "Harjoittele lyhyitä ja pitkiä vokaaleja",
           "items": [
             {
-              "category": "Lyhyet ja pitkät vokaalit",
-              "pairs": [
-                {"short": "a", "long": "aa", "examples": ["ma - maa", "sa - saa"]},
-                {"short": "o", "long": "oo", "examples": ["mo - moo", "ko - koo"]},
-                {"short": "u", "long": "uu", "examples": ["mu - muu", "pu - puu"]}
-              ]
-            }
-          ]
-        },
-        {
-          "type": "vowel_harmony",
-          "title": "Vokaaliharmonia",
-          "instruction": "Valitse oikea pääte vokaaliharmonian mukaan",
-          "items": [
-            {
-              "stem": "auto",
-              "rule": "takavokaalit (a, o, u)",
-              "options": ["ssa", "ssä"],
-              "correct": "ssa",
-              "result": "autossa"
-            },
-            {
-              "stem": "kieli",
-              "rule": "etuvokaalit (ä, ö, y)",
-              "options": ["lla", "llä"],
-              "correct": "llä",
-              "result": "kielellä"
+              "text": "Hyvää päivää",
+              "translation": "Добрый день",
+              "phonetic": "HÜ-vää PÄI-vää"
             }
           ]
         },
@@ -146,8 +122,7 @@
           "items": [
             {
               "text": "Kello on 14:00. A: Hyvää ______!",
-              "options": ["huomenta", "päivää", "iltaa"],
-              "correct": "päivää",
+              "blanks": ["päivää"],
               "explanation": "Päivällä (10-18) käytetään 'Hyvää päivää'"
             }
           ]
@@ -164,33 +139,8 @@
                 "Hei hei",
                 "Näkemiin"
               ],
-              "correct": "Kiitos, hyvää",
+              "correct": 1,
               "explanation": "Kuulumisiin vastataan 'Kiitos, hyvää' tai 'Hyvää, kiitos'"
-            }
-          ]
-        },
-        {
-          "type": "listening",
-          "title": "Kuunteluharjoitus",
-          "items": [
-            {
-              "audio": "Hyvää päivää! Mitä kuuluu?",
-              "question": "Mitä henkilö kysyi toisen tervehdyksen jälkeen?",
-              "options": ["Miten voit?", "Mitä kuuluu?", "Kuka sinä olet?"],
-              "correct": "Mitä kuuluu?",
-              "translation": "Что спросил человек после приветствия?"
-            }
-          ]
-        },
-        {
-          "type": "speaking",
-          "title": "Ääntämisharjoitus",
-          "items": [
-            {
-              "text": "Hyvää päivää",
-              "translation": "Добрый день",
-              "phonetic": "HÜ-vää PÄI-vää",
-              "tips": "Ударение на первый слог каждого слова"
             }
           ]
         }
@@ -263,32 +213,14 @@
       },
       "exercises": [
         {
-          "type": "grammar_fill",
+          "type": "fill-blank",
           "title": "Olla-verbi",
+          "instruction": "Täydennä lauseet",
           "items": [
             {
-              "sentence": "Minä _____ Anna. Sinä _____ Matti.",
+              "text": "Minä _____ Anna. Sinä _____ Matti.",
               "blanks": ["olen", "olet"],
               "explanation": "Первое и второе лицо единственного числа"
-            }
-          ]
-        },
-        {
-          "type": "numbers",
-          "title": "Numerot",
-          "instruction": "Laske ja vastaa suomeksi",
-          "items": [
-            {
-              "dicePattern": "⚀ + ⚃",
-              "calculation": "1 + 4",
-              "answer": 5,
-              "finnish": "viisi"
-            },
-            {
-              "dicePattern": "⚁ + ⚂",
-              "calculation": "2 + 3",
-              "answer": 5,
-              "finnish": "viisi"
             }
           ]
         }
@@ -367,29 +299,13 @@
       },
       "exercises": [
         {
-          "type": "dialogue_complete",
-          "title": "Täydennä keskustelu",
-          "scenario": "Kertominen perheestä",
-          "items": [
-            {
-              "setup": "Anna kertoo perheestään",
-              "missing_parts": [
-                {"speaker": "Anna", "text": "Minulla on _______ perhe."},
-                {"speaker": "Ystävä", "text": "Kuka on _______ perheessäsi?"}
-              ],
-              "options": ["iso", "pieni", "kuka", "mitä"],
-              "correct": ["iso", "kuka"]
-            }
-          ]
-        },
-        {
           "type": "multiple-choice",
           "title": "Valitse oikea vastaus",
           "items": [
             {
               "question": "Mikä on suomeksi 'mother'?",
               "options": ["isä", "äiti", "sisko", "mummo"],
-              "correct": "äiti",
+              "correct": 1,
               "explanation": "Äiti = mother englanniksi"
             }
           ]
