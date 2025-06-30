@@ -149,7 +149,15 @@ export interface VocabularyEntry {
   sourceChapter: string;
   frequency: 'high' | 'medium' | 'low';
   tags: string[];
-  verbType?: string;
+  verbType?: number; // Change from string to number
+}
+
+export interface VocabularyMetadata {
+  version: string;
+  lastUpdated: string;
+  totalWords: number;
+  source: string;
+  difficultyLevel: string;
 }
 
 export interface VocabularyData {
@@ -288,6 +296,7 @@ export interface ReadingSectionProps {
   isCompleted: boolean;
   audioPlaying: string | null;
   isListening: boolean;
+  isGeneratingAudio: boolean; 
   onPlayAudio: (text: string, voiceType?: 'enhanced' | 'standard') => void;
   onStartSpeechRecognition: (text: string) => void;
   onCompleteReading: () => void;

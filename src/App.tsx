@@ -1,523 +1,720 @@
-import React, { useState, useEffect } from 'react';
-import { Check, X } from 'lucide-react';
-
-// Import new types
-import {
-  ChaptersData,
-  VocabularyData,
-  AudioScriptsData,
-  AppState,
-  AppProgress,
-  Chapter,
-  Lesson,
-  LessonProgressDetailed,
-  ChapterProgress,
-  DataLoadingState,
-  FavoriteWord,
-  ProgressStatus
-} from './types';
-
-// Component imports
+import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import ChapterNavigation from './components/ChapterNavigation';
 import LessonNavigation from './components/LessonNavigation';
 import SectionNavigation from './components/SectionNavigation';
-import StatsCards from './components/StatsCards';
 import TheorySection from './components/TheorySection';
 import ReadingSection from './components/ReadingSection';
 import ExercisesSection from './components/ExercisesSection';
 import FavoritesSection from './components/FavoritesSection';
 import Tooltip from './components/Tooltip';
-import ServerDebugTool from './ServerDebugTool';
-import chaptersDataImport from './data/chapters.json';
-import vocabularyDataImport from './data/vocabulary.json';
-import audioScriptsDataImport from './data/audio_scripts.json';
-
-
-// Utility imports
 import { 
-  getEnhancedTranslation, 
-  enhanceTranslationWithAI,
-  getUsageStats
-} from './utils/geminiAI';
+  AppState, 
+  AppProgress, 
+  Chapter, 
+  Lesson, 
+  ChaptersData, 
+  VocabularyData, 
+  AudioScriptsData,
+  LessonProgress,
+  LessonProgressDetailed,
+  ChapterProgress,
+  FavoriteWord
+} from './types';
 
-import { 
-  playAudioWithGemini, 
-  fallbackToWebSpeech,
-  startSpeechRecognition,
-} from './utils/audioHelpers';
+// Import JSON data directly
+import chaptersData from './data/chapters.json';
+import vocabularyData from './data/vocabulary.json';
+import audioScriptsData from './data/audio_scripts.json';
 
-// Hook imports
-import useLocalStorage from './hooks/useLocalStorage';
-
-// ===== UTILITY FUNCTIONS =====
-
-// Audio utility - implement 6+ word rule
-const shouldUseEnhancedTTS = (text: string): boolean => {
-  const wordCount = text.trim().split(/\s+/).length;
-  return wordCount > 6;
+// ===== INITIAL STATE =====
+const initialAppState: AppState = {
+  currentSection: 'home',
+  currentChapter: null,
+  currentLesson: null,
+  chaptersData: null,
+  vocabularyData: null,
+  audioScriptsData: null,
+  appProgress: {
+    chapters: {},
+    totalCompletedLessons: 0,
+    lastUpdated: new Date().toISOString()
+  },
+  favorites: []
 };
 
-const getAudioIcon = (text: string): '⚡' | '🔊' => {
-  return shouldUseEnhancedTTS(text) ? '⚡' : '🔊';
-};
-
-// Progress utility functions
-const getLessonStatus = (progress: LessonProgressDetailed): ProgressStatus => {
-  if (progress.lessonFullyCompleted) return 'completed';
-  if (progress.theory_completed || progress.reading_completed || progress.exercises_completed > 0) {
-    return 'in_progress';
-  }
-  return 'not_started';
-};
-
-const getProgressIcon = (status: ProgressStatus): '⏳' | '🔄' | '✅' => {
-  switch (status) {
-    case 'completed': return '✅';
-    case 'in_progress': return '🔄';
-    case 'not_started': return '⏳';
-  }
-};
-
-const createEmptyProgress = (): AppProgress => ({
+const initialProgress: AppProgress = {
   chapters: {},
-  lastUpdated: new Date().toISOString(),
-  totalCompletedLessons: 0
-});
+  totalCompletedLessons: 0,
+  lastUpdated: new Date().toISOString()
+};
 
-const createEmptyLessonProgress = (lessonId: string, totalExercises: number): LessonProgressDetailed => ({
-  lessonId,
-  theory_completed: false,
-  reading_completed: false,
-  exercises_completed: 0,
-  total_exercises: totalExercises,
-  lessonFullyCompleted: false,
-  lastAccessedAt: new Date().toISOString()
-});
-
-// ===== MAIN APP COMPONENT =====
-
-const App: React.FC = () => {
-  // ===== CORE STATE =====
-  const [appState, setAppState] = useState<AppState>({
-    chaptersData: null,
-    vocabularyData: null,
-    audioScriptsData: null,
-    currentChapter: null,
-    currentLesson: null,
-    currentSection: 'home',
-    appProgress: createEmptyProgress(),
-    favorites: []
-  });
-
-  // ===== DATA LOADING STATE =====
-  const [dataLoading, setDataLoading] = useState<DataLoadingState>({
-    chaptersLoading: false,
-    vocabularyLoading: false,
-    audioScriptsLoading: false,
-    chaptersError: null,
-    vocabularyError: null,
-    audioScriptsError: null
-  });
-
-  // ===== EXERCISE STATE =====
-  const [exerciseAnswers, setExerciseAnswers] = useState<{[key: string]: any}>({});
-  const [exerciseSubmitted, setExerciseSubmitted] = useState(false);
-  
-  // ===== AUDIO STATE =====
-  const [audioPlaying, setAudioPlaying] = useState<string | null>(null);
-  const [isListening, setIsListening] = useState(false);
-  
-  // ===== TOOLTIP STATE =====
+// ===== MAIN COMPONENT =====
+function App() {
+  // ===== STATE =====
+  const [appState, setAppState] = useState<AppState>(initialAppState);
+  const [appProgress, setAppProgress] = useState<AppProgress>(initialProgress);
+  const [favorites, setFavorites] = useState<FavoriteWord[]>([]);
+  const [exerciseAnswers, setExerciseAnswers] = useState<{[key: string]: string}>({});
+  const [exerciseSubmitted, setExerciseSubmitted] = useState<{[key: string]: boolean}>({});
+  const [successMessage, setSuccessMessage] = useState<string>('');
   const [showTooltip, setShowTooltip] = useState(false);
-  const [selectedText, setSelectedText] = useState('');
+  const [selectedText, setSelectedText] = useState<string>('');
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-  
-  // ===== UI STATE =====
-  const [successMessage, setSuccessMessage] = useState('');
-  const [usageStats, setUsageStats] = useState(getUsageStats());
-  
-  // ===== PERSISTENT STATE =====
-  const [favorites, setFavorites] = useLocalStorage<FavoriteWord[]>('finnishApp_favorites_v2', []);
-  const [appProgress, setAppProgress] = useLocalStorage<AppProgress>('finnishApp_progress_v2', createEmptyProgress());
+  const [audioPlaying, setAudioPlaying] = useState<string>('');
+  const [isListening, setIsListening] = useState(false);
 
-  // ===== SYNC FAVORITES WITH APP STATE =====
-  useEffect(() => {
-    setAppState(prev => ({ ...prev, favorites }));
-  }, [favorites]);
-
-  // ===== DATA LOADING FUNCTIONS =====
-  
-  const loadChaptersData = async (url: string) => {
-    setDataLoading(prev => ({ ...prev, chaptersLoading: true, chaptersError: null }));
-    
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
-      const rawText = await response.text();
-      const data: ChaptersData = JSON.parse(rawText);
-      
-      setAppState(prev => ({ ...prev, chaptersData: data }));
-      setSuccessMessage(`✅ Loaded ${data.chapters.length} chapters successfully!`);
-      
-      // Initialize progress for any new chapters/lessons
-      initializeProgressForNewData(data);
-      
-    } catch (error) {
-      const errorMessage = `Failed to load chapters: ${(error as Error).message}`;
-      setDataLoading(prev => ({ ...prev, chaptersError: errorMessage }));
-      console.error('Chapters loading error:', error);
-    } finally {
-      setDataLoading(prev => ({ ...prev, chaptersLoading: false }));
-    }
-  };
-
-  const loadVocabularyData = async (url: string) => {
-    setDataLoading(prev => ({ ...prev, vocabularyLoading: true, vocabularyError: null }));
-    
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
-      const rawText = await response.text();
-      const data: VocabularyData = JSON.parse(rawText);
-      
-      setAppState(prev => ({ ...prev, vocabularyData: data }));
-      setSuccessMessage(`✅ Loaded ${Object.keys(data.vocabulary).length} vocabulary entries!`);
-      
-    } catch (error) {
-      const errorMessage = `Failed to load vocabulary: ${(error as Error).message}`;
-      setDataLoading(prev => ({ ...prev, vocabularyError: errorMessage }));
-      console.error('Vocabulary loading error:', error);
-    } finally {
-      setDataLoading(prev => ({ ...prev, vocabularyLoading: false }));
-    }
-  };
-
-  const loadAudioScriptsData = async (url: string) => {
-    setDataLoading(prev => ({ ...prev, audioScriptsLoading: true, audioScriptsError: null }));
-    
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
-      const rawText = await response.text();
-      const data: AudioScriptsData = JSON.parse(rawText);
-      
-      setAppState(prev => ({ ...prev, audioScriptsData: data }));
-      setSuccessMessage(`✅ Loaded ${data.scripts.length} audio scripts!`);
-      
-    } catch (error) {
-      const errorMessage = `Failed to load audio scripts: ${(error as Error).message}`;
-      setDataLoading(prev => ({ ...prev, audioScriptsError: errorMessage }));
-      console.error('Audio scripts loading error:', error);
-    } finally {
-      setDataLoading(prev => ({ ...prev, audioScriptsLoading: false }));
-    }
-  };
-
-  // Initialize progress for new chapters/lessons
-  const initializeProgressForNewData = (chaptersData: ChaptersData) => {
-    setAppProgress(currentProgress => {
-      const newProgress = { ...currentProgress };
-      
-      chaptersData.chapters.forEach(chapter => {
-        if (!newProgress.chapters[chapter.id]) {
-          newProgress.chapters[chapter.id] = {
-            chapterId: chapter.id,
-            lessons: {},
-            chapterCompleted: false
-          };
-        }
-        
-        const chapterProgress = newProgress.chapters[chapter.id];
-        chapter.lessons.forEach(lesson => {
-          if (!chapterProgress.lessons[lesson.id]) {
-            chapterProgress.lessons[lesson.id] = createEmptyLessonProgress(
-              lesson.id, 
-              lesson.exercises.length
-            );
-          }
-        });
-      });
-      
-      newProgress.lastUpdated = new Date().toISOString();
-      return newProgress;
-    });
-  };
-
-  // ===== NAVIGATION FUNCTIONS =====
-  
-  const goToHome = () => {
-    setAppState(prev => ({ 
-      ...prev, 
-      currentSection: 'home',
-      currentChapter: null,
-      currentLesson: null 
-    }));
-  };
-
-  const goToFavorites = () => {
-    setAppState(prev => ({ ...prev, currentSection: 'favorites' }));
-  };
-
-  const selectChapter = (chapter: Chapter) => {
-    setAppState(prev => ({ 
-      ...prev, 
-      currentChapter: chapter,
-      currentLesson: null,
-      currentSection: 'chapter'
-    }));
-  };
-
-  const selectLesson = (lesson: Lesson) => {
-    setAppState(prev => ({ 
-      ...prev, 
-      currentLesson: lesson,
-      currentSection: 'theory'
-    }));
-    
-    // Update last accessed time
-    if (appState.currentChapter) {
-      updateLessonProgress(appState.currentChapter.id, lesson.id, {
-        lastAccessedAt: new Date().toISOString()
-      });
-    }
-  };
-
-  const changeSection = (section: 'theory' | 'reading' | 'exercises') => {
-    setAppState(prev => ({ ...prev, currentSection: section }));
-  };
+  // ===== COMPUTED VALUES =====
+  const currentLessonProgress = appState.currentChapter && appState.currentLesson 
+    ? appProgress.chapters[appState.currentChapter.id]?.lessons[appState.currentLesson.id]
+    : null;
 
   // ===== PROGRESS MANAGEMENT =====
-  
-  const updateLessonProgress = (chapterId: number, lessonId: string, updates: Partial<LessonProgressDetailed>) => {
-    setAppProgress(currentProgress => {
-      const newProgress = { ...currentProgress };
-      
-      if (!newProgress.chapters[chapterId]) {
-        newProgress.chapters[chapterId] = {
-          chapterId,
-          lessons: {},
-          chapterCompleted: false
+  const initializeProgressForNewData = useCallback((chaptersData: ChaptersData) => {
+    const savedProgress = localStorage.getItem('finnishAppProgress');
+    let progress: AppProgress;
+
+    if (savedProgress) {
+      try {
+        progress = JSON.parse(savedProgress);
+      } catch {
+        progress = { 
+          chapters: {}, 
+          totalCompletedLessons: 0,
+          lastUpdated: new Date().toISOString()
         };
       }
-      
-      const chapterProgress = newProgress.chapters[chapterId];
-      if (!chapterProgress.lessons[lessonId]) {
-        chapterProgress.lessons[lessonId] = createEmptyLessonProgress(lessonId, 0);
-      }
-      
-      const lessonProgress = chapterProgress.lessons[lessonId];
-      Object.assign(lessonProgress, updates);
-      
-      // Check if lesson is fully completed
-      const isFullyCompleted = lessonProgress.theory_completed && 
-                             lessonProgress.reading_completed && 
-                             lessonProgress.exercises_completed >= lessonProgress.total_exercises;
-      
-      if (isFullyCompleted && !lessonProgress.lessonFullyCompleted) {
-        lessonProgress.lessonFullyCompleted = true;
-        lessonProgress.completedAt = new Date().toISOString();
-      }
-      
-      newProgress.lastUpdated = new Date().toISOString();
-      return newProgress;
-    });
-  };
-
-  const completeTheory = () => {
-    if (appState.currentChapter && appState.currentLesson) {
-      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
-        theory_completed: true,
-        theory_completedAt: new Date().toISOString()
-      });
+    } else {
+      progress = { 
+        chapters: {}, 
+        totalCompletedLessons: 0,
+        lastUpdated: new Date().toISOString()
+      };
     }
-  };
 
-  const completeReading = () => {
-    if (appState.currentChapter && appState.currentLesson) {
-      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
-        reading_completed: true,
-        reading_completedAt: new Date().toISOString()
-      });
-    }
-  };
+    let totalCompletedLessons = 0;
 
-  const completeExercises = () => {
-    if (appState.currentChapter && appState.currentLesson) {
-      updateLessonProgress(appState.currentChapter.id, appState.currentLesson.id, {
-        exercises_completed: appState.currentLesson.exercises.length,
-        exercises_completedAt: new Date().toISOString()
-      });
-    }
-  };
-
-  // ===== AUDIO FUNCTIONS =====
-  
-  const playAudio = (text: string, voiceType?: 'enhanced' | 'standard') => {
-    console.log('🎯 playAudio called with:', { text, voiceType, audioPlaying });
-    
-    if (audioPlaying) {
-      if ('speechSynthesis' in window) {
-        speechSynthesis.cancel();
-      }
-      setAudioPlaying(null);
-    }
-    
-    setTimeout(() => {
-      // Use voiceType if provided, otherwise apply 6+ word rule
-      const useEnhanced = voiceType === 'enhanced' || 
-                         (voiceType !== 'standard' && shouldUseEnhancedTTS(text));
-      
-      if (useEnhanced) {
-        playAudioWithGemini(text, 'Kore', setAudioPlaying).catch(() => {
-          console.log('🔄 Enhanced TTS failed, falling back to browser TTS');
-          fallbackToWebSpeech(text, setAudioPlaying);
-        });
-      } else {
-        fallbackToWebSpeech(text, setAudioPlaying);
-      }
-    }, 50);
-  };
-
-  // ===== TEXT INTERACTION =====
-  
-  const handleTextClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.preventDefault();
-    const target = event.target as HTMLElement;
-    const word = target.textContent?.trim();
-    if (!word) return;
-
-    const cleanWord = word.replace(/[.,!?;:]/g, '');
-    let translation = appState.vocabularyData?.vocabulary[cleanWord];
-    
-    if (!translation) {
-      setDataLoading(prev => ({ ...prev, vocabularyLoading: true }));
-      const enhancedTranslation = await getEnhancedTranslation(cleanWord);
-      setDataLoading(prev => ({ ...prev, vocabularyLoading: false }));
-      
-      if (enhancedTranslation.success) {
-        // Store in temporary state for this session
-        translation = {
-          baseForm: cleanWord,
-          russian: enhancedTranslation.data.translation,
-          grammarInfo: enhancedTranslation.data.partOfSpeech,
-          pronunciation: '',
-          examples: enhancedTranslation.data.examples || [],
-          difficulty: enhancedTranslation.data.difficulty,
-          sourceChapter: 'ai_generated',
-          frequency: 'medium',
-          tags: []
+    chaptersData.chapters.forEach(chapter => {
+      if (!progress.chapters[chapter.id]) {
+        progress.chapters[chapter.id] = { 
+          chapterId: chapter.id,
+          chapterCompleted: false,
+          lessons: {} 
         };
       }
-    }
-    
-    if (translation) {
-      setSelectedText(cleanWord);
-      const rect = target.getBoundingClientRect();
-      setTooltipPosition({ 
-        x: rect.left + rect.width / 2, 
-        y: rect.top - 10 
-      });
-      setShowTooltip(true);
-    }
-  };
 
-  const renderClickableText = (text: string) => {
-    const words = text.split(' ');
-    return words.map((word, index) => {
-      const cleanWord = word.replace(/[.,!?]/g, '');
-      const hasTranslation = appState.vocabularyData?.vocabulary[cleanWord];
-      const isRussian = /[а-яё]/i.test(cleanWord);
-      
-      return (
-        <span
-          key={index}
-          className={hasTranslation && !isRussian ? 'cursor-pointer hover:bg-blue-100 hover:text-blue-600 rounded px-1 transition-colors' : ''}
-          onClick={hasTranslation && !isRussian ? handleTextClick : undefined}
-          onDoubleClick={!isRussian && hasTranslation ? () => {
-            addToFavorites(cleanWord, hasTranslation);
-          } : undefined}
-        >
-          {word}
-          {index < words.length - 1 && ' '}
-        </span>
-      );
+      chapter.lessons.forEach(lesson => {
+        if (!progress.chapters[chapter.id].lessons[lesson.id]) {
+          progress.chapters[chapter.id].lessons[lesson.id] = {
+            lessonId: lesson.id,
+            theory_completed: false,
+            reading_completed: false,
+            exercises_completed: 0,
+            total_exercises: lesson.exercises.length,
+            lessonFullyCompleted: false,
+            lastAccessedAt: ""
+          };
+        } else if (progress.chapters[chapter.id].lessons[lesson.id].lessonFullyCompleted) {
+          totalCompletedLessons++;
+        }
+      });
     });
+
+    progress.totalCompletedLessons = totalCompletedLessons;
+    progress.lastUpdated = new Date().toISOString();
+
+    setAppProgress(progress);
+    localStorage.setItem('finnishAppProgress', JSON.stringify(progress));
+  }, []);
+
+  const saveProgress = useCallback((newProgress: AppProgress) => {
+    setAppProgress(newProgress);
+    localStorage.setItem('finnishAppProgress', JSON.stringify(newProgress));
+  }, []);
+
+  // ===== NAVIGATION FUNCTIONS =====
+  const goToHome = useCallback(() => {
+    console.log('goToHome clicked');
+    setAppState(prev => ({
+      ...prev,
+      currentSection: 'home',
+      currentChapter: null,
+      currentLesson: null
+    }));
+  }, []);
+
+  const goToFavorites = useCallback(() => {
+    console.log('goToFavorites clicked');
+    setAppState(prev => ({
+      ...prev,
+      currentSection: 'favorites'
+    }));
+  }, []);
+
+  const selectChapter = useCallback((chapter: Chapter) => {
+    console.log('selectChapter clicked:', chapter.title);
+    setAppState(prev => ({
+      ...prev,
+      currentSection: 'chapter',
+      currentChapter: chapter,
+      currentLesson: null
+    }));
+  }, []);
+
+  const selectLesson = useCallback((lesson: Lesson) => {
+    console.log('selectLesson clicked:', lesson.title);
+    setAppState(prev => ({
+      ...prev,
+      currentSection: 'theory',
+      currentLesson: lesson
+    }));
+  }, []);
+
+  const changeSection = useCallback((section: AppState['currentSection']) => {
+    console.log('changeSection clicked:', section);
+    setAppState(prev => ({
+      ...prev,
+      currentSection: section
+    }));
+  }, []);
+
+  const goToTheory = useCallback(() => {
+    setAppState(prev => ({
+      ...prev,
+      currentSection: 'theory'
+    }));
+  }, []);
+
+  // ===== COMPLETION FUNCTIONS =====
+  const completeTheory = useCallback(() => {
+    if (!appState.currentChapter || !appState.currentLesson) return;
+
+    const newProgress = { ...appProgress };
+    const chapterProgress = newProgress.chapters[appState.currentChapter.id];
+    const lessonProgress = chapterProgress.lessons[appState.currentLesson.id];
+    
+    lessonProgress.theory_completed = true;
+    checkLessonCompletion(lessonProgress, appState.currentLesson);
+    
+    saveProgress(newProgress);
+    setSuccessMessage('Theory completed! 🎉');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  }, [appState.currentChapter, appState.currentLesson, appProgress, saveProgress]);
+
+  const completeReading = useCallback(() => {
+    if (!appState.currentChapter || !appState.currentLesson) return;
+
+    const newProgress = { ...appProgress };
+    const chapterProgress = newProgress.chapters[appState.currentChapter.id];
+    const lessonProgress = chapterProgress.lessons[appState.currentLesson.id];
+    
+    lessonProgress.reading_completed = true;
+    checkLessonCompletion(lessonProgress, appState.currentLesson);
+    
+    saveProgress(newProgress);
+    setSuccessMessage('Reading completed! 📖');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  }, [appState.currentChapter, appState.currentLesson, appProgress, saveProgress]);
+
+  const completeExercises = useCallback(() => {
+    if (!appState.currentChapter || !appState.currentLesson) return;
+
+    const newProgress = { ...appProgress };
+    const chapterProgress = newProgress.chapters[appState.currentChapter.id];
+    const lessonProgress = chapterProgress.lessons[appState.currentLesson.id];
+    
+    lessonProgress.exercises_completed = appState.currentLesson.exercises.length;
+    checkLessonCompletion(lessonProgress, appState.currentLesson);
+    
+    saveProgress(newProgress);
+    setSuccessMessage('Exercises completed! ✅');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  }, [appState.currentChapter, appState.currentLesson, appProgress, saveProgress]);
+
+  const checkLessonCompletion = (lessonProgress: LessonProgressDetailed, lesson: Lesson) => {
+    const isComplete = lessonProgress.theory_completed && 
+                      lessonProgress.reading_completed && 
+                      lessonProgress.exercises_completed === lesson.exercises.length;
+    
+    if (isComplete && !lessonProgress.lessonFullyCompleted) {
+      lessonProgress.lessonFullyCompleted = true;
+      lessonProgress.lastAccessedAt = new Date().toISOString();
+      setAppProgress(prev => ({
+        ...prev,
+        totalCompletedLessons: prev.totalCompletedLessons + 1,
+        lastUpdated: new Date().toISOString()
+      }));
+    }
   };
 
   // ===== FAVORITES MANAGEMENT =====
-  
-  const addToFavorites = (word: string, translationData?: any) => {
-    const translation = translationData || appState.vocabularyData?.vocabulary[word];
+  const addToFavorites = useCallback((word: string) => {
+    const translation = appState.vocabularyData?.vocabulary[word];
     
-    if (translation && !favorites.some(fav => fav.word === word)) {
-      const favorite: FavoriteWord = {
-        id: Date.now(),
-        word,
-        translation: translation.russian || translation.baseForm || translation,
-        sourceChapter: translation.sourceChapter,
-        addedAt: new Date()
-      };
-      setFavorites(prev => [...prev, favorite]);
+    // Extract the actual translation string
+    let translationText: string;
+    if (typeof translation === 'string') {
+      translationText = translation;
+    } else if (translation && typeof translation === 'object') {
+      translationText = translation.russian || translation.baseForm || 'Translation available';
+    } else {
+      translationText = 'Translation not available';
     }
-  };
+    
+    const favoriteWord: FavoriteWord = { 
+      id: Date.now(),
+      word, 
+      translation: translationText, // Use the extracted string
+      addedAt: new Date() 
+    };
+    
+    if (!favorites.find(fav => fav.word === word)) {
+      const newFavorites = [...favorites, favoriteWord];
+      setFavorites(newFavorites);
+      localStorage.setItem('finnishAppFavorites', JSON.stringify(newFavorites));
+      setSuccessMessage(`Added "${word}" to favorites! ⭐`);
+      setTimeout(() => setSuccessMessage(''), 3000);
+    }
+  }, [favorites, appState.vocabularyData]);  
 
-  const removeFromFavorites = (word: string) => {
-    setFavorites(prev => prev.filter(fav => fav.word !== word));
-  };
+  const removeFromFavorites = useCallback((word: string) => {
+    const newFavorites = favorites.filter(fav => fav.word !== word);
+    setFavorites(newFavorites);
+    localStorage.setItem('finnishAppFavorites', JSON.stringify(newFavorites));
+  }, [favorites]);
 
-  const isFavorited = (word: string) => {
+  const isFavorited = useCallback((word: string) => {
     return favorites.some(fav => fav.word === word);
-  };
+  }, [favorites]);
 
-  // ===== AUTO-LOAD DATA ON MOUNT =====
-  
-  useEffect(() => {
-    // Use directly imported data instead of fetching
-    setAppState(prev => ({
-      ...prev,
-      chaptersData: chaptersDataImport as ChaptersData,
-     // vocabularyData: vocabularyDataImport as VocabularyData,
-      audioScriptsData: audioScriptsDataImport as AudioScriptsData
-    }));
+  const [isGeneratingAudio, setIsGeneratingAudio] = useState(false);
+
+  // ===== AUDIO FUNCTIONS =====
+  const playAudio = useCallback((text: string, voiceType?: 'enhanced' | 'standard') => {
+    console.log('Playing audio for:', text, 'with voice type:', voiceType);
     
-    // Initialize progress for the chapters
-    initializeProgressForNewData(chaptersDataImport as ChaptersData);
-    
-    setSuccessMessage('✅ All data loaded successfully!');
+    if (voiceType === 'enhanced') {
+      setIsGeneratingAudio(true); // Start showing progress
+      // Use Gemini TTS for enhanced audio
+      import('./utils/geminiAI').then(({ playAudioWithGemini }) => {
+        playAudioWithGemini(text, 'Kore', setAudioPlaying).catch((error) => {
+          console.log('🔄 Falling back to browser TTS due to:', error.message);
+          // Fallback to browser TTS if Gemini fails
+          fallbackToWebSpeech(text, setAudioPlaying);
+        }).finally(() => {
+          setIsGeneratingAudio(false); // Stop showing progress
+        });
+      }).catch((importError) => {
+        console.log('🔄 Failed to import Gemini AI, using browser TTS:', importError);
+        fallbackToWebSpeech(text, setAudioPlaying);
+        setIsGeneratingAudio(false); // Stop showing progress
+      });
+    } else {
+      // Use optimized browser TTS for standard audio
+      fallbackToWebSpeech(text, setAudioPlaying);
+    }
   }, []);
 
-  // ===== SUCCESS MESSAGE AUTO-HIDE =====
-  useEffect(() => {
-    if (successMessage) {
-      const timer = setTimeout(() => setSuccessMessage(''), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [successMessage]);
+// Add this new helper function right after playAudio
+const fallbackToWebSpeech = (text: string, setAudioPlaying: (text: string) => void) => {
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    
+    setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      // Optimized settings for Finnish
+      utterance.lang = 'fi-FI';
+      utterance.rate = 0.75; // Slightly slower for better pronunciation
+      utterance.pitch = 1.0;
+      utterance.volume = 1.0;
+      
+      utterance.onstart = () => setAudioPlaying(text);
+      utterance.onend = () => setAudioPlaying(''); // Use empty string instead of null
+      utterance.onerror = () => setAudioPlaying(''); // Use empty string instead of null
+      
+      // Try to find the best Finnish voice
+      const voices = speechSynthesis.getVoices();
+      let finnishVoice = null;
+      
+      // Priority order for Finnish voices
+      const preferredVoices = [
+        'Microsoft Heidi - Finnish (Finland)',
+        'Google suomi',
+        'Finnish Finland',
+        'fi-FI'
+      ];
+      
+      for (const preferred of preferredVoices) {
+        finnishVoice = voices.find(voice => 
+          voice.name.includes(preferred) || 
+          voice.lang.startsWith('fi')
+        );
+        if (finnishVoice) break;
+      }
+      
+      if (finnishVoice) {
+        utterance.voice = finnishVoice;
+        console.log('🇫🇮 Using Finnish voice:', finnishVoice.name);
+      } else {
+        console.log('⚠️ No Finnish voice found, using default');
+      }
+      
+      speechSynthesis.speak(utterance);
+    }, 100);
+  } else {
+    setAudioPlaying(''); // Use empty string instead of null
+  }
+};
 
-  // ===== COMPUTED VALUES =====
+// ===== CACHE MANAGEMENT =====
+const clearAudioCache = useCallback(async () => {
+  try {
+    const { clearAudioCache: clearCache } = await import('./utils/geminiAI');
+    await clearCache();
+    setSuccessMessage('Audio cache cleared! 🗑️');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  } catch (error) {
+    console.error('Failed to clear cache:', error);
+    setSuccessMessage('Failed to clear cache ❌');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  }
+}, []);
+
+const getCacheStats = useCallback(async () => {
+  try {
+    const { getAudioCacheStats } = await import('./utils/geminiAI');
+    const stats = await getAudioCacheStats();
+    console.log('📊 Audio cache stats:', stats);
+    setSuccessMessage(`Cache: ${stats.count} files, ${stats.totalSizeMB}MB 📊`);
+    setTimeout(() => setSuccessMessage(''), 5000);
+  } catch (error) {
+    console.error('Failed to get cache stats:', error);
+    setSuccessMessage('Failed to get cache stats ❌');
+    setTimeout(() => setSuccessMessage(''), 3000);
+  }
+}, []);
+
+
+  // ===== TEXT INTERACTION =====
+  const renderClickableText = useCallback((text: string) => {
+    if (!appState.vocabularyData) return <span>{text}</span>;
   
-  const isLoading = dataLoading.chaptersLoading || dataLoading.vocabularyLoading || dataLoading.audioScriptsLoading;
-  const hasErrors = dataLoading.chaptersError || dataLoading.vocabularyError || dataLoading.audioScriptsError;
-  const currentLessonProgress = appState.currentChapter && appState.currentLesson ? 
-    appProgress.chapters[appState.currentChapter.id]?.lessons[appState.currentLesson.id] : null;
+    const words = text.split(/(\s+|[.,!?;:])/);
+    return (
+      <span>
+        {words.map((word, index) => {
+          const cleanWord = word.toLowerCase().replace(/[.,!?;:]/g, '');
+          const hasTranslation = appState.vocabularyData!.vocabulary[cleanWord];
+          
+          if (hasTranslation && word.trim()) {
+            return (
+              <span
+                key={index}
+                className="cursor-pointer hover:bg-yellow-200 transition-colors duration-200 inline-block"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('🔍 Clicked word:', cleanWord);
+                  console.log('🔍 Translation data:', hasTranslation);
+                  console.log('🔍 Vocabulary data structure:', appState.vocabularyData!.vocabulary[cleanWord]);
+                  
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setSelectedText(cleanWord);
+                  setTooltipPosition({
+                    x: rect.left + rect.width / 2,
+                    y: rect.top - 10
+                  });
+                  setShowTooltip(true);
+                  
+                  console.log('🔍 Tooltip should show now');
+                }}
+                style={{ position: 'relative' }}
+              >
+                {word}
+              </span>
+            );
+          }
+          return <span key={index}>{word}</span>;
+        })}
+      </span>
+    );
+  }, [appState.vocabularyData]);
+  
+  
+
+  // ===== SPEECH RECOGNITION =====
+  const startSpeechRecognition = useCallback((targetText: string, setListening: (listening: boolean) => void) => {
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      console.warn('Speech recognition not supported');
+      return;
+    }
+
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    
+    recognition.lang = 'fi-FI';
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      setListening(true);
+    };
+
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript.toLowerCase();
+      const target = targetText.toLowerCase();
+      
+      if (transcript.includes(target) || target.includes(transcript)) {
+        setSuccessMessage('Great pronunciation! 🎤');
+      } else {
+        setSuccessMessage('Keep practicing! Try again. 🎤');
+      }
+      setTimeout(() => setSuccessMessage(''), 3000);
+    };
+
+    recognition.onerror = () => {
+      setListening(false);
+      console.error('Speech recognition error');
+    };
+
+    recognition.onend = () => {
+      setListening(false);
+    };
+
+    recognition.start();
+  }, []);
+
+  // ===== EFFECTS =====
+  useEffect(() => {
+    // Set data directly from imports
+    setAppState(prev => ({
+      ...prev,
+      chaptersData: chaptersData as ChaptersData,
+      vocabularyData: vocabularyData as VocabularyData,
+      audioScriptsData: audioScriptsData as AudioScriptsData
+    }));
+    
+    // Initialize progress with the imported data
+    initializeProgressForNewData(chaptersData as ChaptersData);
+    
+    // Load saved favorites
+    const savedFavorites = localStorage.getItem('finnishAppFavorites');
+    if (savedFavorites) {
+      try {
+        setFavorites(JSON.parse(savedFavorites));
+      } catch (error) {
+        console.error('Error loading favorites:', error);
+      }
+    }
+  }, [initializeProgressForNewData]);
 
   // ===== RENDER =====
-  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <ServerDebugTool />
+      <Header 
+        onHomeClick={goToHome}
+      />
+
+      {/* Success Message */}
+      {successMessage && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50">
+          {successMessage}
+        </div>
+      )}
+
+      <div className="container mx-auto px-4 py-8">
+        
+        {/* Home Section */}
+        {appState.currentSection === 'home' && appState.chaptersData && (
+          <div>
+            <div className="text-center mb-8">
+              <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                Welcome to Finnish Learning! 🇫🇮
+              </h1>
+              <p className="text-lg text-gray-600">
+                Choose a chapter to begin your Finnish journey
+              </p>
+            </div>
+
+            <ChapterNavigation 
+              chapters={appState.chaptersData.chapters}
+              onChapterSelect={(chapter) => {
+                console.log('Chapter selected:', chapter);
+                selectChapter(chapter);
+              }}
+              appProgress={appProgress}
+              currentChapter={appState.currentChapter}
+              onHomeClick={goToHome}
+              onGoToFavorites={goToFavorites}
+              favoritesCount={favorites.length}
+            />
+          </div>
+        )}
+
+        {/* Chapter Section */}
+{appState.currentSection === 'chapter' && appState.currentChapter && (
+  <div>
+    <LessonNavigation 
+      chapter={appState.currentChapter}
+      currentLesson={appState.currentLesson}
+      chapterProgress={appProgress.chapters[appState.currentChapter.id]}
+      onLessonSelect={selectLesson}
+      onBackToChapter={goToHome}
+      onHomeClick={goToHome}
+    />
+  </div>
+)}
+
+{/* Lesson Sections */}
+{appState.currentLesson && appState.currentChapter && (
+  <div>
+    {/* Section Navigation */}
+    <SectionNavigation 
+      lesson={appState.currentLesson}
+      currentSection={appState.currentSection as 'theory' | 'reading' | 'exercises'}
+      lessonProgress={currentLessonProgress!}
+      onSectionChange={changeSection}
+      onBackToLessons={() => selectChapter(appState.currentChapter!)}
+      onHomeClick={goToHome}
+    />
+
+    {/* Theory Section */}
+    {appState.currentSection === 'theory' && appState.vocabularyData && appState.audioScriptsData && (
+      <TheorySection 
+        lesson={appState.currentLesson}
+        vocabularyData={appState.vocabularyData}
+        audioScriptsData={appState.audioScriptsData}
+        isCompleted={currentLessonProgress?.theory_completed || false}
+        audioPlaying={audioPlaying}
+        isListening={isListening}
+        onPlayAudio={playAudio}
+        onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
+        onAddToFavorites={(word: string, translation: any) => addToFavorites(word)}
+        onCompleteTheory={completeTheory}
+        onRestartTheory={() => {
+          // Reset theory progress if needed
+          console.log('Restart theory');
+        }}
+        isFavorited={isFavorited}
+        renderClickableText={renderClickableText}
+      />
+    )}
+
+    {/* Reading Section */}
+{appState.currentSection === 'reading' && appState.audioScriptsData && (
+  <ReadingSection 
+    lesson={appState.currentLesson}
+    audioScriptsData={appState.audioScriptsData}
+    isCompleted={currentLessonProgress?.reading_completed || false}
+    audioPlaying={audioPlaying}
+    isListening={isListening}
+    isGeneratingAudio={isGeneratingAudio} // Add this prop
+    onPlayAudio={playAudio}
+    onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
+    onCompleteReading={completeReading}
+    onRestartReading={() => {
+      console.log('Restart reading');
+    }}
+    onGoToExercises={() => changeSection('exercises')}
+    renderClickableText={renderClickableText}
+  />
+)}
+
+    {/* Exercises Section */}
+    {appState.currentSection === 'exercises' && appState.audioScriptsData && (
+      <ExercisesSection 
+        lesson={appState.currentLesson}
+        audioScriptsData={appState.audioScriptsData}
+        exercisesCompleted={currentLessonProgress?.exercises_completed || 0}
+        totalExercises={appState.currentLesson.exercises.length}
+        isAllCompleted={currentLessonProgress?.exercises_completed === appState.currentLesson.exercises.length}
+        exerciseAnswers={exerciseAnswers}
+        exerciseSubmitted={Object.keys(exerciseSubmitted).length > 0}
+        audioPlaying={audioPlaying}
+        isListening={isListening}
+        onAnswerChange={(exerciseIndex: number, itemIndex: number, answer: any) => {
+          const key = `${exerciseIndex}-${itemIndex}`;
+          setExerciseAnswers(prev => ({ ...prev, [key]: answer }));
+        }}
+        onBlankAnswerChange={(exerciseIndex: number, itemIndex: number, blankIndex: number, answer: string) => {
+          const key = `${exerciseIndex}-${itemIndex}-${blankIndex}`;
+          setExerciseAnswers(prev => ({ ...prev, [key]: answer }));
+        }}
+        onPlayAudio={playAudio}
+        onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
+        onSubmitExercises={() => {
+          // Mark exercises as submitted
+          const lessonId = appState.currentLesson!.id;
+          setExerciseSubmitted(prev => ({ ...prev, [lessonId]: true }));
+        }}
+        onResetExercises={() => {
+          // Reset exercise answers
+          setExerciseAnswers({});
+          setExerciseSubmitted({});
+        }}
+        onCompleteExercises={completeExercises}
+        onRestartExercises={() => {
+          // Reset and restart exercises
+          setExerciseAnswers({});
+          setExerciseSubmitted({});
+        }}
+      />
+    )}
+  </div>
+)}
+        {/* Favorites Section */}
+        {appState.currentSection === 'favorites' && appState.vocabularyData && (
+          <FavoritesSection 
+            favorites={favorites}
+            onRemoveFromFavorites={removeFromFavorites}
+            onPlayAudio={playAudio}
+            audioPlaying={audioPlaying}
+            vocabularyData={appState.vocabularyData}
+            isListening={isListening}
+            onStartSpeechRecognition={(text: string) => startSpeechRecognition(text, setIsListening)}
+            onGoToTheory={goToTheory}
+          />
+        )}
+      </div>
+
+      {/* Tooltip */}
+{showTooltip && selectedText && appState.vocabularyData && (
+  <Tooltip 
+    show={showTooltip}
+    selectedText={selectedText}
+    position={tooltipPosition}
+    translations={appState.vocabularyData.vocabulary}
+    onClose={() => {
+      console.log('🔍 Closing tooltip');
+      setShowTooltip(false);
+    }}
+    onAddToFavorites={(word: string, translation?: any) => {
+      console.log('🔍 Adding to favorites:', word);
+      addToFavorites(word);
+      setShowTooltip(false);
+    }}
+    onPlayAudio={(text: string, voiceType?: string) => {
+      console.log('🔍 Playing audio:', text, voiceType);
+      if (voiceType === 'gemini') {
+        playAudio(text, 'enhanced');
+      } else {
+        playAudio(text, 'standard');
+      }
+    }}
+    onStartSpeechRecognition={(text: string) => {
+      console.log('🔍 Starting speech recognition:', text);
+      startSpeechRecognition(text, setIsListening);
+    }}
+    onEnhanceTranslation={(word: string) => {
+      console.log('🔍 Enhancing translation for:', word);
+      // Add your enhancement logic here
+    }}
+  />
+)}
+
     </div>
   );
-};
+}
 
 export default App;

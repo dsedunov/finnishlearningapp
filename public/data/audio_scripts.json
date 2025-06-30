@@ -1,0 +1,371 @@
+{
+    "metadata": {
+      "version": "2.0",
+      "lastUpdated": "2025-06-29",
+      "totalScripts": 47,
+      "source": "Suomen Mestari 1"
+    },
+    "scripts": [
+      {
+        "id": "dialogue_ch1",
+        "text": "Alex: Anteeksi, onko täällä suomen kurssi? Olga: Joo, on. Tämä on Suomi 1. Alex: Kiva. Hei, minä olen Alex. Kuka sinä olet? Olga: Minä olen Olga. Hauska tutustua! Pedro: Moi Olga! Mitä kuuluu? Olga: Terve Pedro! Kiitos, minulle kuuluu hyvää. Entä sinulle? Opettaja: Hei ja tervetuloa suomen kurssille! Minun nimi on Päivi Koskela.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "1.1",
+        "estimatedDuration": 45,
+        "note": "Main dialogue from Chapter 1, Lesson 1 - first encounters"
+      },
+      {
+        "id": "alphabet_practice",
+        "text": "a, aa, e, ee, i, ii, o, oo, u, uu, y, yy, ä, ää, ö, öö",
+        "lang": "fi",
+        "type": "pronunciation",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "1.1",
+        "estimatedDuration": 20,
+        "note": "Alphabet pronunciation practice"
+      },
+      {
+        "id": "classroom_questions",
+        "text": "Opettaja: Mikä sinun nimi on? Opiskelija: Minun nimi on Laura. Opettaja: Mistä sinä olet kotoisin? Opiskelija: Olen kotoisin Saksasta.",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "1.1",
+        "estimatedDuration": 15,
+        "note": "Repurposed script for classroom interaction exercise"
+      },
+      {
+        "id": "alphabet_world",
+        "text": "Suomen aakkoset: A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, Ä, Ö. Suomessa on 29 kirjainta.",
+        "lang": "fi",
+        "type": "educational",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "1.2",
+        "estimatedDuration": 25,
+        "note": "Introduction to Finnish alphabet"
+      },
+      {
+        "id": "difficult_sounds",
+        "text": "ä, ö, y, ng, nk. Kylä, öljy, yö, kengät, kiitos.",
+        "lang": "fi",
+        "type": "pronunciation",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "1.2",
+        "estimatedDuration": 15,
+        "note": "Difficult Finnish sounds practice"
+      },
+      {
+        "id": "dialogue_ch2",
+        "text": "Olga: Pedro, minkämaalainen sinä olet? Pedro: Minä olen brasilialainen. Entä sinä? Olga: Minä olen venäläinen. Entä Alex, mistä sinä olet kotoisin? Alex: Minä olen kotoisin Johannesburgista, Etelä-Afrikasta. Olga: Ai jaa, mitä kieltä sinä puhut? Alex: Minun äidinkieli on englanti, mutta puhun myös vähän espanjaa.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "2.1",
+        "estimatedDuration": 40,
+        "note": "Dialogue about nationalities and languages"
+      },
+      {
+        "id": "dialogue_ch2_puhekieli",
+        "text": "Myyjä: Hei. Pedro: Hei. Mitä jätski maksaa? Myyjä: Yks pallo maksaa 3 euroo ja kaks palloo 5 euroo. Pedro: Okei. No mä otan sit kaks palloo suklaata.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "2.2",
+        "estimatedDuration": 20,
+        "note": "Spoken language dialogue at ice cream kiosk"
+      },
+      {
+        "id": "script_ex30",
+        "text": "A: Mitä tämä bussi maksaa? B: Se maksaa kaksi euroa.",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "standard",
+        "sourceChapter": "2.2",
+        "estimatedDuration": 8,
+        "note": "Repurposed script for price inquiry exercise"
+      },
+      {
+        "id": "vocab_kieli",
+        "text": "kieli",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "2.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "vocab_kotoisin",
+        "text": "kotoisin",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "2.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "dialogue_ch3",
+        "text": "Pedro: Moi Mikko! Oletko jo töissä? Mikko: No moi! En vielä. Kello on täällä vasta puoli kahdeksan. Pedro: Ai niin, totta. No, mitä kuuluu? Mikko: Ihan hyvää, mutta sää on nyt huono. Tänäänkin sataa kaatamalla ja on tuulista.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "3.1",
+        "estimatedDuration": 35,
+        "note": "Video call to Brazil - weather discussion"
+      },
+      {
+        "id": "dialogue_ch3_puhekieli",
+        "text": "Kurssisihteeri: Hei! Pedro: Hei! Mä haluaisin ilmoittautua suomen kurssille, tasolle kaks. Kurssisihteeri: Joo-o. Seuraava Suomi 2 -kurssi alkaa jo huomenna.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "3.2",
+        "estimatedDuration": 15,
+        "note": "Course enrollment dialogue in spoken Finnish"
+      },
+      {
+        "id": "script_ex14",
+        "text": "Millainen sää Tokiossa on? Siellä on hyvä ilma. On puolipilvistä ja tuulista. On lämmin. On plus kaksikymmentä astetta.",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "3.1",
+        "estimatedDuration": 12,
+        "note": "Weather report exercise script"
+      },
+      {
+        "id": "vocab_sää",
+        "text": "sää",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "3.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "vocab_ystävä",
+        "text": "ystävä",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "3.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "monologues_ch4",
+        "text": "Olga: Minä olen Olga. Minä olen naimisissa Veijon kanssa. Meillä on yksi lapsi. Alex: Minun nimi on Alex ja olen 31 vuotta vanha. Olen pitkä ja hoikka ja pidän urheilusta. Pedro: Minun nimi on Pedro. Olen puhelias ja iloinen brasilialainen.",
+        "lang": "fi",
+        "type": "monologue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "4.1",
+        "estimatedDuration": 30,
+        "note": "Personal descriptions from three characters"
+      },
+      {
+        "id": "dialogue_ch4_puhekieli",
+        "text": "Myyjä: Hei, voinko auttaa? Pedro: Kiitos, mä vaan katselen. ... Pedro: Anteeksi, onks tästä ällää? Myyjä: Hetki, mä tarkistan... Joo, on. Tässä, ole hyvä.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "4.2",
+        "estimatedDuration": 20,
+        "note": "Clothes shopping dialogue in spoken Finnish"
+      },
+      {
+        "id": "script_ex14_ch4",
+        "text": "A: Onko sinulla mukana puhelin ja tietokone? B: Joo, minulla on puhelin, mutta minulla ei ole tietokonetta.",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "standard",
+        "sourceChapter": "4.1",
+        "estimatedDuration": 10,
+        "note": "Possession exercise script"
+      },
+      {
+        "id": "script_ex25_ch4",
+        "text": "Myyjä: Hei, voinko auttaa? Asiakas: Joo, mä etsin juhlamekkoa. Myyjä: Tämä mekko on 89 euroa. Asiakas: Kiitos. Onko tätä punaisena? Myyjä: Punaisena ei ole, mutta oranssina on.",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "standard",
+        "sourceChapter": "4.2",
+        "estimatedDuration": 15,
+        "note": "Shopping dialogue exercise script"
+      },
+      {
+        "id": "vocab_perhe",
+        "text": "perhe",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "4.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "vocab_lapsi",
+        "text": "lapsi",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "4.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "ch5_reading_1",
+        "text": "Minä olen Lauri Mäkelä. Olen suomalainen mies ja isä. Minulla on vaimo ja kaksi lasta. Minä herään kello 6, kun herätyskello soi. Käyn ensin suihkussa ja puen sitten päälle. Sen jälkeen teen keittiössä aamupalaa ja luen lehteä. Kun Tuula ja lapset heräävät, syömme yhdessä aamupalaa. Lapset syövät yleensä muroja ja minä syön leipää. Tuula ei syö aamulla mitään. Hän juo vain kahvia. Lähden töihin kello 7.15. Olen töissä lounasravintolassa. Olen kokki. Töissä teen ruokaa kolmen työkaverin kanssa. Aamulla Tuula kävelee Emman kanssa päiväkotiin. Sitten hän ajaa bussilla töihin. Hän on töissä apteekissa. Kalle menee kouluun pyörällä. Tänään koulu loppuu kahdelta. Koulun jälkeen Kalle pelaa kaverin kanssa jalkapalloa. Iltaisin teemme usein jotain yhdessä. Tänään minä ja Kalle menemme uimahalliin. Uimme kaksi tuntia. Emma ja Tuula eivät tule uimahalliin. He menevät kenkäkauppaan, koska Emma tarvitsee kesäkengät. Hän valitsee pinkit sandaalit. Kotona Tuula tekee ruokaa. Ruoan jälkeen lapset haluavat katsoa televisiota. Minä olen jo väsynyt, mutta lapset eivät ole. Tuula ja lapset lukevat kirjaa. Yhdeksältä lapset pesevät hampaat. Sitten sanomme 'hyvää yötä' ja lapset menevät nukkumaan.",
+        "lang": "fi",
+        "type": "narrative",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "5.1",
+        "estimatedDuration": 120,
+        "note": "Family daily routine narrative - main reading text"
+      },
+      {
+        "id": "ch5_puhutaan_1",
+        "text": "Lauri: Huomenta Kalle, nukuiks sä hyvin? Kalle: Mhmm... Lauri: Otaks sä muroja? Kalle: Joo. Lauri: Äiti menee Emman kanssa illalla ostoksille. Tuuks sä mun kanssa uimaan? Kalle: Ai tänään? Monelta? Lauri: No, käyks vaikka puol viideltä? Mä tuun suoraan töistä. Kalle: Öö tota, en mä ehdi puol viideks. Mä meen Jussin kanssa koulun jälkeen pelaamaan futista. Ja sit mun täytyy syödäkin. Lauri: No sopiiks viideltä? Kalle: Joo, sopii! Missä me nähään? Lauri: Nähään suoraan uimahallilla. Kalle: Okei.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "5.2",
+        "estimatedDuration": 45,
+        "note": "Breakfast table conversation - making plans"
+      },
+      {
+        "id": "ch5_ex35_script",
+        "text": "Anna: Hei Pekka! Mennäänkö elokuviin? Pekka: Joo, hyvä idea! Milloin? Anna: Sopiiko tänään illalla? Pekka: Ei, tänään ei käy. Mutta huomenna sopii hyvin. Anna: Okei, nähdään huomenna!",
+        "lang": "fi",
+        "type": "exercise",
+        "preferredTTS": "standard",
+        "sourceChapter": "5.2",
+        "estimatedDuration": 15,
+        "note": "Appointment making exercise script"
+      },
+      {
+        "id": "vocab_herätä",
+        "text": "herätä",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "5.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "vocab_aamupala",
+        "text": "aamupala",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "5.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "vocab_yhdessä",
+        "text": "yhdessä",
+        "lang": "fi",
+        "type": "vocabulary",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "5.1",
+        "estimatedDuration": 2
+      },
+      {
+        "id": "ch6_reading_1",
+        "text": "ASUNTOILMOITUS. VUOKRALLE ANNETAAN. 45 neliömetriä, vuokra 870 euroa kuukaudessa plus vesimaksu 14 euroa per henkilö kuukaudessa. Kaksi huonetta, keittiö ja parveke. Puistotie 20, Helsinki. Hyväkuntoinen valoisa kaksio kerrostalossa Lehtelässä. Rauhallinen sijainti Puistotiellä viihtyisällä alueella. 3. kerros, ei hissiä. Asunnossa on pieni parveke. Isossa keittiössä on tilaa ruokapöydälle. Sauna ja pesutupa ovat kellarissa. Parkkipaikat etupihalla. Vapaa 1. syyskuuta. Vuokratakuu kahden kuukauden vuokra. Yhteydenotot sähköpostitse. Vuokranantaja Heikki Jussila.",
+        "lang": "fi",
+        "type": "advertisement",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "6.1",
+        "estimatedDuration": 60,
+        "note": "Apartment rental advertisement"
+      },
+      {
+        "id": "ch6_reading_2",
+        "text": "Pedro: Hanna, katso, tämä näyttää hyvältä! Hanna: Onko se kaksio? Pedro: Joo, on. 45 neliötä. Hanna: Missä päin se on? Pedro: Öö, odota, minä katson... Tämä on Lehtelässä, Puistotiellä. Eikö se ole ihan kiva alue? Hanna: Joo, on! Lehtelästä menee juna keskustaan. Paljonko sen vuokra on? Pedro: 870 euroa plus vesimaksut. Hanna: Ohhoh, hirveän kallis! Pedro: Niin on, mutta mennäänkö silti katsomaan? Hanna: Mennään vaan. Milloin siellä on näyttö? Pedro: En minä tiedä. Tässä on vain sähköpostiosoite. Hanna: Okei, no täytyy sitten kirjoittaa ja kysyä.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "6.1",
+        "estimatedDuration": 45,
+        "note": "Pedro and Hanna discussing apartment ad"
+      },
+      {
+        "id": "ch6_reading_3",
+        "text": "On iltapäivä. Mäkelät istuvat keittiössä ja syövät lounasta. Kalle katsoo ulos ikkunasta. Pihalle ajaa iso pakettiauto. Mies nostaa autosta monta ruskeaa laatikkoa kadulle. Nainen kantaa laatikot kadulta sisään taloon. Emma ja Kalle menevät ulos. He haluavat nähdä, mitä pihalla tapahtuu. Kalle: Hei, kuka sinä olet? Pedro: Hei, minä olen Pedro. Muutan tänään asuntoon numero 5. Kalle: Minä olen Kalle ja tässä on Emma. Me asumme numerossa 6. Sinä olet meidän uusi naapuri. Pedro: Hauska tavata! Emma: Tarvitsetko apua? Pedro: Joo, kiitos. Emma: Mitä minä voin tehdä? Pedro: Vie vaikka tämä lamppu pöydälle olohuoneeseen. Kalle: Entä minä? Pedro: No, ota tuo pieni laatikko ja vie se keittiöön. Minä kannan nämä tuolit. Käyn ensin kellarissa ja tulen sitten. Emma: Okei. Me menemme jo ylös. Onko ovi auki? Pedro: Ei, mutta minun tyttöystävä Hanna on kotona.",
+        "lang": "fi",
+        "type": "narrative",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "6.2",
+        "estimatedDuration": 90,
+        "note": "Moving day scenario with neighbors helping"
+      },
+      {
+        "id": "ch6_puhutaan_1",
+        "text": "Huoltomies: Huoltoyhtiö Jokinen. Pedro: Huomenta. Täällä on Pedro Ribeiro. Mä oon uusi asukas Puistotie 4:ssä. Huoltomies: Hei. Pedro: Tota... Mä haluaisin varata saunavuoron. Huoltomies: Selvä. Mikä teiän asunnon numero on? Pedro: C 32. Huoltomies: Okei, joo, Lahtinen ja Ribeiro? Pedro: Joo. Huoltomies: Hetkinen.. Joo, teiän talon saunassa on vapaata vielä tiistaina kello 17 ja perjantaina kello 21. Kaikki muut vuorot on varattu. Pedro: Ahaa... No, mä luulen, että me otetaan perjantai. Onks se tunnin vuoro? Huoltomies: Joo, kello 21-22. Se on sit 12 euroa kuussa. Pedro: Okei. Miten se maksetaan? Huoltomies: Lasku tulee postissa. Ja vuoro alkaa jo tällä viikolla. Pedro: Hienoa, kiitos paljon! Huoltomies: Kiitos ja hei.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "6.3",
+        "estimatedDuration": 60,
+        "note": "Phone call to building maintenance for sauna booking"
+      },
+      {
+        "id": "ch7_reading_1",
+        "text": "Viikonloppuna Pedro ja Hanna lähtevät Tampereelle. Ensin he käyvät kylässä Hannan Kyllikki-tädillä. Kyllikki: Hei, kiva nähdä pitkästä aikaa! Hanna: Niin sinuakin! Pedro: Tässä kassissa on sinulle pieni tuliainen. Ole hyvä! Kyllikki: Oi, kiitos paljon! Otatteko kahvia? Minulla on tuoretta pullaakin. Pedro: Joo, kiitos mielellämme. Kyllikki: Tulkaa pöytään. Miten matka meni? Tulitteko autolla vai junalla? Hanna: Junalla. Meillä oli mukava matka, vaikka juna oli melkein puoli tuntia myöhässä. Kyllikki: No mitä te aiotte tehdä täällä? Pedro: Hanna haluaa näyttää minulle kaikki tärkeät paikat, koska olen täällä ensimmäistä kertaa. Hanna: Joo, käymme ainakin Tammerkoskella ja museokeskus Vapriikissa. Syömme lounasta kauppahallissa ja sen jälkeen käymme Pyynikin näkötornissa. Kyllikki: Hyvä idea. Sieltä on upeat näköalat ja sen kahvilassa on herkulliset munkit. Hanna: Niin onkin! Ja jos jaksamme, käymme ehkä myös Muumimuseossa tai Särkänniemen huvipuistossa. Pedro: Ja minä haluan maistaa mustaamakkaraa. Minun kaveri Alex sanoi, että se on tamperelainen erikoisuus. Kyllikki: Joo, niin onkin. Me syömme sitä yleensä puolukkahillon kanssa. Missä muuten yövytte täällä? Hanna: Meillä on huone hotelli Pirkassa. Siellä oli hyvä viikonlopputarjous. Kyllikki: Aijaa, sehän on kiva! Hanna: Joo, ja huomenna näemme minun tamperelaiset ystävät Paulan ja Ilkan. Heillä on mökki pienessä saaressa Näsijärvellä. Menemme sinne heidän uudella veneellä. Pedro: On tosi kivaa lähteä mökille. Minä tykkään saunoa ja uida järvessä. Hanna: Niin ja vaikka tapaamme vain pari kertaa vuodessa, meillä on aina tosi hauskaa yhdessä. Kyllikki: No varmasti!",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "7.1",
+        "estimatedDuration": 150,
+        "note": "Weekend visit to Tampere with Aunt Kyllikki"
+      },
+      {
+        "id": "ch7_puhutaan_1",
+        "text": "Hanna: Hei! Meillä on varaus nimellä Lahtinen. Hotellivirkailija: Joo, hetkinen. Mä tarkistan koneelta. Tässä se on: kahden hengen huone yhdeksi yöksi. Hanna: Joo, just niin. Hotellivirkailija: Voisitteko kirjoittaa tähän henkilötiedot. Hanna: Joo, tietysti. Hotellivirkailija: Maksatteko nyt vai huomenna? Hanna: Mä voin maksaa nyt. Hotellivirkailija: Hyvä, se on siis yhteensä 100 euroa ja aamiainen kuuluu hintaan. Hanna: Selvä. Hotellivirkailija: Huone on 4. kerroksessa, numero 418. Tässä ovat avainkortit, olkaa hyvä. Aamiainen on kello 7-10. Ja huone täytyy luovuttaa kello 12. Hanna: Onks täällä myös sauna? Hotellivirkailija: Kyllä on. Saunaosasto on P1-kerroksessa. Hanna: Okei, kiitti paljon. Hotellivirkailija: Kiitos ja hauskaa päivää!",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "7.2",
+        "estimatedDuration": 50,
+        "note": "Hotel check-in dialogue in spoken Finnish"
+      },
+      {
+        "id": "ch8_reading_1",
+        "text": "Tänään on lauantai 3. syyskuuta. Illalla on Hannan ja Pedron tupaantuliaiset heidän uudessa kodissa. Hanna: Pedro, voitko sinä käydä kaupassa? Minä imuroin ja pesen lattiat sillä aikaa. Pedro: Okei. Kirjoitan ensin ostoslistan. Tehdäänkö pastasalaattia ja lihapullia? Hanna: Joo, tehdään vaan. Ja voitko sinä leipoa sitä teidän äidin ihanaa sitruunakakkua? Se on niin hyvää! Pedro: Voin tietysti. Hanna: Hyvä! Osta myös jotain hyvää leipää. Pedro: Joo. Ja juotavaa tietysti. Janita: Teillä on ihana koti! Pedro: Kiitos! Meistäkin tämä on tosi kiva. Janita: Täällä on tosi avaraa ja valoisaa. Kuinka monta neliötä tässä asunnossa on? Pedro: 45. Janita: Ahaa. Kiva, että keittiö on niin iso, että siellä on tilaa ruokapöydälle. Pedro: Joo, se on tosi hyvä, koska keittiö on myös meidän työhuone. Tässä pöydän ääressä minä teen aina kotitehtävät. Janita: Sama juttu meilläkin. Läppärit ja opiskelupaperit ovat aina ruokapöydällä. Olga: Tämä salaatti on tosi hyvää! Alex: Niin minustakin! Olga: Pedro, mitä kaikkea tässä on? Pedro: No siinä on pastaa, maissia, oliiveja, valkosipulia, kanaa ja chiliöljyä. Alex: Ahaa, siksi se maistuu vähän tuliselta. Pedro: Joo, ei kai se ole liian tulista? Alex: Ei ei, se on juuri sopivaa. Olga: Niin on. Ja tuo sitruunakakku näyttää herkulliselta. Pedro: Toivottavasti se myös maistuu hyvältä! Hei Hanna, onko kahvi jo valmista? Hanna: Joo, on. Tulkaa ottamaan kahvia ja kakkua!",
+        "lang": "fi",
+        "type": "narrative",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "8.1",
+        "estimatedDuration": 120,
+        "note": "Housewarming party preparation and guest conversations"
+      },
+      {
+        "id": "ch8_puhutaan_1",
+        "text": "Alex: Terve Pedro. Mulla on ongelma. Mä en löydä perille. Pedro: Aa, okei. Missä sä oot nyt? Ooks sä vielä bussissa? Alex: En. Mä seison bussipysäkillä. Tässä vieressä on kioski ja tien toisella puolella on pizzeria. Pedro: Ahaa. Sä oot ihan lähellä. Alex: No hyvä! Mihin suuntaan mä lähen tästä? Pedro: Näeks sä X-marketin? Alex: Joo, näen. Pedro: No kävele sinne päin ja käänny ekasta risteyksestä oikeelle Puistotielle. Jatka sit vielä noin 100 metriä eteenpäin, ja meiän talo on se iso harmaa talo vasemmalla puolella. Alex: Selvä, kiitti. Nähään kohta!",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "8.2",
+        "estimatedDuration": 40,
+        "note": "Phone conversation giving directions"
+      },
+      {
+        "id": "ch9_reading_1",
+        "text": "Tänään on Alexin ensimmäinen työpäivä Mix-Elektro Oy:ssä. Aamulla hän on niin hermostunut, että hän ei voi syödä aamupalaa. Yhdeksältä Alexin pomo Jari odottaa Alexia yrityksen pääovella. Ensin Alex saa Jarilta työpaikan kulkukortin. Sitten he menevät hissillä toiseen kerrokseen Mix-Elektron toimistoon. Jari: No niin Alex, näytän sinulle ensin sinun työpisteen. Se on tässä. Alex: Okei. Jari: Voit laittaa sinun takin ja muut tavarat tuohon kaappiin. Et tarvitse avainta, siinä on koodilukko. Alex: Hyvä juttu! Jari: Esittelen sinulle ensin tilat ja vähän myöhemmin tapaat meidän tiimin muut työntekijät. Alex: Joo, kiva. Kuinka monta henkilöä meidän tiimiin kuuluu? Jari: Yhteensä seitsemän. Kaikki muut paitsi Rantasen Veli-Matti ovat tänään täällä. Meidän viikkopalaveri alkaa kymmeneltä. Tapaat heidät kaikki siellä. Alex: Hienoa. Jari: Minä kerron kokouksessa myös tiimin uudesta projektista. Alex: Selvä. Jari: No niin, jatketaan kierrosta. Tuolla on meidän it-osasto. Siellä istuvat Jarno ja Viivi. Voit aina kysyä heiltä neuvoa, jos sinulla on jokin ongelma tietokoneen kanssa. Alex: Saanko heiltä myös käyttäjätunnuksen ja salasanan? Jari: Joo, saat. Jari: Tässä oikealla on keittiö, ja tuolla käytävän päässä on pari neuvotteluhuonetta. Alex: Okei. Jari: Tästä kahviautomaatista voit hakea kahvia tai teetä aina kun haluat. Ja jos sinulla on omat eväät, voit laittaa ne tänne jääkaappiin. Alex: Onko kaikilla yleensä eväät mukana? Jari: Ei, aika usein syömme alakerran lounaspaikassa. Alex: Hyvä tietää. Jari: Oho, kello on jo melkein kymmenen! Mennään suoraan neukkariin. Alex: Ok, haen vain nopeasti läppärin!",
+        "lang": "fi",
+        "type": "narrative",
+        "preferredTTS": "enhanced",
+        "sourceChapter": "9.1",
+        "estimatedDuration": 150,
+        "note": "Alex's first day at work - office tour and introduction"
+      },
+      {
+        "id": "ch9_puhutaan_1",
+        "text": "Tarjoilija: Hei! Jari: Hei! Mitäs teillä on tänään lounaslistalla? Tarjoilija: Meillä on kolme eri annosta: kanarisotto, kurpitsakeitto ja savulohisalaatti. Kaikki on 10,50 €. Jari: Okei, mä luulen, että mä otan kurpitsakeittoa. Alex: Ja mulle kanarisottoa, kiitos. Tarjoilija: Syöttekö täällä vai tuleeks nää mukaan? Jari: Me syödään täällä. Tarjoilija: Tuleeks nää samasta vai erikseen? Alex: Erikseen, kiitos. Tarjoilija: Okei. Tässä on teidän tilausnumero. Ruoka tulee pöytään kohta. Tuolta voitte ottaa salaattia. Alex: Kuuluuks kahvi lounaan hintaan? Tarjoilija: Joo, kuuluu. Alex: Kiitos.",
+        "lang": "fi",
+        "type": "dialogue",
+        "preferredTTS": "standard",
+        "sourceChapter": "9.2",
+        "estimatedDuration": 35,
+        "note": "Lunch ordering at workplace restaurant"
+      }
+    ]
+  }

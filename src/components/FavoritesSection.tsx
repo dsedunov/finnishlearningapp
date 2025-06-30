@@ -139,7 +139,10 @@ const FavoritesSection: React.FC<FavoritesSectionProps> = ({
       setLoadingAI(true);
       
       try {
-        const enhanced = await enhanceTranslationWithAI(fav.word, fav.translation);
+        const translationText = typeof fav.translation === 'string' 
+        ? fav.translation 
+        : fav.translation?.russian || fav.translation?.baseForm || '';
+      const enhanced = await enhanceTranslationWithAI(fav.word, translationText);
         
         console.log('Received AI enhancement response:', {
           word: fav.word,
@@ -209,11 +212,16 @@ const FavoritesSection: React.FC<FavoritesSectionProps> = ({
           </button>
         </div>
 
-        {/* Basic Translation */}
-        <div className="bg-blue-50 rounded-lg p-4 mb-4">
-          <h4 className="text-lg font-semibold text-blue-800 mb-2">Basic Translation</h4>
-          <p className="text-gray-700 text-lg">{fav.translation}</p>
-        </div>
+       {/* Basic Translation */}
+<div className="bg-blue-50 rounded-lg p-4 mb-4">
+  <h4 className="text-lg font-semibold text-blue-800 mb-2">Basic Translation</h4>
+  <p className="text-gray-700 text-lg">
+    {typeof fav.translation === 'string' 
+      ? fav.translation 
+      : fav.translation?.russian || fav.translation?.baseForm || 'Translation not available'
+    }
+  </p>
+</div>
 
         {/* Enhanced Vocabulary Info */}
         {vocabularyEntry && (

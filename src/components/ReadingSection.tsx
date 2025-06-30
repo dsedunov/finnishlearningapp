@@ -8,6 +8,7 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
   isCompleted,
   audioPlaying,
   isListening,
+  isGeneratingAudio, // Make sure this prop is included
   onPlayAudio,
   onStartSpeechRecognition,
   onCompleteReading,
@@ -110,11 +111,24 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
             <p className="text-gray-700 flex-1">{lesson.reading.description}</p>
             <button
               onClick={() => onPlayAudio(lesson.reading.description, getAudioVoiceType(lesson.reading.description))}
-              className="ml-4 text-blue-500 hover:text-blue-700 p-2 rounded-full hover:bg-blue-100 transition-colors flex-shrink-0"
-              disabled={audioPlaying === lesson.reading.description}
-              title={shouldUseEnhancedTTS(lesson.reading.description) ? "Enhanced AI Voice" : "Browser Voice"}
+              disabled={audioPlaying === lesson.reading.description || (isGeneratingAudio && shouldUseEnhancedTTS(lesson.reading.description))}
+              className={`ml-4 p-2 rounded-full transition-colors flex-shrink-0 ${
+                shouldUseEnhancedTTS(lesson.reading.description)
+                  ? `text-purple-500 hover:text-purple-700 hover:bg-purple-100 ${
+                      isGeneratingAudio ? 'opacity-50 cursor-not-allowed' : ''
+                    }`
+                  : 'text-blue-500 hover:text-blue-700 hover:bg-blue-100'
+              }`}
+              title={shouldUseEnhancedTTS(lesson.reading.description) ? 
+                (isGeneratingAudio ? "Generating Enhanced Audio..." : "Enhanced AI Voice") : 
+                "Browser Voice"
+              }
             >
-              {getAudioIcon(lesson.reading.description)}
+              {isGeneratingAudio && shouldUseEnhancedTTS(lesson.reading.description) ? (
+                <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                getAudioIcon(lesson.reading.description)
+              )}
             </button>
           </div>
         </div>
@@ -132,19 +146,30 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
                 dialogueScript.text, 
                 dialogueScript.preferredTTS === 'enhanced' ? 'enhanced' : 'standard'
               )}
+              disabled={audioPlaying === dialogueScript.text || (isGeneratingAudio && dialogueScript.preferredTTS === 'enhanced')}
               className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
                 dialogueScript.preferredTTS === 'enhanced' 
-                  ? 'bg-purple-500 hover:bg-purple-600' 
-                  : 'bg-blue-500 hover:bg-blue-600'
-              } text-white`}
-              disabled={audioPlaying === dialogueScript.text}
+                  ? `bg-purple-500 hover:bg-purple-600 text-white ${
+                      isGeneratingAudio ? 'opacity-50 cursor-not-allowed' : ''
+                    }`
+                  : 'bg-blue-500 hover:bg-blue-600 text-white'
+              }`}
             >
-              {dialogueScript.preferredTTS === 'enhanced' ? (
-                <Zap className="w-4 h-4 mr-2" />
+              {isGeneratingAudio && dialogueScript.preferredTTS === 'enhanced' ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Generating...
+                </>
               ) : (
-                <Volume2 className="w-4 h-4 mr-2" />
+                <>
+                  {dialogueScript.preferredTTS === 'enhanced' ? (
+                    <Zap className="w-4 h-4 mr-2" />
+                  ) : (
+                    <Volume2 className="w-4 h-4 mr-2" />
+                  )}
+                  Play Full Dialogue
+                </>
               )}
-              Play Full Dialogue
             </button>
           )}
         </div>
@@ -166,15 +191,24 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
                     {/* Audio button with smart TTS selection */}
                     <button
                       onClick={() => onPlayAudio(line.text, getAudioVoiceType(line.text))}
+                      disabled={audioPlaying === line.text || (isGeneratingAudio && useEnhanced)}
                       className={`p-1 rounded transition-colors ${
                         useEnhanced 
-                          ? 'text-purple-500 hover:text-purple-700' 
+                          ? `text-purple-500 hover:text-purple-700 ${
+                              isGeneratingAudio ? 'opacity-50 cursor-not-allowed' : ''
+                            }`
                           : 'text-blue-500 hover:text-blue-700'
                       }`}
-                      disabled={audioPlaying === line.text}
-                      title={useEnhanced ? "Enhanced AI Voice (6+ words)" : "Browser Voice"}
+                      title={useEnhanced ? 
+                        (isGeneratingAudio ? "Generating Enhanced Audio..." : "Enhanced AI Voice (6+ words)") : 
+                        "Browser Voice"
+                      }
                     >
-                      {getAudioIcon(line.text)}
+                      {isGeneratingAudio && useEnhanced ? (
+                        <div className="w-4 h-4 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        getAudioIcon(line.text)
+                      )}
                     </button>
                     
                     <button
@@ -188,7 +222,7 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
 
                     {/* Audio quality indicator */}
                     <span className="text-xs text-gray-500">
-                      {useEnhanced ? '⚡ Enhanced' : '🔊 Standard'}
+                      {useEnhanced ? (isGeneratingAudio ? '⚡ Generating...' : '⚡ Enhanced') : '🔊 Standard'}
                     </span>
                   </div>
                   
@@ -215,11 +249,24 @@ const ReadingSection: React.FC<ReadingSectionProps> = ({
                 <p className="font-semibold text-gray-800 flex-1">{question.question}</p>
                 <button
                   onClick={() => onPlayAudio(question.question, getAudioVoiceType(question.question))}
-                  className="ml-2 text-green-600 hover:text-green-800 p-1 rounded transition-colors"
-                  disabled={audioPlaying === question.question}
-                  title={shouldUseEnhancedTTS(question.question) ? "Enhanced AI Voice" : "Browser Voice"}
+                  disabled={audioPlaying === question.question || (isGeneratingAudio && shouldUseEnhancedTTS(question.question))}
+                  className={`ml-2 p-1 rounded transition-colors ${
+                    shouldUseEnhancedTTS(question.question)
+                      ? `text-green-600 hover:text-green-800 ${
+                          isGeneratingAudio ? 'opacity-50 cursor-not-allowed' : ''
+                        }`
+                      : 'text-green-600 hover:text-green-800'
+                  }`}
+                  title={shouldUseEnhancedTTS(question.question) ? 
+                    (isGeneratingAudio ? "Generating Enhanced Audio..." : "Enhanced AI Voice") : 
+                    "Browser Voice"
+                  }
                 >
-                  {getAudioIcon(question.question)}
+                  {isGeneratingAudio && shouldUseEnhancedTTS(question.question) ? (
+                    <div className="w-4 h-4 border-2 border-green-600 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    getAudioIcon(question.question)
+                  )}
                 </button>
               </div>
               {question.translation && (

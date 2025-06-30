@@ -29,6 +29,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
 
   const translation = translations[selectedText];
 
+  // Helper function to safely extract string from translation
+  const getTranslationText = (translation: any): string => {
+    if (typeof translation === 'string') {
+      return translation;
+    }
+    if (translation && typeof translation === 'object') {
+      // Extract the Russian translation from your vocabulary structure
+      return translation.russian || translation.baseForm || 'Translation available';
+    }
+    return 'Translation not found. Click to enhance with AI!';
+  };
+
   return (
     <div
       ref={ref}
@@ -53,21 +65,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
         <div className="space-y-2">
           <div className="text-sm">
             <p className="font-semibold text-blue-300">Primary Translation:</p>
-            <p>{translation.enhanced.baseTranslation}</p>
+            <p>{getTranslationText(translation.enhanced.baseTranslation)}</p>
           </div>
           
           {translation.enhanced.alternativeTranslations?.length > 0 && (
             <div className="text-sm">
               <p className="font-semibold text-green-300">Alternatives:</p>
-              <p>{translation.enhanced.alternativeTranslations.join(', ')}</p>
+              <p>{Array.isArray(translation.enhanced.alternativeTranslations) 
+                ? translation.enhanced.alternativeTranslations.join(', ') 
+                : String(translation.enhanced.alternativeTranslations)}</p>
             </div>
           )}
           
           <div className="text-sm">
             <p className="font-semibold text-yellow-300">Grammar:</p>
-            <p>{translation.enhanced.grammaticalInfo.partOfSpeech}</p>
-            {translation.enhanced.grammaticalInfo.case && (
-              <p>Case: {translation.enhanced.grammaticalInfo.case}</p>
+            <p>{String(translation.enhanced.grammaticalInfo?.partOfSpeech || 'Unknown')}</p>
+            {translation.enhanced.grammaticalInfo?.case && (
+              <p>Case: {String(translation.enhanced.grammaticalInfo.case)}</p>
             )}
           </div>
           
@@ -77,21 +91,53 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
                 translation.enhanced.frequency === 'common' ? 'bg-green-600' :
                 translation.enhanced.frequency === 'uncommon' ? 'bg-yellow-600' : 'bg-red-600'
               }`}>
-                {translation.enhanced.frequency}
+                {String(translation.enhanced.frequency)}
               </span>
             </div>
           )}
         </div>
       ) : (
         <div className="text-sm whitespace-pre-line mb-3 leading-relaxed">
-          {translation?.base || translation || 'Translation not found. Click to enhance with AI!'}
+          {/* Fixed: Use the helper function to safely extract translation text */}
+          <div className="space-y-2">
+            <div>
+              <span className="font-semibold text-blue-300">Translation: </span>
+              <span>{getTranslationText(translation)}</span>
+            </div>
+            
+            {/* Show additional vocabulary info if available */}
+            {translation && typeof translation === 'object' && (
+              <>
+                {translation.grammarInfo && (
+                  <div>
+                    <span className="font-semibold text-yellow-300">Grammar: </span>
+                    <span className="text-xs">{String(translation.grammarInfo)}</span>
+                  </div>
+                )}
+                
+                {translation.pronunciation && (
+                  <div>
+                    <span className="font-semibold text-green-300">Pronunciation: </span>
+                    <span className="text-xs">{String(translation.pronunciation)}</span>
+                  </div>
+                )}
+                
+                {translation.examples && Array.isArray(translation.examples) && translation.examples.length > 0 && (
+                  <div>
+                    <span className="font-semibold text-purple-300">Example: </span>
+                    <span className="text-xs italic">{String(translation.examples[0])}</span>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       )}
       
       <div className="flex items-center justify-between mt-3">
         <button
           onClick={() => {
-            onAddToFavorites(selectedText, translation?.base || translation);
+            onAddToFavorites(selectedText, getTranslationText(translation));
             onClose();
           }}
           className="text-red-400 hover:text-red-300 flex items-center transition-colors"
@@ -100,14 +146,14 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(({
           Favorite
         </button>
         <button
-          onClick={() => onPlayAudio(selectedText, 'default')}
+          onClick={() => onPlayAudio(selectedText, 'standard')}
           className="text-blue-400 hover:text-blue-300 flex items-center transition-colors"
         >
           <Volume2 className="w-4 h-4 mr-1" />
           Listen
         </button>
         <button
-          onClick={() => onPlayAudio(selectedText, 'gemini')}
+          onClick={() => onPlayAudio(selectedText, 'enhanced')}
           className="text-purple-400 hover:text-purple-300 flex items-center transition-colors"
         >
           <Zap className="w-4 h-4 mr-1" />
