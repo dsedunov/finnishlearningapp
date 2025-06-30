@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/finnishlearningapp/static/css/main.6635597e.css",
-    "main.js": "/finnishlearningapp/static/js/main.d712f449.js",
+    "main.css": "/finnishlearningapp/static/css/main.c991bf55.css",
+    "main.js": "/finnishlearningapp/static/js/main.6e0a56b7.js",
     "index.html": "/finnishlearningapp/index.html",
-    "main.6635597e.css.map": "/finnishlearningapp/static/css/main.6635597e.css.map",
-    "main.d712f449.js.map": "/finnishlearningapp/static/js/main.d712f449.js.map"
+    "main.c991bf55.css.map": "/finnishlearningapp/static/css/main.c991bf55.css.map",
+    "main.6e0a56b7.js.map": "/finnishlearningapp/static/js/main.6e0a56b7.js.map"
   },
   "entrypoints": [
-    "static/css/main.6635597e.css",
-    "static/js/main.d712f449.js"
+    "static/css/main.c991bf55.css",
+    "static/js/main.6e0a56b7.js"
   ]
 }

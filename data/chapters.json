@@ -1,0 +1,1832 @@
+{
+    "metadata": {
+      "source": "Suomen Mestari 1",
+      "version": "2.0",
+      "lastUpdated": "2025-06-29",
+      "totalChapters": 9,
+      "difficultyLevel": "A1"
+    },
+    "chapters": [
+      {
+        "id": 1,
+        "title": "Hei ja tervetuloa!",
+        "subtitle": "Привет и добро пожаловать!",
+        "pageNumbers": "10-27",
+        "difficulty": "A1",
+        "estimatedHours": 3,
+        "lessons": [
+          {
+            "id": "1.1",
+            "title": "First Encounters & Basic Greetings",
+            "subtitle": "Первые встречи и основные приветствия",
+            "estimatedMinutes": 30,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 4
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Tervehdykset ja esittäytyminen",
+                  "subtitle": "Приветствие и представление",
+                  "content": "Suomessa tervehdykset ovat tärkeitä. Perusmuodot ovat 'Hei', 'Moi', 'Terve' epämuodollisesti ja 'Hyvää päivää' muodollisesti.",
+                  "grammar": [
+                    {
+                      "rule": "Kysymys 'Mikä sinun nimi on?'",
+                      "explanation": "Nimen kysyminen ja kertominen on ensimmäinen askel tutustumisessa.",
+                      "examples": ["Mikä sinun nimi on?", "Minun nimi on Alex.", "Kuka sinä olet?"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Aakkoset ja numerot",
+                  "subtitle": "Алфавит и числа",
+                  "content": "Suomen aakkoset ja perusnumerot 0-20. Tärkeää oppia ääntämään oikein.",
+                  "grammar": [
+                    {
+                      "rule": "Numerot 0-20",
+                      "explanation": "Perusnumerot jokapäiväiseen käyttöön.",
+                      "examples": ["yksi, kaksi, kolme", "nolla, kymmenen, kaksikymmentä"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Ensimmäinen päivä kurssilla",
+              "subtitle": "Первый день на курсах",
+              "description": "Alex, Olga ja Pedro tapaavat ensimmäistä kertaa suomen kurssilla ja esittelevät itsensä.",
+              "dialogue_id": "dialogue_ch1",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "dialogue_complete",
+                "original_exercise": "Harjoitus 8",
+                "title": "Complete the Introductions",
+                "instruction": "Täydennä keskustelut sopivilla sanoilla.",
+                "items": [
+                  {
+                    "id": "ex8_dc1",
+                    "missing_parts": [
+                      {"speaker": "A", "text": "Hei, ___ sinun nimi on?"},
+                      {"speaker": "B", "text": "Minun nimi on Laura. ___ sinä olet?"}
+                    ],
+                    "options": ["mikä", "kuka"],
+                    "correct": ["mikä", "Kuka"]
+                  }
+                ]
+              },
+              {
+                "type": "pronunciation_practice",
+                "original_exercise": "Harjoitus 1",
+                "title": "Alphabet Practice",
+                "instruction": "Harjoittele aakkosten ääntämistä.",
+                "audio_type": "enhanced",
+                "items": [
+                  {
+                    "id": "ex1_pronunciation",
+                    "script_id": "alphabet_practice",
+                    "text": "a, b, c, d, e, f, g"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 12",
+                "title": "Numbers 1-20",
+                "instruction": "Kirjoita numerot sanoina.",
+                "items": [
+                  {
+                    "id": "ex12_wt1",
+                    "prompt": "5 = ___",
+                    "answer": "viisi"
+                  },
+                  {
+                    "id": "ex12_wt2",
+                    "prompt": "13 = ___",
+                    "answer": "kolmetoista"
+                  }
+                ]
+              },
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 15",
+                "title": "Classroom Questions",
+                "instruction": "Kuuntele kysymykset ja vastaa.",
+                "script_id": "classroom_questions",
+                "questions": [
+                  {
+                    "id": "ex15_q1",
+                    "question": "Mitä opettaja kysyy?",
+                    "answer": "Mikä sinun nimi on?"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "1.2",
+            "title": "The Building Blocks",
+            "subtitle": "Основы: алфавит и числа",
+            "estimatedMinutes": 25,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 3
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Vokaalien harmonia",
+                  "subtitle": "Гармония гласных",
+                  "content": "Suomen kielessä on etuvokaalit (ä, ö, y) ja takavokaalit (a, o, u). Ne eivät esiinny samassa sanassa.",
+                  "grammar": [
+                    {
+                      "rule": "Etuvokaalit: ä, ö, y",
+                      "explanation": "Käytetään sanoissa kuten 'kylä', 'öljy'",
+                      "examples": ["kylä", "öljy", "yö"]
+                    },
+                    {
+                      "rule": "Takavokaalit: a, o, u",
+                      "explanation": "Käytetään sanoissa kuten 'katu', 'auto'",
+                      "examples": ["katu", "auto", "kuva"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Aakkosten maailma",
+              "subtitle": "Мир алфавита",
+              "description": "Tutustuminen suomen aakkosiin ja niiden ääntämiseen.",
+              "dialogue_id": "alphabet_world",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "vowel_harmony",
+                "original_exercise": "Harjoitus 18",
+                "title": "Vowel Harmony Practice",
+                "instruction": "Valitse oikeat vokaalit sanan mukaan.",
+                "items": [
+                  {
+                    "id": "ex18_vh1",
+                    "word": "k_t_",
+                    "options": ["a,u", "ä,y"],
+                    "correct": "a,u",
+                    "result": "katu"
+                  }
+                ]
+              },
+              {
+                "type": "pronunciation_practice",
+                "original_exercise": "Harjoitus 20",
+                "title": "Difficult Sounds",
+                "instruction": "Harjoittele vaikeita äänteitä.",
+                "audio_type": "enhanced",
+                "items": [
+                  {
+                    "id": "ex20_pronunciation",
+                    "script_id": "difficult_sounds",
+                    "text": "ä, ö, y, ng, nk"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 22",
+                "title": "Word Building",
+                "instruction": "Rakenna sanoja annetuista kirjaimista.",
+                "items": [
+                  {
+                    "id": "ex22_wt1",
+                    "prompt": "k, a, t, u → ___",
+                    "answer": "katu"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Minkämaalainen sinä olet?",
+        "subtitle": "Какой ты национальности?",
+        "pageNumbers": "28-55",
+        "difficulty": "A1",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "2.1",
+            "title": "Nationalities and Languages",
+            "subtitle": "Национальности и языки",
+            "estimatedMinutes": 40,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 4
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Kansalaisuudet ja kielet",
+                  "subtitle": "Национальности и языки",
+                  "content": "Для обозначения национальности используется суффикс -lainen/-läinen. Вопросы 'Mistä sinä olet kotoisin?' (Откуда ты родом?) и 'Mitä kieltä sinä puhut?' (На каком языке ты говоришь?) являются ключевыми для этой темы.",
+                  "grammar": [
+                    {
+                      "rule": "Суффикс -lainen/-läinen",
+                      "explanation": "Образование национальностей от названий стран",
+                      "examples": ["Suomi → suomalainen", "Venäjä → venäläinen"]
+                    }
+                  ]
+                },
+                {
+                  "title": "k-p-t-vaihtelu (Nominien)",
+                  "subtitle": "Чередование согласных k-p-t (в именах)",
+                  "content": "Чередование согласных k, p, t — важное фонетическое явление. Сильная ступень появляется в именительном падеже, а слабая ступень — при добавлении многих падежных окончаний.",
+                  "grammar": [
+                    {
+                      "rule": "Сильная → слабая ступень",
+                      "explanation": "Примеры чередования: kk → k, p → v, t → d",
+                      "examples": ["Turkki → Turkissa", "Eurooppa → Euroopassa"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Kurssin jälkeen",
+              "subtitle": "После курсов",
+              "description": "Алекс, Ольга и Педро идут в киоск после занятий и говорят о своих странах и языках.",
+              "dialogue_id": "dialogue_ch2",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "listening_exercise",
+                "original_exercise": "Harjoitus 3",
+                "title": "Consonant Pronunciation",
+                "status": "skipped_missing_audio_text",
+                "instruction": "This exercise requires an external audio file to distinguish between short and long consonants."
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 5",
+                "title": "k-p-t-vaihtelu",
+                "instruction": "Добавьте окончание и примените правило чередования согласных.",
+                "items": [
+                  {
+                    "id": "ex5_kpt1",
+                    "sentence": "Turkki + ssa = ___",
+                    "blanks": ["Turkissa"],
+                    "options": ["Turkkissa", "Turkissa"]
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 13",
+                "title": "Countries and Nationalities",
+                "instruction": "Заполните пропуски, используя правильную форму страны, национальности или языка.",
+                "items": [
+                  {
+                    "id": "ex13_i1",
+                    "prompt": "Laura on kotoisin Roomasta, Italiasta. Hän on ___ ja hän puhuu ___.",
+                    "answer": "italialainen, italiaa"
+                  }
+                ]
+              },
+              {
+                "type": "listening_comprehension",
+                "original_exercise": "Harjoitus 10 (adapted)",
+                "title": "Dialogue Comprehension",
+                "instruction": "Прочитайте диалог урока и ответьте на вопросы.",
+                "items": [
+                  {
+                    "id": "ex10_lc1",
+                    "text_id": "dialogue_ch2",
+                    "question": "Miksi Olga ei osta jäätelöä?",
+                    "options": ["Hän ei pidä jäätelöstä.", "Hän säästää rahaa.", "Kioski on kiinni."],
+                    "correct": "Hän säästää rahaa.",
+                    "translation": "Почему Ольга не покупает мороженое?"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2.2",
+            "title": "Puhutaan! At the Ice Cream Kiosk",
+            "subtitle": "Разговорный! В киоске с мороженым",
+            "estimatedMinutes": 20,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 1
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Puhekielen numerot ja ostosfraasit",
+                  "subtitle": "Разговорные числительные и фразы для покупок",
+                  "content": "В разговорной речи числительные часто сокращаются (yksi → yks, kaksi → kaks). При покупке используются стандартные фразы для вопроса о цене и оплаты.",
+                  "grammar": [
+                    {
+                      "rule": "Разговорные числительные",
+                      "explanation": "Сокращенные формы в неформальной речи",
+                      "examples": ["yksi → yks", "kaksi → kaks", "kolme → kolme"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Jätskikiskalla",
+              "subtitle": "В киоске с мороженым",
+              "description": "Педро и Алекс покупают мороженое, используя разговорный финский.",
+              "dialogue_id": "dialogue_ch2_puhekieli",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 30 (Puhutaan!)",
+                "title": "Price Check",
+                "instruction": "Listen to the dialogue and answer the question.",
+                "script_id": "script_ex30",
+                "questions": [
+                  {
+                    "id": "ex30_q1",
+                    "question": "Mitä bussi maksaa?",
+                    "answer": "2 euroa"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Pedro soittaa Mikolle",
+        "subtitle": "Педро звонит Микко",
+        "pageNumbers": "56-85",
+        "difficulty": "A1",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "3.1",
+            "title": "Talking about Weather, Time, and Friends",
+            "subtitle": "Говорим о погоде, времени и друзьях",
+            "estimatedMinutes": 45,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 4
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Sää, vuodenajat ja kuukaudet",
+                  "subtitle": "Погода, времена года и месяцы",
+                  "content": "В этом уроке изучается лексика для описания погоды (aurinko paistaa, sataa, on kylmä), времен года (kesä, talvi), месяцев и времени суток.",
+                  "grammar": [
+                    {
+                      "rule": "Погодные выражения",
+                      "explanation": "Основные фразы для описания погоды",
+                      "examples": ["Aurinko paistaa", "Sataa vettä", "On kylmä"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Genetiivi ja t-monikko",
+                  "subtitle": "Генетив и мн. число на -t",
+                  "content": "Генетив (притяжательный падеж) образуется с помощью окончания -n и используется для выражения принадлежности. Множественное число именительного падежа образуется с помощью окончания -t.",
+                  "grammar": [
+                    {
+                      "rule": "Образование генетива",
+                      "explanation": "Используется для ответа на вопрос 'Kenen?' (Чей?)",
+                      "examples": ["Pedro → Pedron", "Helsinki → Helsingin"]
+                    },
+                    {
+                      "rule": "Образование мн. числа на -t",
+                      "explanation": "Добавляется к основе слова",
+                      "examples": ["ystävä → ystävät", "kirja → kirjat"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Videopuhelu Brasiliaan",
+              "subtitle": "Видеозвонок в Бразилию",
+              "description": "Педро, находясь в Финляндии, звонит своему другу Микко, который живет в Бразилии. Они обсуждают погоду, времена года и новости.",
+              "dialogue_id": "dialogue_ch3",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 14",
+                "title": "Weather Report",
+                "instruction": "Listen to the weather report and answer the questions.",
+                "script_id": "script_ex14",
+                "questions": [
+                  {
+                    "id": "ex14_q1",
+                    "question": "What city is the weather report for?",
+                    "answer": "Tokio"
+                  }
+                ]
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 16",
+                "title": "Genetiivi",
+                "instruction": "Поставьте слово в генетив (притяжательный падеж).",
+                "items": [
+                  {
+                    "id": "ex16_gf1",
+                    "sentence": "opiskelija → ___ sanakirja",
+                    "blanks": ["opiskelijan"],
+                    "options": ["opiskelijan", "opiskelijat"]
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 19",
+                "title": "t-monikko",
+                "instruction": "Преобразуйте слова из единственного числа во множественное.",
+                "items": [
+                  {
+                    "id": "ex19_wt1",
+                    "prompt": "kurssi → ___",
+                    "answer": "kurssit"
+                  }
+                ]
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 25",
+                "title": "k-p-t verbit",
+                "instruction": "Поставьте глагол в правильную форму.",
+                "items": [
+                  {
+                    "id": "ex25_gf1",
+                    "sentence": "Aamulla minä ___ (NEG.) pitkään. (nukkua)",
+                    "blanks": ["en nuku"],
+                    "options": ["en nukun", "en nuku"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "3.2",
+            "title": "Puhutaan! Enrolling in a Course",
+            "subtitle": "Разговорный! Запись на курс",
+            "estimatedMinutes": 20,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 1
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Avun pyytäminen",
+                  "subtitle": "Просьба о помощи",
+                  "content": "Изучение полезных фраз для ситуаций, когда вам нужна помощь или разъяснение.",
+                  "grammar": [
+                    {
+                      "rule": "Фразы для просьбы о помощи",
+                      "explanation": "Вежливые способы попросить помощь",
+                      "examples": ["Voitko auttaa minua?", "Anteeksi, voisitko...?"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Pedro ilmoittautuu kurssille",
+              "subtitle": "Педро записывается на курс",
+              "description": "Педро приходит в офис учебного центра, чтобы записаться на следующий уровень курса финского языка.",
+              "dialogue_id": "dialogue_ch3_puhekieli",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "dialogue_complete",
+                "original_exercise": "Harjoitus 26",
+                "title": "Asking for Help",
+                "instruction": "Заполните пропуски в диалоге.",
+                "scenario": "A person doesn't understand a Finnish word.",
+                "items": [
+                  {
+                    "id": "ex26_dc1",
+                    "missing_parts": [
+                      {"speaker": "A", "text": "Anteeksi, __ __ __ vähän?"},
+                      {"speaker": "B", "text": "Totta kai. Miten?"},
+                      {"speaker": "A", "text": "___ ___ 'Yksityisalue'?"}
+                    ],
+                    "options": ["Voitko auttaa minua", "Mitä tarkoittaa"],
+                    "correct": ["Voitko auttaa minua", "Mitä tarkoittaa"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Minä",
+        "subtitle": "Я",
+        "pageNumbers": "86-113",
+        "difficulty": "A1",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "4.1",
+            "title": "Describing People and Family",
+            "subtitle": "Описание людей и семьи",
+            "estimatedMinutes": 40,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 4
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Ulkonäkö, luonne ja perhe",
+                  "subtitle": "Внешность, характер и семья",
+                  "content": "Лексика для описания внешности (например, 'pitkä tukka', 'siniset silmät'), черт характера ('iloinen', 'ujo') и семейных отношений ('naimisissa', 'lapsi', 'suku').",
+                  "grammar": [
+                    {
+                      "rule": "Описание внешности",
+                      "explanation": "Прилагательные для описания людей",
+                      "examples": ["pitkä", "lyhyt", "kaunis", "komea"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Partitiivi",
+                  "subtitle": "Партитив",
+                  "content": "Партитив — один из самых важных падежей в финском языке. Он используется после числительных (кроме 'yksi'), с глаголами, выражающими незавершенное действие или чувство (rakastaa, etsiä), и в отрицательных предложениях владения.",
+                  "grammar": [
+                    {
+                      "rule": "Окончания партитива",
+                      "explanation": "Основные окончания: -a/-ä, -ta/-tä, -tta/-ttä",
+                      "examples": ["taloa", "metsää", "maata", "huonetta"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Minulla on... (Possessio)",
+                  "subtitle": "У меня есть... (Владение)",
+                  "content": "Для выражения владения используется конструкция 'адессив + on'. В отрицательной форме объект ставится в партитив.",
+                  "grammar": [
+                    {
+                      "rule": "Конструкция владения",
+                      "explanation": "minulla on, sinulla on, hänellä on",
+                      "examples": ["Minulla on auto", "Minulla ei ole autoa"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Minä",
+              "subtitle": "Я",
+              "description": "Ольга, Алекс и Педро рассказывают о себе: о своей семье, характере, внешности и жизни в Финляндии.",
+              "dialogue_id": "monologues_ch4",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "listening_exercise",
+                "original_exercise": "Harjoitus 4",
+                "title": "Minkänäköinen hän on?",
+                "status": "skipped_missing_audio_text",
+                "instruction": "This exercise requires an external audio file to match descriptions to people."
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 8",
+                "title": "Numero + partitiivi",
+                "instruction": "Поставьте слово в правильную форму партитива после числительного.",
+                "items": [
+                  {
+                    "id": "ex8_wt1",
+                    "prompt": "2 (katu) → ___",
+                    "answer": "kaksi katua"
+                  }
+                ]
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 13",
+                "title": "Minulla on / ei ole",
+                "instruction": "Опишите картинки, используя конструкцию 'X:llä on/ei ole Y:tä'.",
+                "items": [
+                  {
+                    "id": "ex13_gf1",
+                    "image_description": "Picture of a teacher with a pen.",
+                    "sentence": "Opettajalla ___ kynä.",
+                    "blanks": ["on"],
+                    "options": ["on", "ei ole"]
+                  }
+                ]
+              },
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 14",
+                "title": "What's in the Bag?",
+                "instruction": "Listen to the dialogue and answer the questions.",
+                "script_id": "script_ex14_ch4",
+                "questions": [
+                  {
+                    "id": "ex14_q1",
+                    "question": "Does the person have a phone?",
+                    "answer": "Yes ('Joo, minulla on puhelin...')"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "4.2",
+            "title": "Puhutaan! Shopping for Clothes",
+            "subtitle": "Разговорный! Покупка одежды",
+            "estimatedMinutes": 20,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 1
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Vaatekaupassa",
+                  "subtitle": "В магазине одежды",
+                  "content": "Изучение полезных фраз для похода в магазин: как спросить о наличии размера или другого цвета, как обратиться к продавцу и как вести себя в примерочной.",
+                  "grammar": [
+                    {
+                      "rule": "Фразы для покупок",
+                      "explanation": "Полезные выражения в магазине",
+                      "examples": ["Onko tästä L-kokoa?", "Paljonko tämä maksaa?"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Vaatekaupassa",
+              "subtitle": "В магазине одежды",
+              "description": "Педро ищет джинсовую куртку и общается с продавцом, используя разговорный финский.",
+              "dialogue_id": "dialogue_ch4_puhekieli",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 25",
+                "title": "Shopping Dialogue",
+                "instruction": "Listen to the shopping scenario and answer the questions.",
+                "script_id": "script_ex25_ch4",
+                "questions": [
+                  {
+                    "id": "ex25_q1",
+                    "question": "What is the customer looking for?",
+                    "answer": "A party dress ('juhlamekkoa')"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Meidän tavallinen päivä",
+        "subtitle": "Наш обычный день",
+        "pageNumbers": "114-145",
+        "difficulty": "A1",
+        "estimatedHours": 5,
+        "lessons": [
+          {
+            "id": "5.1",
+            "title": "Daily Routines and Verb Types",
+            "subtitle": "Ежедневные дела и типы глаголов",
+            "estimatedMinutes": 50,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 11
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Verbityypit 1-5",
+                  "subtitle": "Типы глаголов 1-5",
+                  "content": "Suomen verbit jaetaan viiteen tyyppiin niiden infinitiivin ja vartalon perusteella. Tämä on perusta koko suomen kielen verbitaivutukselle.",
+                  "grammar": [
+                    {
+                      "rule": "Tyyppi 1 (a/ä): tanssia → minä tanssin",
+                      "explanation": "Infinitiivi päättyy vokaaliin + a/ä. K-p-t-vaihtelu.",
+                      "examples": ["nukkua → nukun", "lukea → luen"]
+                    },
+                    {
+                      "rule": "Tyyppi 2 (da/dä): syödä → hän syö",
+                      "explanation": "Infinitiivi päättyy -da/-dä. Ei pitkää vokaalia 3. persoonassa.",
+                      "examples": ["tehdä → tekee", "juoda → juo"]
+                    },
+                    {
+                      "rule": "Tyyppi 3 (la/lä, na/nä, ra/rä, sta/stä): kävellä → kävelen",
+                      "explanation": "Vartaloon lisätään -e.",
+                      "examples": ["mennä → menen", "nousta → nousen"]
+                    },
+                    {
+                      "rule": "Tyyppi 4 (vokaali + ta/tä): siivota → siivoan",
+                      "explanation": "Vartalo saadaan poistamalla -ta/-tä ja lisäämällä -a/-ä.",
+                      "examples": ["pelata → pelaan", "haluta → haluan"]
+                    },
+                    {
+                      "rule": "Tyyppi 5 (ita/itä): valita → valitsen",
+                      "explanation": "Vartaloon lisätään -tse.",
+                      "examples": ["tarvita → tarvitsen", "häiritä → häiritsen"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Kellonaika",
+                  "subtitle": "Время",
+                  "content": "Kellonajan ilmaiseminen ja kysyminen on tärkeä osa päivittäistä kommunikaatiota.",
+                  "grammar": [
+                    {
+                      "rule": "Mitä kello on? - Kello on neljä",
+                      "explanation": "Nykyisen ajan kysyminen ja vastaus nominatiivissa.",
+                      "examples": ["Kello on puoli viisi", "Kello on vartti yli kolme"]
+                    },
+                    {
+                      "rule": "Mihin aikaan? / Monelta? - Kuudelta",
+                      "explanation": "Tapahtuma-ajan kysyminen ja vastaus adessiivissa.",
+                      "examples": ["Tulen seitsemältä", "Koulu alkaa kahdeksalta"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Meidän tavallinen päivä",
+              "subtitle": "Наш обычный день",
+              "description": "Lauri Mäkelä kertoo perheensä tavallisesta päivästä - aamusta iltaan.",
+              "dialogue_id": "ch5_reading_1",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "pronunciation_practice",
+                "original_exercise": "Harjoitus 1",
+                "title": "Long and Short Consonants",
+                "instruction": "Harjoittele pitkien ja lyhyiden konsonanttien ääntämistä.",
+                "audio_type": "enhanced",
+                "items": [
+                  {
+                    "id": "ex1_pronunciation",
+                    "script_id": "ch5_ex1_pairs",
+                    "options": ["taka/takka", "kapa/kappa", "tutti/tuutti"]
+                  }
+                ]
+              },
+              {
+                "type": "reading_comprehension",
+                "original_exercise": "Harjoitus 2",
+                "title": "Family Daily Routine",
+                "instruction": "Lue teksti ja vastaa kysymyksiin Lauri Mäkelän perheestä.",
+                "text_id": "ch5_reading_1",
+                "items": [
+                  {
+                    "id": "ex2_q1",
+                    "question": "Mitä kello on, kun Lauri herää?",
+                    "answer": "Kello 6",
+                    "translation": "Во сколько просыпается Лаури?"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "5.2",
+            "title": "Puhutaan! Making Plans",
+            "subtitle": "Разговорный! Строим планы",
+            "estimatedMinutes": 25,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 2
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Tapaamisen sopiminen",
+                  "subtitle": "Назначение встречи",
+                  "content": "Puhekielisiä fraaseja ajan sopimiseen ja tapaamisen järjestämiseen.",
+                  "grammar": [
+                    {
+                      "rule": "Ehdotus: Mennäänks uimaan? / Tuuks sä mukaan?",
+                      "explanation": "Epämuodollisia tapoja ehdottaa yhteistä tekemistä.",
+                      "examples": ["Käydäänks kahvilla?", "Lähdetäänks elokuviin?"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Aamupalapöydässä",
+              "subtitle": "За завтраком",
+              "description": "Lauri ja Kalle sopivat uintireissusta aamupalan aikana.",
+              "dialogue_id": "ch5_puhutaan_1",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 35",
+                "title": "Making Appointments",
+                "instruction": "Kuuntele keskustelu tapaamisen sopimisesta.",
+                "script_id": "ch5_ex35_script",
+                "questions": [
+                  {
+                    "id": "ex35_q1",
+                    "question": "Mitä Anna ehdottaa?",
+                    "answer": "Mennä elokuviin"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Pedro ja Hanna etsivät asuntoa, Muutto",
+        "subtitle": "Педро и Ханна ищут квартиру, Переезд",
+        "pageNumbers": "146-183",
+        "difficulty": "A1",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "6.1",
+            "title": "Pedro ja Hanna etsivät asuntoa",
+            "subtitle": "Педро и Ханна ищут квартиру",
+            "estimatedMinutes": 35,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 3
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Asuminen ja asuntoilmoitukset",
+                  "subtitle": "Жилье и объявления о квартирах",
+                  "content": "Asuntoilmoitusten lukeminen ja ymmärtäminen on tärkeä taito Suomessa. Ilmoituksissa käytetään lyhenteitä ja erityissanastoa.",
+                  "grammar": [
+                    {
+                      "rule": "Asuntoilmoitusten lyhenteet",
+                      "explanation": "h = huone, k = keittiö, p = parveke, kk = kuukausi",
+                      "examples": ["2h+k+p", "870 e/kk"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Asunnon kuvaileminen",
+                  "subtitle": "Описание квартиры",
+                  "content": "Adjektiivit asunnon ja alueen kuvaamiseen. Tärkeää osata kertoa, millainen asunto on.",
+                  "grammar": [
+                    {
+                      "rule": "Adjektiivien käyttö",
+                      "explanation": "Adjektiivit taipuvat samoin kuin substantiivit.",
+                      "examples": ["valoisa asunto", "rauhallinen sijainti"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Asuntoilmoitus ja keskustelu",
+              "subtitle": "Объявление о квартире и разговор",
+              "description": "Pedro ja Hanna lukevat asuntoilmoitusta ja keskustelevat asunnosta.",
+              "dialogue_id": "ch6_reading_combined",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "reading_comprehension",
+                "original_exercise": "Harjoitus 3",
+                "title": "Asuntoilmoituksen ymmärtäminen",
+                "instruction": "Lue asuntoilmoitus ja vastaa kysymyksiin.",
+                "text_id": "ch6_reading_1",
+                "items": [
+                  {
+                    "id": "ex3_q1",
+                    "question": "Kuinka monta huonetta asunnossa on?",
+                    "answer": "Kaksi huonetta",
+                    "translation": "Сколько комнат в квартире?"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 8",
+                "title": "Adjektiivien taivutus",
+                "instruction": "Täydennä lauseet oikealla adjektiivin muodolla.",
+                "items": [
+                  {
+                    "id": "ex8_wt1",
+                    "prompt": "Asunto on (valoisa) ___.",
+                    "answer": "valoisa"
+                  }
+                ]
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 12",
+                "title": "Missä päin -kysymykset",
+                "instruction": "Vastaa kysymyksiin käyttäen oikeaa sijaa.",
+                "items": [
+                  {
+                    "id": "ex12_gf1",
+                    "sentence": "Missä päin Helsinki ___ on?",
+                    "blanks": ["sijaitsee"],
+                    "options": ["sijaitsee", "sijaitseva", "sijaitsi"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "6.2",
+            "title": "Muutto",
+            "subtitle": "Переезд",
+            "estimatedMinutes": 30,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 2
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Liikkumisverbit",
+                  "subtitle": "Глаголы движения",
+                  "content": "Verbit, jotka kuvaavat liikettä ja esineiden siirtämistä. Tärkeää muuttotilanteessa.",
+                  "grammar": [
+                    {
+                      "rule": "Liikkuminen ja kuljettaminen",
+                      "explanation": "kantaa, viedä, tuoda, nostaa",
+                      "examples": ["Kantaa laatikko ylös", "Viedä tuoli olohuoneeseen"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Paikanilmaukset",
+                  "subtitle": "Выражения места",
+                  "content": "Sisään, ulos, ylös, alas - tärkeät paikanilmaukset muuttotilanteessa.",
+                  "grammar": [
+                    {
+                      "rule": "Suunnan ilmaiseminen",
+                      "explanation": "sisään, ulos, ylös, alas",
+                      "examples": ["Mene sisään taloon", "Tule ulos pihalle"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Muuttopäivä",
+              "subtitle": "День переезда",
+              "description": "Pedro muuttaa uuteen asuntoon ja saa apua naapureilta Kallelta ja Emmalta.",
+              "dialogue_id": "ch6_reading_3",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "listening_comprehension",
+                "original_exercise": "Harjoitus 18",
+                "title": "Muuttotilanne",
+                "instruction": "Kuuntele keskustelu ja vastaa kysymyksiin.",
+                "text_id": "ch6_reading_3",
+                "items": [
+                  {
+                    "id": "ex18_q1",
+                    "question": "Mihin asuntoon Pedro muuttaa?",
+                    "answer": "Asuntoon numero 5",
+                    "translation": "В какую квартиру переезжает Педро?"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 22",
+                "title": "Liikkumisverbit",
+                "instruction": "Valitse oikea verbi ja kirjoita se oikeassa muodossa.",
+                "items": [
+                  {
+                    "id": "ex22_wt1",
+                    "prompt": "(kantaa/viedä) Minä ___ laatikon keittiöön.",
+                    "answer": "vien"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "6.3",
+            "title": "Puhutaan! Pedro soittaa huoltoyhtiöön",
+            "subtitle": "Разговорный! Педро звонит в обслуживающую компанию",
+            "estimatedMinutes": 15,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 1
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Puhelinpalvelu",
+                  "subtitle": "Телефонное обслуживание",
+                  "content": "Kuinka hoitaa asioita puhelimitse. Tärkeää asumiseen liittyvissä asioissa.",
+                  "grammar": [
+                    {
+                      "rule": "Puhelinkeskustelun aloitus",
+                      "explanation": "Täällä on..., Haluaisin varata...",
+                      "examples": ["Täällä on Pedro Ribeiro", "Haluaisin varata saunavuoron"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Saunavuoron varaaminen",
+              "subtitle": "Бронирование времени в сауне",
+              "description": "Pedro soittaa huoltoyhtiöön ja varaa saunavuoron uudessa talossaan.",
+              "dialogue_id": "ch6_puhutaan_1",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 28",
+                "title": "Puhelinpalvelu",
+                "instruction": "Kuuntele puhelinkeskustelu ja vastaa kysymyksiin.",
+                "script_id": "ch6_puhutaan_1",
+                "questions": [
+                  {
+                    "id": "ex28_q1",
+                    "question": "Mitä Pedro haluaa varata?",
+                    "answer": "Saunavuoron"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Kylässä",
+        "subtitle": "В гостях",
+        "pageNumbers": "184-215",
+        "difficulty": "A1",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "7.1",
+            "title": "Visiting Tampere",
+            "subtitle": "Посещение Тампере",
+            "estimatedMinutes": 40,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 5
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Matkustaminen ja vierailu",
+                  "subtitle": "Путешествие и визиты",
+                  "content": "Sanavarasto matkustamiseen ja vierailuun liittyen. Kuinka kertoa matkasuunnitelmista ja kokemuksista.",
+                  "grammar": [
+                    {
+                      "rule": "Liikenneverbit",
+                      "explanation": "mennä, tulla, lähteä, saapua",
+                      "examples": ["Mennään Tampereelle", "Tulimme junalla"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Kulkuneuvot",
+                  "subtitle": "Транспорт",
+                  "content": "Eri kulkuneuvojen nimet ja niiden käyttö lauseissa.",
+                  "grammar": [
+                    {
+                      "rule": "Kulkuneuvojen käyttö",
+                      "explanation": "autolla, junalla, bussilla, kävellen",
+                      "examples": ["Matkustamme junalla", "Kävelemme keskustaan"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Viikonloppu Tampereella",
+              "subtitle": "Выходные в Тампере",
+              "description": "Pedro ja Hanna vierailevat Hannan tädillä Tampereella ja suunnittelevat viikonloppua.",
+              "dialogue_id": "ch7_reading_1",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "listening_exercise",
+                "original_exercise": "Harjoitus 2",
+                "title": "Travel Sounds",
+                "status": "skipped_missing_audio_text",
+                "instruction": "This exercise requires external audio to identify different transportation sounds."
+              },
+              {
+                "type": "reading_comprehension",
+                "original_exercise": "Harjoitus 5",
+                "title": "Weekend Plans",
+                "instruction": "Lue teksti ja vastaa kysymyksiin viikonlopun suunnitelmista.",
+                "text_id": "ch7_reading_1",
+                "items": [
+                  {
+                    "id": "ex5_q1",
+                    "question": "Millä Pedro ja Hanna matkustavat Tampereelle?",
+                    "answer": "Junalla",
+                    "translation": "На чем Педро и Ханна едут в Тампере?"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 8",
+                "title": "Transportation Methods",
+                "instruction": "Täydennä lauseet oikealla kulkuneuvolla.",
+                "items": [
+                  {
+                    "id": "ex8_wt1",
+                    "prompt": "Matkustan Helsinkiin ___. (train)",
+                    "answer": "junalla"
+                  }
+                ]
+              },
+              {
+                "type": "grammar_fill",
+                "original_exercise": "Harjoitus 12",
+                "title": "Movement Verbs",
+                "instruction": "Valitse oikea verbi ja taivuta se.",
+                "items": [
+                  {
+                    "id": "ex12_gf1",
+                    "sentence": "Me ___ Tampereelle huomenna. (mennä/tulla)",
+                    "blanks": ["menemme"],
+                    "options": ["menemme", "tulemme"]
+                  }
+                ]
+              },
+              {
+                "type": "listening_repurposed",
+                "original_exercise": "Harjoitus 15",
+                "title": "Hotel Booking",
+                "instruction": "Kuuntele hotellivaraus ja vastaa kysymyksiin.",
+                "script_id": "hotel_booking_script",
+                "questions": [
+                  {
+                    "id": "ex15_q1",
+                    "question": "Kuinka monta yötä he yöpyvät?",
+                    "answer": "Yhden yön"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "7.2",
+            "title": "Puhutaan! Hotel Check-in",
+            "subtitle": "Разговорный! Регистрация в отеле",
+            "estimatedMinutes": 20,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 1
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Hotellissa",
+                  "subtitle": "В отеле",
+                  "content": "Hotellivarauksen tekeminen ja sisäänkirjautuminen. Tärkeät fraasit matkustajalle.",
+                  "grammar": [
+                    {
+                      "rule": "Hotellifraasit",
+                      "explanation": "Varaus, sisäänkirjautuminen, palvelut",
+                      "examples": ["Meillä on varaus", "Huone on neljännessä kerroksessa"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Hotellissa sisäänkirjautuminen",
+              "subtitle": "Регистрация в отеле",
+              "description": "Hanna ja Pedro saapuvat hotelliin ja kirjautuvat sisään.",
+              "dialogue_id": "ch7_puhutaan_1",
+              "audio_type": "standard",
+              "preferredTTS": "standard"
+            },
+            "exercises": [
+              {
+                "type": "dialogue_complete",
+                "original_exercise": "Harjoitus 20",
+                "title": "Hotel Reception",
+                "instruction": "Täydennä hotellivastaanoton keskustelu.",
+                "scenario": "Customer checking into a hotel",
+                "items": [
+                  {
+                    "id": "ex20_dc1",
+                    "missing_parts": [
+                      {"speaker": "Asiakas", "text": "Hei, meillä on ___ nimellä Lahtinen."},
+                      {"speaker": "Virkailija", "text": "Joo, ___ se on."}
+                    ],
+                    "options": ["varaus", "tässä"],
+                    "correct": ["varaus", "tässä"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Onnea uuteen kotiin!",
+        "subtitle": "Поздравляю с новым домом!",
+        "pageNumbers": "216-253",
+        "difficulty": "A1+",
+        "estimatedHours": 4,
+        "lessons": [
+          {
+            "id": "8.1",
+            "title": "Housewarming Party",
+            "subtitle": "Новоселье",
+            "estimatedMinutes": 45,
+            "progress": {
+              "theory_completed": false,
+              "reading_completed": false,
+              "exercises_completed": 0,
+              "total_exercises": 6
+            },
+            "theory": {
+              "sections": [
+                {
+                  "title": "Juhlat ja tapahtumat",
+                  "subtitle": "Праздники и события",
+                  "content": "Erilaisten juhlien ja tapahtumien sanasto. Kuinka järjestää juhlia ja olla vieraana.",
+                  "grammar": [
+                    {
+                      "rule": "Juhla-sanasto",
+                      "explanation": "Syntymäpäivä, häät, tupaantuliaiset",
+                      "examples": ["Paljon onnea!", "Hauska juhla!", "Kiitos kutsusta!"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Ainepartitiivin käyttö",
+                  "subtitle": "Использование партитива вещества",
+                  "content": "Partitiivia käytetään aineiden ja ruoka-aineiden kanssa. Tärkeää ruoan valmistuksessa ja ostoksilla.",
+                  "grammar": [
+                    {
+                      "rule": "Aine + partitiivi",
+                      "explanation": "vettä, maitoa, leipää, lihaa",
+                      "examples": ["Ostan maitoa", "Syön leipää", "Juon kahvia"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Järjestysluvut ja päivämäärät",
+                  "subtitle": "Порядковые числительные и даты",
+                  "content": "Järjestyslukujen muodostaminen ja päivämäärien ilmaiseminen.",
+                  "grammar": [
+                    {
+                      "rule": "Järjestysluvut",
+                      "explanation": "ensimmäinen, toinen, kolmas",
+                      "examples": ["ensimmäinen kerros", "toinen päivä", "kolmas viikko"]
+                    }
+                  ]
+                },
+                {
+                  "title": "Postpositiot",
+                  "subtitle": "Послелоги",
+                  "content": "Paikan ja suunnan ilmaiseminen postpositioilla.",
+                  "grammar": [
+                    {
+                      "rule": "Postpositiot",
+                      "explanation": "vieressä, päällä, alla, edessä, takana",
+                      "examples": ["pöydän päällä", "talon vieressä", "tuolin alla"]
+                    }
+                  ]
+                }
+              ]
+            },
+            "reading": {
+              "title": "Tupaantuliaiset",
+              "subtitle": "Новоселье",
+              "description": "Pedro ja Hanna järjestävät tupaantuliaiset uudessa kodissaan. Vieraat saapuvat ja keskustelevat ruoasta.",
+              "dialogue_id": "ch8_reading_1",
+              "audio_type": "enhanced",
+              "preferredTTS": "enhanced"
+            },
+            "exercises": [
+              {
+                "type": "reading_comprehension",
+                "original_exercise": "Harjoitus 3",
+                "title": "Party Preparations",
+                "instruction": "Lue teksti ja vastaa kysymyksiin juhlan valmistelusta.",
+                "text_id": "ch8_reading_1",
+                "items": [
+                  {
+                    "id": "ex3_q1",
+                    "question": "Mitä ruokaa Pedro ja Hanna valmistavat?",
+                    "answer": "Pastasalaattia ja lihapullia",
+                    "translation": "Какую еду готовят Педро и Ханна?"
+                  }
+                ]
+              },
+              {
+                "type": "written_task",
+                "original_exercise": "Harjoitus 7",
+                "title": "Substance Partitive",
+                "instruction": "Kirjoita aineet partitiivissa.",
+                "items": [
+                        {
+                          "id": "ex7_wt1",
+                          "prompt": "leipä → Ostan ___",
+                          "answer": "leipää"
+                        },
+                        {
+                          "id": "ex7_wt2",
+                          "prompt": "maito → Juon ___",
+                          "answer": "maitoa"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "grammar_fill",
+                      "original_exercise": "Harjoitus 10",
+                      "title": "Ordinal Numbers",
+                      "instruction": "Täydennä lauseet järjestysluvuilla.",
+                      "items": [
+                        {
+                          "id": "ex10_gf1",
+                          "sentence": "Asumme ___ kerroksessa. (2)",
+                          "blanks": ["toisessa"],
+                          "options": ["toisessa", "toinen", "kaksi"]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "written_task",
+                      "original_exercise": "Harjoitus 15",
+                      "title": "Postpositions",
+                      "instruction": "Kirjoita oikea postpositio.",
+                      "items": [
+                        {
+                          "id": "ex15_wt1",
+                          "prompt": "Kirja on pöydän ___. (on top of)",
+                          "answer": "päällä"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listening_repurposed",
+                      "original_exercise": "Harjoitus 18",
+                      "title": "Food Discussion",
+                      "instruction": "Kuuntele keskustelu ruoasta ja vastaa kysymyksiin.",
+                      "script_id": "food_discussion_script",
+                      "questions": [
+                        {
+                          "id": "ex18_q1",
+                          "question": "Mitä salaatissa on?",
+                          "answer": "Pastaa, maissia, oliiveja ja kanaa"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dialogue_complete",
+                      "original_exercise": "Harjoitus 22",
+                      "title": "Party Compliments",
+                      "instruction": "Täydennä keskustelu juhlavieraiden kanssa.",
+                      "scenario": "Guests complimenting the food and home",
+                      "items": [
+                        {
+                          "id": "ex22_dc1",
+                          "missing_parts": [
+                            {"speaker": "Vieras", "text": "Teillä on ___ koti!"},
+                            {"speaker": "Pedro", "text": "Kiitos! ___ tämä on tosi kiva."}
+                          ],
+                          "options": ["ihana", "Meistäkin"],
+                          "correct": ["ihana", "Meistäkin"]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "8.2",
+                  "title": "Puhutaan! Getting Directions",
+                  "subtitle": "Разговорный! Как пройти",
+                  "estimatedMinutes": 25,
+                  "progress": {
+                    "theory_completed": false,
+                    "reading_completed": false,
+                    "exercises_completed": 0,
+                    "total_exercises": 2
+                  },
+                  "theory": {
+                    "sections": [
+                      {
+                        "title": "Reittiohjeet",
+                        "subtitle": "Указание маршрута",
+                        "content": "Kuinka antaa ja pyytää reittioppaita. Tärkeää kaupungissa liikkumiseen.",
+                        "grammar": [
+                          {
+                            "rule": "Suunta-sanat",
+                            "explanation": "oikealle, vasemmalle, suoraan, takaisin",
+                            "examples": ["Käänny oikealle", "Mene suoraan", "Palaa takaisin"]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "reading": {
+                    "title": "Alex eksyy",
+                    "subtitle": "Алекс заблудился",
+                    "description": "Alex soittaa Pedrolle, koska ei löydä perille tupaantuliaisten.",
+                    "dialogue_id": "ch8_puhutaan_1",
+                    "audio_type": "standard",
+                    "preferredTTS": "standard"
+                  },
+                  "exercises": [
+                    {
+                      "type": "listening_repurposed",
+                      "original_exercise": "Harjoitus 25",
+                      "title": "Phone Directions",
+                      "instruction": "Kuuntele puhelinkeskustelu ja vastaa kysymyksiin.",
+                      "script_id": "ch8_puhutaan_1",
+                      "questions": [
+                        {
+                          "id": "ex25_q1",
+                          "question": "Missä Alex on?",
+                          "answer": "Bussipysäkillä kioski vieressä"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "written_task",
+                      "original_exercise": "Harjoitus 28",
+                      "title": "Direction Instructions",
+                      "instruction": "Kirjoita reittiohjeet annettujen sanojen avulla.",
+                      "items": [
+                        {
+                          "id": "ex28_wt1",
+                          "prompt": "(kääntyä/oikealle/risteys) → ___",
+                          "answer": "Käänny risteyksestä oikealle"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": 9,
+              "title": "Ensimmäinen työpäivä",
+              "subtitle": "Первый рабочий день",
+              "pageNumbers": "254-285",
+              "difficulty": "A1+",
+              "estimatedHours": 4,
+              "lessons": [
+                {
+                  "id": "9.1",
+                  "title": "At the Office",
+                  "subtitle": "В офисе",
+                  "estimatedMinutes": 50,
+                  "progress": {
+                    "theory_completed": false,
+                    "reading_completed": false,
+                    "exercises_completed": 0,
+                    "total_exercises": 8
+                  },
+                  "theory": {
+                    "sections": [
+                      {
+                        "title": "Työelämän sanasto",
+                        "subtitle": "Рабочая лексика",
+                        "content": "Toimiston sanasto ja työhön liittyvät ilmaukset. Tärkeää työelämään siirtyvälle.",
+                        "grammar": [
+                          {
+                            "rule": "Työpaikka-sanasto",
+                            "explanation": "toimisto, työpiste, kokous, projekti",
+                            "examples": ["Minulla on kokous", "Työskentelen projektissa", "Toimisto on toisessa kerroksessa"]
+                          }
+                        ]
+                      },
+                      {
+                        "title": "Objektin sija (genetiivi, partitiivi, monikko)",
+                        "subtitle": "Падеж объекта (генетив, партитив, множественное число)",
+                        "content": "Objektin sijan valinta on yksi suomen kielen vaikeimmista asioista. Se riippuu verbistä, lausetyypistä ja merkityksestä.",
+                        "grammar": [
+                          {
+                            "rule": "Genetiivi objektina",
+                            "explanation": "Käytetään tuloksellisissa lauseissa yksikössä",
+                            "examples": ["Luen kirjan", "Ostan auton", "Teen työn"]
+                          },
+                          {
+                            "rule": "Partitiivi objektina",
+                            "explanation": "Käytetään osittaisuuden, jatkuvuuden tai negaation kanssa",
+                            "examples": ["Luen kirjaa", "En osta autoa", "Juon kahvia"]
+                          },
+                          {
+                            "rule": "Monikko objektina",
+                            "explanation": "Nominatiivi monikossa tuloksellisissa lauseissa",
+                            "examples": ["Luen kirjat", "Ostan autot", "Teen työt"]
+                          }
+                        ]
+                      },
+                      {
+                        "title": "Ammatit",
+                        "subtitle": "Профессии",
+                        "content": "Eri ammattien nimet ja niiden käyttö lauseissa.",
+                        "grammar": [
+                          {
+                            "rule": "Ammatin kertominen",
+                            "explanation": "Olen + ammatti",
+                            "examples": ["Olen opettaja", "Työskentelen insinöörinä", "Hän on lääkäri"]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "reading": {
+                    "title": "Alexin ensimmäinen työpäivä",
+                    "subtitle": "Первый рабочий день Алекса",
+                    "description": "Alex aloittaa uudessa työpaikassa Mix-Elektro Oy:ssä. Pomo Jari näyttää toimiston ja esittelee tiimin.",
+                    "dialogue_id": "ch9_reading_1",
+                    "audio_type": "enhanced",
+                    "preferredTTS": "enhanced"
+                  },
+                  "exercises": [
+                    {
+                      "type": "reading_comprehension",
+                      "original_exercise": "Harjoitus 2",
+                      "title": "First Day at Work",
+                      "instruction": "Lue teksti ja vastaa kysymyksiin Alexin ensimmäisestä työpäivästä.",
+                      "text_id": "ch9_reading_1",
+                      "items": [
+                        {
+                          "id": "ex2_q1",
+                          "question": "Missä yrityksessä Alex työskentelee?",
+                          "answer": "Mix-Elektro Oy:ssä",
+                          "translation": "В какой компании работает Алекс?"
+                        },
+                        {
+                          "id": "ex2_q2",
+                          "question": "Kuinka monta henkilöä tiimiin kuuluu?",
+                          "answer": "Seitsemän henkilöä",
+                          "translation": "Сколько человек в команде?"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "written_task",
+                      "original_exercise": "Harjoitus 5",
+                      "title": "Office Vocabulary",
+                      "instruction": "Täydennä lauseet toimistosanastolla.",
+                      "items": [
+                        {
+                          "id": "ex5_wt1",
+                          "prompt": "Minulla on ___ kello kymmenen. (meeting)",
+                          "answer": "kokous"
+                        },
+                        {
+                          "id": "ex5_wt2",
+                          "prompt": "Työskentelen uudessa ___. (project)",
+                          "answer": "projektissa"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "grammar_fill",
+                      "original_exercise": "Harjoitus 8",
+                      "title": "Object Cases",
+                      "instruction": "Valitse objektille oikea sija.",
+                      "items": [
+                        {
+                          "id": "ex8_gf1",
+                          "sentence": "Luen ___ (kirja) illalla.",
+                          "blanks": ["kirjaa"],
+                          "options": ["kirjan", "kirjaa", "kirjat"]
+                        },
+                        {
+                          "id": "ex8_gf2",
+                          "sentence": "Ostin ___ (auto) eilen.",
+                          "blanks": ["auton"],
+                          "options": ["auton", "autoa", "autot"]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "written_task",
+                      "original_exercise": "Harjoitus 12",
+                      "title": "Professions",
+                      "instruction": "Kirjoita ammatti oikeassa muodossa.",
+                      "items": [
+                        {
+                          "id": "ex12_wt1",
+                          "prompt": "Hän työskentelee ___. (opettaja)",
+                          "answer": "opettajana"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "listening_exercise",
+                      "original_exercise": "Harjoitus 15",
+                      "title": "Office Tour",
+                      "status": "skipped_missing_audio_text",
+                      "instruction": "This exercise requires external audio for office environment sounds."
+                    },
+                    {
+                      "type": "grammar_fill",
+                      "original_exercise": "Harjoitus 18",
+                      "title": "Workplace Situations",
+                      "instruction": "Täydennä työpaikkakeskustelut.",
+                      "items": [
+                        {
+                          "id": "ex18_gf1",
+                          "sentence": "Saanko ___ (sinä) käyttäjätunnuksen?",
+                          "blanks": ["sinulta"],
+                          "options": ["sinulta", "sinulle", "sinua"]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "written_task",
+                      "original_exercise": "Harjoitus 22",
+                      "title": "Work Activities",
+                      "instruction": "Kuvaile työpäivän toimintoja.",
+                      "items": [
+                        {
+                          "id": "ex22_wt1",
+                          "prompt": "Aamulla minä ___ (tarkistaa) sähköpostit.",
+                          "answer": "tarkistan"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dialogue_complete",
+                      "original_exercise": "Harjoitus 25",
+                      "title": "Meeting Introduction",
+                      "instruction": "Täydennä esittäytyminen kokouksessa.",
+                      "scenario": "New employee introducing themselves in a meeting",
+                      "items": [
+                        {
+                          "id": "ex25_dc1",
+                          "missing_parts": [
+                            {"speaker": "Alex", "text": "Hei, minun nimi on Alex ja olen ___ tiimin jäsen."},
+                            {"speaker": "Kollega", "text": "Tervetuloa ___!"}
+                          ],
+                          "options": ["uusi", "joukkoon"],
+                          "correct": ["uusi", "joukkoon"]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "9.2",
+                  "title": "Puhutaan! Lunch Break",
+                  "subtitle": "Разговорный! Обеденный перерыв",
+                  "estimatedMinutes": 20,
+                  "progress": {
+                    "theory_completed": false,
+                    "reading_completed": false,
+                    "exercises_completed": 0,
+                    "total_exercises": 2
+                  },
+                  "theory": {
+                    "sections": [
+                      {
+                        "title": "Ravintolassa tilaaminen",
+                        "subtitle": "Заказ в ресторане",
+                        "content": "Ruoan tilaaminen työpaikkaravintolassa. Puhekielisiä ilmauksia lounastilanteeseen.",
+                        "grammar": [
+                          {
+                            "rule": "Tilausfraasit",
+                            "explanation": "Mitä teillä on? Mä otan... Tuleeks samasta?",
+                            "examples": ["Mä otan kanarisottoa", "Tuleeks samasta vai erikseen?", "Kuuluuks kahvi hintaan?"]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "reading": {
+                    "title": "Lounaalla pomön kanssa",
+                    "subtitle": "На обеде с начальником",
+                    "description": "Alex menee ensimmäistä kertaa lounaalle pomojensa Jarin kanssa työpaikan ravintolaan.",
+                    "dialogue_id": "ch9_puhutaan_1",
+                    "audio_type": "standard",
+                    "preferredTTS": "standard"
+                  },
+                  "exercises": [
+                    {
+                      "type": "listening_repurposed",
+                      "original_exercise": "Harjoitus 28",
+                      "title": "Restaurant Order",
+                      "instruction": "Kuuntele ravintolakeskustelu ja vastaa kysymyksiin.",
+                      "script_id": "ch9_puhutaan_1",
+                      "questions": [
+                        {
+                          "id": "ex28_q1",
+                          "question": "Mitä Alex tilaa?",
+                          "answer": "Kanarisottoa"
+                        },
+                        {
+                          "id": "ex28_q2",
+                          "question": "Kuuluuko kahvi lounaan hintaan?",
+                          "answer": "Kyllä kuuluu"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "dialogue_complete",
+                      "original_exercise": "Harjoitus 30",
+                      "title": "Ordering Food",
+                      "instruction": "Täydennä ravintolakeskustelu.",
+                      "scenario": "Ordering lunch at workplace restaurant",
+                      "items": [
+                        {
+                          "id": "ex30_dc1",
+                          "missing_parts": [
+                            {"speaker": "Tarjoilija", "text": "Mitäs teillä on ___ lounaslistalla?"},
+                            {"speaker": "Asiakas", "text": "Mä ___ kanarisottoa, kiitos."}
+                          ],
+                          "options": ["tänään", "otan"],
+                          "correct": ["tänään", "otan"]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        
+  
